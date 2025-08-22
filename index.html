@@ -9,16 +9,17 @@
     <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
 </head>
 <body>
-    <div class="form-wrapper">
-        <div class="form-container">
+    <div class="main-container">
+        <!-- Logo circular que "salta" do card -->
+        <div class="logo-circle">
+            <img src="images/logo.png" alt="Logo Quintal das Artes">
+        </div>
+        
+        <div class="form-card">
             <div class="form-header">
-                <div class="form-logo">
-                    <!-- Substitua pela sua imagem de logo, ou use um ícone/texto -->
-                    <img src="https://res.cloudinary.com/ddjlqajrd/image/upload/v1755866966/logo_quintal_direita_2_wc3bdp.avif" alt="Logo Quintal das Artes">
-                </div>
                 <h1 class="form-title">Ficha de Inscrição</h1>
                 <p class="form-description">Que bom que chegou aqui! Se você recebeu este link é porque já passou por uma aula experimental e vai fazer sua inscrição. Estamos muito felizes em receber sua família! A arte e o brincar são elementos centrais na programação do QUINTAL das artes.</p>
-                <p class="form-contact">Para + informações e dúvidas, entre em contato com a Lari no whatsapp <a href="https://wa.me/5511940355159"  class="whatsapp-link">(11) 9 4035.5159</a></p>
+                <p class="form-contact">Para + informações e dúvidas, entre em contato com a Lari no whatsapp <a href="https://wa.me/5511940355159" target="_blank" class="whatsapp-link">(11) 9 4035.5159</a></p>
             </div>
 
             <form id="registrationForm">
@@ -181,8 +182,43 @@
                     <button type="button" class="btn btn-remove-apprentice">Remover Aprendiz</button>
                 </div>
 
+                <!-- Passo 4: Termos e Condições -->
+                <div class="form-step" id="step-terms">
+                    <h2 class="step-title">Termos e Condições</h2>
+                    <div class="form-fields terms-and-conditions">
+                        <!-- Conteúdo dos termos e condições (substitua pelo seu texto real) -->
+                        <p>Ao prosseguir com esta inscrição, você concorda com os seguintes termos e condições do Quintal das Artes:</p>
+                        <p>1. **Matrícula e Mensalidades:** A matrícula é confirmada mediante o preenchimento completo deste formulário e o pagamento da primeira mensalidade/parcela. As mensalidades subsequentes deverão ser pagas até o dia 5, 10 ou 15 de cada mês, conforme sua escolha.</p>
+                        <p>2. **Cancelamento:** Em caso de cancelamento da matrícula, solicitamos aviso prévio de 30 dias. Mensalidades não são reembolsáveis para o mês corrente.</p>
+                        <p>3. **Ausências:** Aulas perdidas por ausência do aluno não serão reembolsadas ou repostas, salvo em casos de emergência médica comprovada, a critério da coordenação.</p>
+                        <p>4. **Materiais:** Alguns cursos podem exigir materiais específicos. A lista será fornecida no início do curso e é de responsabilidade do responsável a aquisição.</p>
+                        <p>5. **Segurança:** O Quintal das Artes se compromete a zelar pela segurança dos alunos durante as atividades. Em caso de emergência, as informações de contato fornecidas serão utilizadas.</p>
+                        <p>6. **Alterações:** O Quintal das Artes reserva-se o direito de alterar horários, professores ou conteúdo programático dos cursos, mediante aviso prévio aos responsáveis.</p>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="aceiteTermos" name="aceiteTermos" required>
+                            <label for="aceiteTermos">Eu li e concordo com os termos e condições do Quintal das Artes.</label>
+                            <div class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Autorização de Uso de Imagem:</label>
+                            <div class="radio-group">
+                                <input type="radio" id="autorizaFotoSim" name="autorizaFoto" value="sim" required>
+                                <label for="autorizaFotoSim">Sim, autorizo o uso de imagem do(s) meu(s) filho(s) para divulgação do Quintal das Artes.</label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="autorizaFotoNao" name="autorizaFoto" value="nao">
+                                <label for="autorizaFotoNao">Não, não autorizo o uso de imagem do(s) meu(s) filho(s) para divulgação do Quintal das Artes.</label>
+                            </div>
+                            <div class="error-message photo-consent-error"></div>
+                        </div>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-prev"><span class="arrow-left">←</span> Voltar</button>
+                        <button type="button" class="btn btn-next">Próximo <span class="arrow-right">→</span></button>
+                    </div>
+                </div>
 
-                <!-- Passo 4: Plano de Pagamento e Resumo -->
+                <!-- Passo 5: Plano de Pagamento e Resumo -->
                 <div class="form-step" id="step-4">
                     <h2 class="step-title">Plano de Pagamento e Resumo</h2>
                     <div class="form-fields">
@@ -251,45 +287,9 @@
                     <h2 class="step-title">Inscrição Finalizada com Sucesso!</h2>
                     <div class="form-fields">
                         <p>Obrigado por preencher sua ficha de inscrição. Em breve entraremos em contato para os próximos passos.</p>
-                        <p>Se tiver qualquer dúvida, entre em contato através do nosso WhatsApp: <a href="https://wa.me/5511940355159"  class="whatsapp-link">(11) 9 4035.5159</a></p>
+                        <p>Se tiver qualquer dúvida, entre em contato através do nosso WhatsApp: <a href="https://wa.me/5511940355159" target="_blank" class="whatsapp-link">(11) 9 4035.5159</a></p>
                         <p id="paymentRedirectMessage" style="display:none;">Você será redirecionado(a) para a página de pagamento em breve...</p>
                         <button type="button" id="goToPaymentBtn" class="btn btn-next" style="display:none;">Ir para o pagamento agora</button>
-                    </div>
-                </div>
-
-                 <!-- Passo de Termos e Condições (RF.1.2) -->
-                <div class="form-step" id="step-terms">
-                    <h2 class="step-title">Termos e Condições</h2>
-                    <div class="form-fields terms-and-conditions">
-                        <!-- Conteúdo dos termos e condições (substitua pelo seu texto real) -->
-                        <p>Ao prosseguir com esta inscrição, você concorda com os seguintes termos e condições do Quintal das Artes:</p>
-                        <p>1. **Matrícula e Mensalidades:** A matrícula é confirmada mediante o preenchimento completo deste formulário e o pagamento da primeira mensalidade/parcela. As mensalidades subsequentes deverão ser pagas até o dia 5, 10 ou 15 de cada mês, conforme sua escolha.</p>
-                        <p>2. **Cancelamento:** Em caso de cancelamento da matrícula, solicitamos aviso prévio de 30 dias. Mensalidades não são reembolsáveis para o mês corrente.</p>
-                        <p>3. **Ausências:** Aulas perdidas por ausência do aluno não serão reembolsadas ou repostas, salvo em casos de emergência médica comprovada, a critério da coordenação.</p>
-                        <p>4. **Materiais:** Alguns cursos podem exigir materiais específicos. A lista será fornecida no início do curso e é de responsabilidade do responsável a aquisição.</p>
-                        <p>5. **Segurança:** O Quintal das Artes se compromete a zelar pela segurança dos alunos durante as atividades. Em caso de emergência, as informações de contato fornecidas serão utilizadas.</p>
-                        <p>6. **Alterações:** O Quintal das Artes reserva-se o direito de alterar horários, professores ou conteúdo programático dos cursos, mediante aviso prévio aos responsáveis.</p>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="aceiteTermos" name="aceiteTermos" required>
-                            <label for="aceiteTermos">Eu li e concordo com os termos e condições do Quintal das Artes.</label>
-                            <div class="error-message"></div>
-                        </div>
-                        <div class="form-group">
-                            <label>Autorização de Uso de Imagem:</label>
-                            <div class="radio-group">
-                                <input type="radio" id="autorizaFotoSim" name="autorizaFoto" value="sim" required>
-                                <label for="autorizaFotoSim">Sim, autorizo o uso de imagem do(s) meu(s) filho(s) para divulgação do Quintal das Artes.</label>
-                            </div>
-                            <div class="radio-group">
-                                <input type="radio" id="autorizaFotoNao" name="autorizaFoto" value="nao">
-                                <label for="autorizaFotoNao">Não, não autorizo o uso de imagem do(s) meu(s) filho(s) para divulgação do Quintal das Artes.</label>
-                            </div>
-                            <div class="error-message photo-consent-error"></div>
-                        </div>
-                    </div>
-                    <div class="form-navigation">
-                        <button type="button" class="btn btn-prev"><span class="arrow-left">←</span> Voltar</button>
-                        <button type="button" class="btn btn-next">Próximo <span class="arrow-right">→</span></button>
                     </div>
                 </div>
 
