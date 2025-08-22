@@ -82,10 +82,6 @@ $(document).ready(function() {
             if ($input.prop('required') && !$input.is(':checked')) {
                 isValid = false;
             }
-        } else if ($input.is('select[multiple]')) {
-             if ($input.prop('required') && ($input.val() === null || $input.val().length === 0)) {
-                isValid = false;
-             }
         } else if ($input.prop('required') && $input.val().trim() === '') {
             isValid = false;
         } else if (validationFn && !validationFn($input.val())) {
@@ -97,6 +93,29 @@ $(document).ready(function() {
             $errorDiv.text(errorMessage).show();
         }
         return isValid;
+    }
+
+    // Valida seleção de cursos para um aprendiz
+    function validateApprenticesCourses($apprenticeGroup) {
+        const $checkedCourses = $apprenticeGroup.find('.course-checkbox:checked');
+        const $errorDiv = $apprenticeGroup.find('.courses-selection').siblings('.error-message');
+        
+        if ($checkedCourses.length === 0) {
+            $errorDiv.text('Selecione pelo menos um curso.').show();
+            return false;
+        } else {
+            $errorDiv.hide().text('');
+            return true;
+        }
+    }
+
+    // Obtém cursos selecionados para um aprendiz
+    function getSelectedCourses($apprenticeGroup) {
+        const selectedCourses = [];
+        $apprenticeGroup.find('.course-checkbox:checked').each(function() {
+            selectedCourses.push($(this).val());
+        });
+        return selectedCourses;
     }
 
     // Valida o passo atual antes de avançar
@@ -148,14 +167,8 @@ $(document).ready(function() {
                 isValid = validateField($group.find('.questaoSaudeAprendiz'), null, 'Campo obrigatório.') && isValid;
                 isValid = validateField($group.find('.emergenciaQuemChamarAprendiz'), null, 'Campo obrigatório.') && isValid;
 
-                // Validação de cursos: pelo menos 1 curso deve ser selecionado
-                const $cursosSelect = $group.find('.cursosAprendiz');
-                if ($cursosSelect.val() === null || $cursosSelect.val().length === 0) {
-                    validateField($cursosSelect, () => false, 'Selecione pelo menos um curso.');
-                    isValid = false;
-                } else {
-                    validateField($cursosSelect, () => true); // Limpa o erro se estiver ok
-                }
+                // Validação de cursos usando a nova função
+                isValid = validateApprenticesCourses($group) && isValid;
             });
         } else if (currentStep === 4) { // Termos e Condições (step-terms)
             isValid = validateField($('#aceiteTermos'), null, 'Você deve aceitar os termos e condições.') && isValid;
@@ -194,6 +207,44 @@ $(document).ready(function() {
         return isValid;
     }
 
+    // Popula a seleção de cursos com checkboxes
+    function populateCourseSelection($container) {
+        const allCourses = priceCalculator.getAllCourses();
+        const apprenticeNumber = $container.closest('.apprentice-group').find('.apprentice-number').text();
+        
+        // Limpa containers existentes
+        $container.find('.courses-checkboxes').empty();
+        
+        // Separa cursos e contraturnos
+        const cursos = allCourses.filter(c => c.categoria === 'curso');
+        const contraturnos = allCourses.filter(c => c.categoria === 'contraturno');
+        
+        // Função para criar checkboxes
+        function createCheckboxes(courseList, categoryContainer) {
+            courseList.forEach(course => {
+                const referencePrice = course.precos.mensal;
+                const uniqueId = `course-${course.id}-${apprenticeNumber}`;
+                const checkboxHtml = `
+                    <div class="checkbox-group">
+                        <input type="checkbox" 
+                               class="course-checkbox" 
+                               value="${course.id}" 
+                               id="${uniqueId}">
+                        <label for="${uniqueId}">
+                            ${course.nome} 
+                            <span class="course-price">(a partir de R$ ${referencePrice.toFixed(2).replace('.', ',')})</span>
+                        </label>
+                    </div>
+                `;
+                categoryContainer.append(checkboxHtml);
+            });
+        }
+        
+        // Cria checkboxes para cada categoria
+        createCheckboxes(cursos, $container.find('[data-category="curso"]'));
+        createCheckboxes(contraturnos, $container.find('[data-category="contraturno"]'));
+    }
+
     // Adiciona um novo grupo de aprendiz
     function addApprentice(animate = true, apprenticeData = null) {
         apprenticeCounter++;
@@ -214,9 +265,9 @@ $(document).ready(function() {
         // Atualiza o número do aprendiz no título
         $newApprentice.find('.apprentice-number').text(apprenticeCounter);
 
-        // Popula o dropdown de cursos
-        const $courseSelect = $newApprentice.find('.cursosAprendiz');
-        populateCourseDropdown($courseSelect);
+        // Popula a seleção de cursos com checkboxes
+        const $courseContainer = $newApprentice.find('.courses-selection');
+        populateCourseSelection($courseContainer);
         
         // Mostra o botão de remover se houver mais de um aprendiz
         if ($('#apprenticesContainer .apprentice-group:not(.template)').length > 0) {
@@ -240,16 +291,13 @@ $(document).ready(function() {
 
             // Seleciona os cursos. Os dados do webhook vêm com nomes, precisamos dos IDs
             if (apprenticeData.cursos && Array.isArray(apprenticeData.cursos)) {
-                const courseIdsToSelect = [];
                 const allCourses = priceCalculator.getAllCourses();
                 apprenticeData.cursos.forEach(courseName => {
-                    // Encontrar o ID do curso pelo nome
                     const courseObj = allCourses.find(c => c.nome === courseName);
                     if (courseObj) {
-                        courseIdsToSelect.push(courseObj.id);
+                        $newApprentice.find(`input[value="${courseObj.id}"]`).prop('checked', true);
                     }
                 });
-                $courseSelect.val(courseIdsToSelect);
             }
         }
 
@@ -291,38 +339,6 @@ $(document).ready(function() {
         }
     }
 
-    // Popula o dropdown de cursos
-    function populateCourseDropdown($selectElement) {
-        $selectElement.empty();
-        $selectElement.append('<option value="">Selecione curso(s)</option>');
-
-        const allCourses = priceCalculator.getAllCourses();
-        
-        // Separa cursos e contraturnos
-        const cursos = allCourses.filter(c => c.categoria === 'curso');
-        const contraturnos = allCourses.filter(c => c.categoria === 'contraturno');
-
-        // Função para criar as opções agrupadas
-        function appendOptions(groupName, courseList) {
-            if (courseList.length > 0) {
-                const $optgroup = $('<optgroup>').attr('label', groupName);
-                courseList.forEach(course => {
-                    // Mostra o preço mensal como referência
-                    const referencePrice = course.precos.mensal;
-                    $optgroup.append(
-                        $('<option>')
-                            .val(course.id)
-                            .text(`${course.nome} (a partir de R$ ${referencePrice.toFixed(2).replace('.', ',')})`)
-                    );
-                });
-                $selectElement.append($optgroup);
-            }
-        }
-
-        appendOptions('Cursos Livres', cursos);
-        appendOptions('Contraturnos', contraturnos);
-    }
-
     // Coleta todos os dados do formulário
     function collectFormData() {
         const formData = {
@@ -358,7 +374,7 @@ $(document).ready(function() {
                 escola: $group.find('.escolaAprendiz').val(),
                 dataNascimento: $group.find('.dataNascimentoAprendiz').val(),
                 genero: $group.find('.generoAprendiz').val(),
-                cursos: $group.find('.cursosAprendiz').val(), // Retorna array de IDs
+                cursos: getSelectedCourses($group), // Usa a nova função
                 consentimentoFoto: $group.find('.consentimentoFoto').is(':checked'),
                 restricaoAlimentar: $group.find('.restricaoAlimentarAprendiz').val(),
                 questaoSaude: $group.find('.questaoSaudeAprendiz').val(),
@@ -403,7 +419,7 @@ $(document).ready(function() {
         $('#apprenticesContainer .apprentice-group:not(.template)').each(function() {
             const $group = $(this);
             const apprenticeName = $group.find('.nomeAprendiz').val() || `Aprendiz ${$group.find('.apprentice-number').text()}`;
-            const selectedCourseIds = $group.find('.cursosAprendiz').val() || [];
+            const selectedCourseIds = getSelectedCourses($group); // Usa a nova função
             
             apprenticesCount++;
             
@@ -577,7 +593,7 @@ $(document).ready(function() {
         });
 
         // Disparar cálculo ao mudar seleção de curso, plano ou cupom
-        $('#registrationForm').on('change', '.cursosAprendiz, input[name="planoPagamento"]', function() {
+        $('#registrationForm').on('change', '.course-checkbox, input[name="planoPagamento"]', function() {
             updateSummaryAndTotal();
         });
 
