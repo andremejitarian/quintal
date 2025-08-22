@@ -77,18 +77,6 @@ function getCoursePrice(courseId, planKey) {
 }
 
 /**
- * Verifica se o cupom é de bolsista integral
- * @param {string} couponCode - Código do cupom
- * @returns {boolean} True se for cupom de bolsista
- */
-function isScholarshipCoupon(couponCode) {
-    if (!couponCode) return false;
-    const normalizedCouponCode = couponCode.toUpperCase();
-    const coupon = couponsData[normalizedCouponCode];
-    return coupon && coupon.tipo === 'percentual' && coupon.valor >= 1.00;
-}
-
-/**
  * Calcula o total da inscrição com base nos cursos selecionados, plano de pagamento e cupom.
  * @param {Array<string>} selectedCourseIds - Array de IDs dos cursos selecionados
  * @param {string} paymentPlanKey - Chave do plano de pagamento (mensal, bimestral, quadrimestral)
@@ -107,9 +95,7 @@ function calculateTotal(selectedCourseIds, paymentPlanKey, couponCode, paymentMe
             cardFee: 0, 
             total: 0,
             coursesDetails: [],
-            appliedDiscounts: [],
-            isScholarship: false,
-            originalTotal: 0
+            appliedDiscounts: []
         };
     }
 
@@ -138,11 +124,8 @@ function calculateTotal(selectedCourseIds, paymentPlanKey, couponCode, paymentMe
     let couponAmount = 0;
     let cardFee = 0;
 
-    // Verifica se é cupom de bolsista antes de aplicar outros descontos
-    const isScholarship = isScholarshipCoupon(couponCode);
-
-    // 2. Aplicar desconto de múltiplos cursos (10% no curso de menor valor) - apenas se não for bolsista
-    if (selectedCourseIds.length > 1 && !isScholarship) {
+    // 2. Aplicar desconto de múltiplos cursos (10% no curso de menor valor)
+    if (selectedCourseIds.length > 1) {
         const lowestPrice = Math.min(...coursesDetails.map(c => c.price));
         discountAmount = lowestPrice * pricesData.descontos.multiplos_cursos.percentual;
         currentTotal -= discountAmount;
@@ -153,8 +136,8 @@ function calculateTotal(selectedCourseIds, paymentPlanKey, couponCode, paymentMe
         });
     }
 
-    // 3. Aplicar desconto de irmãos (se mais de 1 aprendiz) - apenas se não for bolsista
-    if (apprenticesCount > 1 && !isScholarship) {
+    // 3. Aplicar desconto de irmãos (se mais de 1 aprendiz)
+    if (apprenticesCount > 1) {
         const brotherDiscount = currentTotal * pricesData.descontos.irmaos.percentual;
         discountAmount += brotherDiscount;
         currentTotal -= brotherDiscount;
@@ -165,9 +148,6 @@ function calculateTotal(selectedCourseIds, paymentPlanKey, couponCode, paymentMe
         });
     }
 
-    // Armazena o total antes do cupom para referência
-    const originalTotal = currentTotal;
-
     // 4. Aplicar desconto do cupom
     if (couponCode) {
         const normalizedCouponCode = couponCode.toUpperCase();
@@ -175,31 +155,20 @@ function calculateTotal(selectedCourseIds, paymentPlanKey, couponCode, paymentMe
 
         if (coupon) {
             if (coupon.tipo === 'percentual') {
-                if (isScholarship) {
-                    // Para bolsista, aplica 100% de desconto sobre o valor original (sem outros descontos)
-                    couponAmount = subtotal;
-                    currentTotal = 0;
-                    // Remove outros descontos já que o bolsista tem 100%
-                    discountAmount = 0;
-                    appliedDiscounts = [];
-                } else {
-                    couponAmount = currentTotal * coupon.valor;
-                    if (coupon.maxDesconto && couponAmount > coupon.maxDesconto) {
-                        couponAmount = coupon.maxDesconto;
-                    }
-                    couponAmount = Math.min(couponAmount, currentTotal);
-                    currentTotal -= couponAmount;
+                couponAmount = currentTotal * coupon.valor;
+                if (coupon.maxDesconto && couponAmount > coupon.maxDesconto) {
+                    couponAmount = coupon.maxDesconto;
                 }
-            } else if (coupon.tipo === 'fixo' && !isScholarship) {
+            } else if (coupon.tipo === 'fixo') {
                 couponAmount = coupon.valor;
-                couponAmount = Math.min(couponAmount, currentTotal);
-                currentTotal -= couponAmount;
             }
+            couponAmount = Math.min(couponAmount, currentTotal);
+            currentTotal -= couponAmount;
         }
     }
 
-    // 5. Aplicar taxa de cartão (se cartão de crédito e não for bolsista)
-    if (paymentMethod === 'Cartão de Crédito' && pricesData.planos[paymentPlanKey] && !isScholarship) {
+    // 5. Aplicar taxa de cartão (se cartão de crédito)
+    if (paymentMethod === 'Cartão de Crédito' && pricesData.planos[paymentPlanKey]) {
         const plan = pricesData.planos[paymentPlanKey];
         if (plan.taxaCartaoPercentual) {
             cardFee = currentTotal * plan.taxaCartaoPercentual;
@@ -207,7 +176,7 @@ function calculateTotal(selectedCourseIds, paymentPlanKey, couponCode, paymentMe
         }
     }
 
-    // 6. Aplicar desconto de bolsista integral via forma de pagamento (zera o valor)
+    // 6. Aplicar desconto de bolsista integral (zera o valor)
     if (paymentMethod === 'Bolsista Integral') {
         const scholarshipDiscount = currentTotal;
         discountAmount += scholarshipDiscount;
@@ -227,9 +196,7 @@ function calculateTotal(selectedCourseIds, paymentPlanKey, couponCode, paymentMe
         total: parseFloat(currentTotal.toFixed(2)),
         coursesDetails: coursesDetails,
         appliedDiscounts: appliedDiscounts,
-        paymentPlan: pricesData.planos[paymentPlanKey],
-        isScholarship: isScholarship,
-        originalTotal: parseFloat(subtotal.toFixed(2)) // Valor original antes de qualquer desconto
+        paymentPlan: pricesData.planos[paymentPlanKey]
     };
 }
 
@@ -259,7 +226,6 @@ window.priceCalculator = {
     getAllCourses,
     getCoursePrice,
     getCourseNameById,
-    isScholarshipCoupon,
     getPricesData: () => pricesData,
     getCouponsData: () => couponsData
 };
