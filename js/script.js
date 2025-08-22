@@ -169,6 +169,20 @@ $(document).ready(function() {
                 $photoConsentErrorDiv.hide().text('');
             }
         } else if (currentStep === 5) { // Plano de Pagamento e Resumo (step-4)
+            // Plano de Pagamento
+            const $planRadios = $('input[name="planoPagamento"]');
+            const $planErrorDiv = $('.plan-error');
+            if ($planRadios.filter(':checked').length === 0) {
+                isValid = false;
+                if ($planErrorDiv.length === 0) {
+                    $('input[name="planoPagamento"]').closest('.checkbox-group-container').after('<div class="error-message plan-error">Selecione um plano de pagamento.</div>');
+                } else {
+                    $planErrorDiv.text('Selecione um plano de pagamento.').show();
+                }
+            } else {
+                $('.plan-error').hide().text('');
+            }
+
             // Forma de Pagamento
             isValid = validateField($('#formaPagamento'), null, 'Selecione a forma de pagamento.') && isValid;
             
@@ -176,9 +190,6 @@ $(document).ready(function() {
             if ($('#formaPagamento').val() === 'PIX/Boleto') {
                 isValid = validateField($('#diaVencimento'), null, 'Selecione o dia de vencimento.') && isValid;
             }
-            
-            // A validação de cálculo é feita no próprio updateSummaryAndTotal
-            isValid = true; // Reinicia a validação do passo final
         }
         return isValid;
     }
@@ -207,13 +218,18 @@ $(document).ready(function() {
         const $courseSelect = $newApprentice.find('.cursosAprendiz');
         populateCourseDropdown($courseSelect);
         
+        // Mostra o botão de remover se houver mais de um aprendiz
+        if ($('#apprenticesContainer .apprentice-group:not(.template)').length > 0) {
+            $newApprentice.find('.btn-remove-apprentice').show();
+        }
+        
         $('#apprenticesContainer').append($newApprentice);
 
         // Preenche dados se houver prefilledData para este aprendiz
         if (apprenticeData) {
             $newApprentice.find('.nomeAprendiz').val(apprenticeData.nome);
             $newApprentice.find('.escolaAprendiz').val(apprenticeData.escola);
-            $newApprentice.find('.dataNascimentoAprendiz').val(apprenticeData.dataNascimento); // Assumindo DD/MM/AAAA ou que a máscara tratará
+            $newApprentice.find('.dataNascimentoAprendiz').val(apprenticeData.dataNascimento);
             $newApprentice.find('.generoAprendiz').val(apprenticeData.genero);
             $newApprentice.find('.restricaoAlimentarAprendiz').val(apprenticeData.restricaoAlimentar);
             $newApprentice.find('.questaoSaudeAprendiz').val(apprenticeData.questaoSaude);
@@ -225,9 +241,10 @@ $(document).ready(function() {
             // Seleciona os cursos. Os dados do webhook vêm com nomes, precisamos dos IDs
             if (apprenticeData.cursos && Array.isArray(apprenticeData.cursos)) {
                 const courseIdsToSelect = [];
+                const allCourses = priceCalculator.getAllCourses();
                 apprenticeData.cursos.forEach(courseName => {
                     // Encontrar o ID do curso pelo nome
-                    const courseObj = priceCalculator.getPricesData().cursos.find(c => c.nome === courseName);
+                    const courseObj = allCourses.find(c => c.nome === courseName);
                     if (courseObj) {
                         courseIdsToSelect.push(courseObj.id);
                     }
@@ -241,7 +258,10 @@ $(document).ready(function() {
         if (animate) {
             $newApprentice.hide().fadeIn(300);
         }
-        updateSummaryAndTotal(); // Recalcula após adicionar/remover
+        
+        // Atualiza a visibilidade dos botões de remover
+        updateRemoveButtons();
+        updateSummaryAndTotal(); // Recalcula após adicionar
     }
 
     // Remove um grupo de aprendiz
@@ -253,37 +273,54 @@ $(document).ready(function() {
                 $('#apprenticesContainer .apprentice-group:not(.template)').each(function(index) {
                     $(this).find('.apprentice-number').text(index + 1);
                 });
-                updateSummaryAndTotal(); // Recalcula após adicionar/remover
+                updateRemoveButtons();
+                updateSummaryAndTotal(); // Recalcula após remover
             });
         } else {
             alert('Você deve ter pelo menos um aprendiz.');
         }
     }
 
+    // Atualiza a visibilidade dos botões de remover
+    function updateRemoveButtons() {
+        const $apprenticeGroups = $('#apprenticesContainer .apprentice-group:not(.template)');
+        if ($apprenticeGroups.length <= 1) {
+            $apprenticeGroups.find('.btn-remove-apprentice').hide();
+        } else {
+            $apprenticeGroups.find('.btn-remove-apprentice').show();
+        }
+    }
+
     // Popula o dropdown de cursos
     function populateCourseDropdown($selectElement) {
         $selectElement.empty();
-        $selectElement.append('<option value="">Selecione um curso(s)</option>'); // Placeholder para multi-select
+        $selectElement.append('<option value="">Selecione curso(s)</option>');
 
-        const courses = priceCalculator.getPricesData().cursos;
-
-        // Agrupa por tipo
-        const contraturnos = courses.filter(c => c.tipo === 'Contraturno');
-        const outrosCursos = courses.filter(c => c.tipo === 'Curso');
+        const allCourses = priceCalculator.getAllCourses();
+        
+        // Separa cursos e contraturnos
+        const cursos = allCourses.filter(c => c.categoria === 'curso');
+        const contraturnos = allCourses.filter(c => c.categoria === 'contraturno');
 
         // Função para criar as opções agrupadas
         function appendOptions(groupName, courseList) {
             if (courseList.length > 0) {
                 const $optgroup = $('<optgroup>').attr('label', groupName);
                 courseList.forEach(course => {
-                    $optgroup.append($('<option>').val(course.id).text(`${course.nome} (R$ ${course.valor.toFixed(2).replace('.', ',')})`));
+                    // Mostra o preço mensal como referência
+                    const referencePrice = course.precos.mensal;
+                    $optgroup.append(
+                        $('<option>')
+                            .val(course.id)
+                            .text(`${course.nome} (a partir de R$ ${referencePrice.toFixed(2).replace('.', ',')})`)
+                    );
                 });
                 $selectElement.append($optgroup);
             }
         }
 
+        appendOptions('Cursos Livres', cursos);
         appendOptions('Contraturnos', contraturnos);
-        appendOptions('Cursos Livres', outrosCursos);
     }
 
     // Coleta todos os dados do formulário
@@ -339,8 +376,7 @@ $(document).ready(function() {
         // Converte os IDs dos cursos para os nomes dos cursos para o backend
         const detalhesAprendizesParaBackend = formData.aprendizes.map(ap => {
             const cursosNomes = (ap.cursos || []).map(id => {
-                const course = priceCalculator.getPricesData().cursos.find(c => c.id === id);
-                return course ? course.nome : id; // Retorna o nome ou o ID se não encontrar
+                return priceCalculator.getCourseNameById(id);
             });
             return { ...ap, cursos: cursosNomes };
         });
@@ -358,32 +394,43 @@ $(document).ready(function() {
 
     // Atualiza a seção de resumo e o total
     function updateSummaryAndTotal() {
-        if (!pricesDataLoaded) return; // Não calcula se os dados não foram carregados
+        if (!pricesDataLoaded) return { total: 0 };
 
         const allSelectedCourseIds = [];
         const apprenticesSummary = [];
+        let apprenticesCount = 0;
 
         $('#apprenticesContainer .apprentice-group:not(.template)').each(function() {
             const $group = $(this);
             const apprenticeName = $group.find('.nomeAprendiz').val() || `Aprendiz ${$group.find('.apprentice-number').text()}`;
             const selectedCourseIds = $group.find('.cursosAprendiz').val() || [];
             
+            apprenticesCount++;
+            
             const coursesDetails = [];
             selectedCourseIds.forEach(courseId => {
-                const course = priceCalculator.getPricesData().cursos.find(c => c.id === courseId);
-                if (course) {
-                    allSelectedCourseIds.push(courseId);
-                    coursesDetails.push(course.nome);
-                }
+                allSelectedCourseIds.push(courseId);
+                const courseName = priceCalculator.getCourseNameById(courseId);
+                coursesDetails.push(courseName);
             });
-            apprenticesSummary.push({ name: apprenticeName, courses: coursesDetails });
+            
+            apprenticesSummary.push({ 
+                name: apprenticeName, 
+                courses: coursesDetails 
+            });
         });
 
-        const selectedCoursesObjects = allSelectedCourseIds.map(id => priceCalculator.getPricesData().cursos.find(c => c.id === id));
-        const paymentPlan = $('input[name="planoPagamento"]:checked').val();
+        const paymentPlan = $('input[name="planoPagamento"]:checked').val() || 'mensal';
         const couponCode = $('#cupomCode').val();
+        const paymentMethod = $('#formaPagamento').val();
 
-        const totals = priceCalculator.calculateTotal(selectedCoursesObjects, paymentPlan, couponCode);
+        const totals = priceCalculator.calculateTotal(
+            allSelectedCourseIds, 
+            paymentPlan, 
+            couponCode, 
+            paymentMethod,
+            apprenticesCount
+        );
 
         // Atualiza a lista de aprendizes no resumo
         const $summaryList = $('#summaryApprenticesList');
@@ -410,7 +457,6 @@ $(document).ready(function() {
         // Atualiza os campos ocultos
         $('#valor_calculado_total').val(totals.total.toFixed(2));
         
-        // Retorna os totais para a submissão
         return totals;
     }
 
@@ -498,12 +544,6 @@ $(document).ready(function() {
         if (data.couponCode) {
             $('#cupomCode').val(data.couponCode).trigger('input');
         }
-
-        // Aceite termos e autorização de foto (se vierem no pré-preenchimento)
-        // O PRD não especifica que esses campos viriam no preenchimento,
-        // mas se viessem, a lógica seria similar:
-        // if (data.aceiteTermos) { $('#aceiteTermos').prop('checked', true); }
-        // if (data.autorizaFoto) { $(`input[name="autorizaFoto"][value="${data.autorizaFoto}"]`).prop('checked', true); }
 
         updateSummaryAndTotal(); // Atualiza o resumo com os dados pré-preenchidos
     }
@@ -605,6 +645,11 @@ $(document).ready(function() {
             }
         });
 
+        // Validação de planos de pagamento
+        $('input[name="planoPagamento"]').on('change', function() {
+            $('.plan-error').hide().text('');
+        });
+
         // Botão de redirecionamento para pagamento
         $('#goToPaymentBtn').on('click', function() {
             const paymentLink = $(this).data('payment-link');
@@ -625,7 +670,6 @@ $(document).ready(function() {
                 // Mostra a tela de sucesso imediatamente
                 showStep('success');
                 $('#paymentRedirectMessage').text('Processando sua inscrição...').show();
-
 
                 // Enviar dados para o backend via AJAX
                 try {
@@ -653,10 +697,6 @@ $(document).ready(function() {
                     } else if (result.link) {
                         $('#paymentRedirectMessage').text('Sua inscrição foi finalizada com sucesso! Clique abaixo para prosseguir com o pagamento.');
                         $('#goToPaymentBtn').data('payment-link', result.link).show();
-                        // Opcional: redirecionar automaticamente após alguns segundos
-                        // setTimeout(() => {
-                        //     window.open(result.link, '_blank');
-                        // }, 5000);
                     } else {
                         $('#paymentRedirectMessage').text('Inscrição finalizada com sucesso! Não foi possível obter o link de pagamento. Por favor, entre em contato.');
                         $('#goToPaymentBtn').hide();
