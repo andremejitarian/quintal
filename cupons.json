@@ -1,14 +1,6 @@
 {
-  "CUPOM10OFF": {
-    "tipo": "percentual",
-    "valor": 10,
-    "minimo_compra": 100,
-    "expira_em": "2025-12-31"
-  },
-  "GANHA50": {
-    "tipo": "fixo",
-    "valor": 50,
-    "minimo_compra": 200,
-    "expira_em": "2025-11-30"
-  }
+  "CUPOM10OFF": {"tipo": "percentual", "valor": 0.10, "maxDesconto": 50.00},
+  "CUPOM50FIXO": {"tipo": "fixo", "valor": 50.00},
+  "BOASVINDAS": {"tipo": "percentual", "valor": 0.15, "maxDesconto": 75.00},
+  "GANHE30": {"tipo": "fixo", "valor": 30.00}
 }
