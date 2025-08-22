@@ -42,7 +42,7 @@ body {
 .logo-circle {
     position: absolute;
     top: -60px; /* Posiciona o logo para que fique metade no banner, metade no card */
-    left: 40px; /* Posicionado à esquerda, não centralizado */
+    left: 60px; /* Posicionado à esquerda, não centralizado */
     background-color: white;
     border-radius: 50%;
     width: 120px;
