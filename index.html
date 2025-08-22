@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Inscrição - Quintal das Artes</title>
+    <title>Formulário de Check-in - Fazenda Serrinha</title>
     <link rel="stylesheet" href="css/style.css">
     <!-- jQuery and jQuery Mask -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -11,26 +11,40 @@
 </head>
 <body>
     <div class="container">
-        <!-- Logo e Cabeçalho -->
-        <header class="form-header">
-            <img src="assets/logo.svg" alt="Quintal das Artes" class="logo">
-            <h1>Formulário de Check-in na Fazenda Serrinha</h1>
-            <p class="header-description">
-                Damos as boas-vindas à Fazenda Serrinha! Somos bastante informais no nosso
-                modo de receber, porém o check-in é uma exigência legal que devemos cumprir.
-                Assim, solicitamos que preencha este formulário antes da chegada, de forma a
-                agilizar a acomodação na fazenda. Desejamos uma ótima estadia!
-            </p>
-        </header>
+        <!-- Welcome Screen -->
+        <div class="form-step welcome-screen active" id="welcome-screen">
+            <div class="form-card">
+                <div class="logo-container">
+                    <img src="images/logo.svg" alt="Fazenda Serrinha" class="logo">
+                </div>
+                <header class="form-header">
+                    <h1>Formulário de Check-in na Fazenda Serrinha</h1>
+                    <p class="header-description">
+                        Damos as boas-vindas à Fazenda Serrinha! Somos bastante informais no nosso
+                        modo de receber, porém o check-in é uma exigência legal que devemos cumprir.
+                        Assim, solicitamos que preencha este formulário antes da chegada, de forma a
+                        agilizar a acomodação na fazenda. Desejamos uma ótima estadia!
+                    </p>
+                </header>
+                <button class="btn btn-primary" onclick="nextStep('welcome-screen', 'form-step-1')">
+                    Avançar <span class="arrow">→</span>
+                </button>
+            </div>
+        </div>
 
-        <form id="inscricaoForm" class="multi-step-form">
-            <!-- Campo oculto para token de matrícula -->
-            <input type="hidden" name="matricula" id="matricula">
-            <input type="hidden" name="valor_calculado_total" id="valor_calculado_total">
-            <input type="hidden" name="detalhes_matricula" id="detalhes_matricula">
-
-            <!-- Etapa 1: Dados do Responsável e Aprendizes -->
-            <section class="form-step" id="step1">
+        <!-- Form Step 1: Personal Information -->
+        <div class="form-step" id="form-step-1">
+            <div class="form-card">
+                <button class="back-button" onclick="prevStep('form-step-1', 'welcome-screen')">
+                    ← Voltar
+                </button>
+                <form id="personal-info-form">
+                    <!-- Campo oculto para token de matrícula -->
+                    <input type="hidden" name="matricula" id="matricula">
+                    
+                    <header class="form-header">
+                        <h1>Informações Pessoais</h1>
+                    </header>
                 <div class="step-header">
                     <h2>Dados do Responsável</h2>
                 </div>
