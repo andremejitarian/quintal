@@ -1,46 +1,40 @@
-function validarCPF(cpf) {
-    // Remove caracteres não numéricos
-    cpf = cpf.replace(/[^\d]/g, '');
+// js/cpfValidation.js
 
-    // Verifica se tem 11 dígitos
-    if (cpf.length !== 11) return false;
+/**
+ * Valida um número de CPF.
+ * @param {string} cpf - O número de CPF a ser validado (pode conter pontos e hífens).
+ * @returns {boolean} - True se o CPF for válido, False caso contrário.
+ */
+function isValidCPF(cpf) {
+    if (typeof cpf !== "string") return false;
 
-    // Verifica se todos os dígitos são iguais
-    if (/^(\d)\1+$/.test(cpf)) return false;
+    cpf = cpf.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos
 
-    // Validação dos dígitos verificadores
-    let soma = 0;
-    let resto;
-
-    // Primeiro dígito verificador
-    for (let i = 0; i < 9; i++) {
-        soma += parseInt(cpf.charAt(i)) * (10 - i);
+    if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
+        return false; // Verifica se tem 11 dígitos e não é uma sequência de dígitos iguais
     }
 
-    resto = (soma * 10) % 11;
-    if (resto === 10 || resto === 11) resto = 0;
-    if (resto !== parseInt(cpf.charAt(9))) return false;
+    let sum = 0;
+    let remainder;
 
-    // Segundo dígito verificador
-    soma = 0;
-    for (let i = 0; i < 10; i++) {
-        soma += parseInt(cpf.charAt(i)) * (11 - i);
+    // Valida o primeiro dígito verificador
+    for (let i = 1; i <= 9; i++) {
+        sum = sum + parseInt(cpf.substring(i - 1, i)) * (11 - i);
     }
+    remainder = (sum * 10) % 11;
 
-    resto = (soma * 10) % 11;
-    if (resto === 10 || resto === 11) resto = 0;
-    if (resto !== parseInt(cpf.charAt(10))) return false;
+    if ((remainder === 10) || (remainder === 11)) remainder = 0;
+    if (remainder !== parseInt(cpf.substring(9, 10))) return false;
+
+    sum = 0;
+    // Valida o segundo dígito verificador
+    for (let i = 1; i <= 10; i++) {
+        sum = sum + parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    }
+    remainder = (sum * 10) % 11;
+
+    if ((remainder === 10) || (remainder === 11)) remainder = 0;
+    if (remainder !== parseInt(cpf.substring(10, 11))) return false;
 
     return true;
-}
-
-// Função para formatar o CPF
-function formatarCPF(cpf) {
-    cpf = cpf.replace(/[^\d]/g, '');
-    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-}
-
-// Exporta as funções
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { validarCPF, formatarCPF };
 }
