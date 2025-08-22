@@ -304,23 +304,16 @@
                             </ul>
                         </div>
 
-                        <div class="form-group">
-                            <label>Plano de Pagamento *</label>
-                            <div class="checkbox-group-container">
-                                <div class="radio-group">
-                                    <input type="radio" name="planoPagamento" value="mensal" id="plano-mensal">
-                                    <label for="plano-mensal">Mensal</label>
-                                </div>
-                                <div class="radio-group">
-                                    <input type="radio" name="planoPagamento" value="bimestral" id="plano-bimestral">
-                                    <label for="plano-bimestral">Bimestral (desconto aplicado)</label>
-                                </div>
-                                <div class="radio-group">
-                                    <input type="radio" name="planoPagamento" value="quadrimestral" id="plano-quadrimestral">
-                                    <label for="plano-quadrimestral">Quadrimestral (maior desconto)</label>
-                                </div>
-                            </div>
-                        </div>
+<div class="form-group">
+    <label for="planoPagamento">Plano de Pagamento *</label>
+    <select id="planoPagamento" name="planoPagamento" required>
+        <option value="">Selecione um plano de pagamento</option>
+        <option value="mensal">Mensal</option>
+        <option value="bimestral">Bimestral (desconto aplicado)</option>
+        <option value="quadrimestral">Quadrimestral (maior desconto)</option>
+    </select>
+    <div class="error-message">Selecione o plano de pagamento</div>
+</div>
 
                         <div class="form-group">
                             <label for="formaPagamento">Forma de Pagamento *</label>
