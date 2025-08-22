@@ -434,15 +434,35 @@ body {
     border-bottom: 2px dashed #ddd;
 }
 
+/* --- Organização dos cursos na lista de resumo --- */
+
+/* Cada aprendiz */
 #summaryApprenticesList li {
     padding: 8px 0;
     font-size: 1rem;
     color: #5B5B5B;
+    margin-bottom: 25px; /* Espaço entre diferentes aprendizes */
 }
 
+/* Remove margem do último aprendiz */
+#summaryApprenticesList li:last-child {
+    margin-bottom: 0;
+}
+
+/* Nome do aprendiz - linha própria */
 #summaryApprenticesList li strong {
-    color: #5B5B5B;
+    display: block;
+    margin-bottom: 10px;
     font-weight: 600;
+    color: #5B5B5B;
+}
+
+/* Cada curso em linha separada com indentação */
+.course-details-line {
+    display: block;
+    margin-bottom: 5px; /* Espaço entre cada curso */
+    padding-left: 20px; /* Indentação para mostrar que é subcategoria */
+    line-height: 1.4;
 }
 
 .price-details p {
@@ -625,11 +645,6 @@ body {
 
 .scholarship-message {
     animation: fadeIn 0.3s ease-in;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Template escondido */
