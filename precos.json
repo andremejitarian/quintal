@@ -127,9 +127,7 @@
         "bimestral": 255,
         "quadrimestral": 250
       }
-    }
-  },
-  "contraturnos": {
+    },
     "contraturno_tarde_1x": {
       "nome": "CONTRATURNO TARDE (ter e/ou qui) 1x/semana 13H-17h30",
       "categoria": "contraturno",
@@ -198,4 +196,5 @@
       "percentual": 10,
       "observacao": "Aplicado no curso de menor valor. Não cumulativo com outros descontos"
     }
+}
 }

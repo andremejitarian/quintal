@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Inscrição - Quintal das Artes</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- jQuery and jQuery Mask -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo e Cabeçalho -->
+        <header class="form-header">
+            <img src="assets/logo.svg" alt="Quintal das Artes" class="logo">
+            <h1>Formulário de Check-in na Fazenda Serrinha</h1>
+            <p class="header-description">
+                Damos as boas-vindas à Fazenda Serrinha! Somos bastante informais no nosso
+                modo de receber, porém o check-in é uma exigência legal que devemos cumprir.
+                Assim, solicitamos que preencha este formulário antes da chegada, de forma a
+                agilizar a acomodação na fazenda. Desejamos uma ótima estadia!
+            </p>
+        </header>
+
+        <form id="inscricaoForm" class="multi-step-form">
+            <!-- Campo oculto para token de matrícula -->
+            <input type="hidden" name="matricula" id="matricula">
+            <input type="hidden" name="valor_calculado_total" id="valor_calculado_total">
+            <input type="hidden" name="detalhes_matricula" id="detalhes_matricula">
+
+            <!-- Etapa 1: Dados do Responsável e Aprendizes -->
+            <section class="form-step" id="step1">
+                <div class="step-header">
+                    <h2>Dados do Responsável</h2>
+                </div>
+
+                <div class="form-group">
+                    <label for="nome_responsavel">Nome completo *</label>
+                    <input type="text" id="nome_responsavel" name="nome_responsavel" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cpf_responsavel">CPF *</label>
+                    <input type="text" id="cpf_responsavel" name="cpf_responsavel" required>
+                    <span class="error-message" id="cpf-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email_responsavel">E-mail *</label>
+                    <input type="email" id="email_responsavel" name="email_responsavel" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefone_responsavel">Telefone *</label>
+                    <input type="tel" id="telefone_responsavel" name="telefone_responsavel" required>
+                </div>
+
+                <!-- Seção de Aprendizes -->
+                <div class="aprendizes-section">
+                    <h3>Aprendizes</h3>
+                    <div id="aprendizes-container"></div>
+                    <button type="button" id="add-aprendiz" class="btn-secondary">+ Adicionar Aprendiz</button>
+                </div>
+
+                <!-- Template para Aprendiz -->
+                <template id="aprendiz-template">
+                    <div class="aprendiz-card">
+                        <div class="card-header">
+                            <h4>Aprendiz <span class="aprendiz-numero"></span></h4>
+                            <button type="button" class="remove-aprendiz">&times;</button>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Nome completo *</label>
+                            <input type="text" name="nome_aprendiz[]" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Data de Nascimento *</label>
+                            <input type="date" name="data_nascimento_aprendiz[]" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cursos/Contraturnos *</label>
+                            <select name="cursos_aprendiz[]" multiple required class="curso-select">
+                                <optgroup label="Contraturnos">
+                                    <!-- Preenchido dinamicamente via JavaScript -->
+                                </optgroup>
+                                <optgroup label="Cursos">
+                                    <!-- Preenchido dinamicamente via JavaScript -->
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Seção Como Ficou Sabendo -->
+                <div class="form-group checkbox-group">
+                    <label>Como ficou sabendo sobre o Quintal das Artes? *</label>
+                    <div class="checkbox-options">
+                        <label><input type="checkbox" name="como_conheceu[]" value="indicacao"> Indicação</label>
+                        <label><input type="checkbox" name="como_conheceu[]" value="redes_sociais"> Redes Sociais</label>
+                        <label><input type="checkbox" name="como_conheceu[]" value="site"> Site</label>
+                        <label><input type="checkbox" name="como_conheceu[]" value="outros"> Outros</label>
+                    </div>
+                </div>
+
+                <!-- Planos de Pagamento -->
+                <div class="form-group">
+                    <label>Plano de Pagamento *</label>
+                    <div class="radio-cards">
+                        <!-- Preenchido dinamicamente via JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Descontos -->
+                <div class="form-group">
+                    <label>Desconto Aplicável</label>
+                    <select name="desconto" id="desconto">
+                        <option value="">Selecione um desconto (se aplicável)</option>
+                        <!-- Preenchido dinamicamente via JavaScript -->
+                    </select>
+                </div>
+
+                <!-- Cupom -->
+                <div class="form-group">
+                    <label for="cupom">Cupom de Desconto</label>
+                    <div class="cupom-container">
+                        <input type="text" id="cupom" name="cupom">
+                        <button type="button" id="aplicar-cupom" class="btn-secondary">Aplicar</button>
+                    </div>
+                    <span class="cupom-message" id="cupom-message"></span>
+                </div>
+
+                <!-- Resumo dos Valores -->
+                <div class="resumo-valores">
+                    <h3>Resumo dos Valores</h3>
+                    <div id="valores-container">
+                        <!-- Preenchido dinamicamente via JavaScript -->
+                    </div>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" class="btn-primary next-step">Continuar</button>
+                </div>
+            </section>
+
+            <!-- Etapa 2: Termos e Condições -->
+            <section class="form-step" id="step2" style="display: none;">
+                <div class="step-header">
+                    <h2>Termos e Condições</h2>
+                </div>
+
+                <div class="form-group">
+                    <div class="terms-container">
+                        <!-- Termos e condições aqui -->
+                        <p class="terms-text">
+                            [Texto dos termos e condições]
+                        </p>
+                    </div>
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="aceite_termos" required>
+                        Eu li e concordo com os termos e condições *
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>Autorização de Uso de Imagem *</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="autorizacao_imagem" value="sim" required>
+                            Autorizo o uso de imagem
+                        </label>
+                        <label>
+                            <input type="radio" name="autorizacao_imagem" value="nao" required>
+                            Não autorizo o uso de imagem
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-navigation">
+                    <button type="button" class="btn-secondary prev-step">Voltar</button>
+                    <button type="submit" class="btn-primary">Enviar Cadastro</button>
+                </div>
+            </section>
+        </form>
+
+        <!-- Modal de Sucesso -->
+        <div id="success-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2>Inscrição Realizada com Sucesso!</h2>
+                <p>Sua inscrição foi recebida com sucesso. Para finalizar o processo, clique no botão abaixo para realizar o pagamento.</p>
+                <button id="btn-pagamento" class="btn-primary">Ir para o pagamento agora</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/cpfValidation.js"></script>
+    <script src="js/priceCalculator.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
