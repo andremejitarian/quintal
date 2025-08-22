@@ -10,38 +10,40 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    /* Imagem de fundo que cobre toda a tela */
-    background-image: url('images/background.jpg'); /* Substitua pelo caminho da sua imagem */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Mantém o fundo fixo durante o scroll */
+    background-color: #f0f2f5; /* Fundo branco/cinza claro */
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
     color: #333;
     line-height: 1.6;
 }
 
-/* Container principal que centraliza tudo */
+/* Banner superior */
+.banner-top {
+    width: 100%;
+    height: 300px; /* Altura do banner - ajuste conforme necessário */
+    background-image: url('images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* Container principal */
 .main-container {
     position: relative;
     width: 100%;
     max-width: 700px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 60px; /* Espaço para o logo circular */
+    margin: 0 auto;
+    margin-top: -150px; /* Puxa o card para cima, sobrepondo o banner */
+    padding: 0 20px 40px;
+    z-index: 2;
 }
 
 /* Logo circular que "salta" do card */
 .logo-circle {
     position: absolute;
-    top: 0;
+    top: -60px; /* Posiciona o logo para que fique metade no banner, metade no card */
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     background-color: white;
     border-radius: 50%;
     width: 120px;
@@ -465,17 +467,19 @@ body {
 
 /* Responsividade */
 @media (max-width: 768px) {
-    body {
-        padding: 10px;
+    .banner-top {
+        height: 200px; /* Banner menor em mobile */
     }
     
     .main-container {
-        padding-top: 50px;
+        margin-top: -100px; /* Ajusta a sobreposição */
+        padding: 0 15px 30px;
     }
     
     .logo-circle {
         width: 100px;
         height: 100px;
+        top: -50px;
     }
     
     .form-card {
@@ -516,13 +520,19 @@ body {
 }
 
 @media (max-width: 480px) {
+    .banner-top {
+        height: 150px;
+    }
+    
     .main-container {
-        padding-top: 40px;
+        margin-top: -75px;
+        padding: 0 10px 20px;
     }
     
     .logo-circle {
         width: 80px;
         height: 80px;
+        top: -40px;
     }
     
     .form-card {
@@ -582,16 +592,4 @@ body {
 /* Template escondido */
 .template {
     display: none !important;
-}
-
-/* Efeito de overlay no fundo para melhor legibilidade */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Overlay escuro semi-transparente */
-    z-index: -1;
 }
