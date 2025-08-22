@@ -418,3 +418,91 @@ select:focus {
     font-size: 0.875rem;
     color: #666;
 }
+
+/* Estilos para as telas */
+.form-screen {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.form-screen.active {
+    display: block;
+}
+
+/* Estilos para a tela de sucesso */
+.success-card {
+    text-align: center;
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+.success-icon {
+    margin-bottom: 2rem;
+}
+
+.checkmark {
+    width: 80px;
+    height: 80px;
+    background-color: var(--success-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+.success-description,
+.next-steps {
+    margin: 1rem 0;
+    color: #666;
+}
+
+.payment-summary {
+    background-color: var(--secondary-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+    text-align: left;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.summary-item .label {
+    font-weight: 500;
+}
+
+.status-pending {
+    color: #ff9800;
+    font-weight: 600;
+}
+
+.payment-btn {
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+    margin: 1.5rem 0;
+}
+
+.support-text {
+    margin-top: 2rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Estilos para termos e condições */
+.terms-scroll {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    background-color: #fafafa;
+}
