@@ -165,13 +165,25 @@
                                 <div class="error-message">Selecione o gênero</div>
                             </div>
 
-                            <div class="form-group">
-                                <label>Cursos de Interesse *</label>
-                                <select class="cursosAprendiz" multiple required>
-                                    <!-- Opções serão preenchidas pelo JavaScript -->
-                                </select>
-                                <div class="error-message">Selecione pelo menos um curso</div>
-                            </div>
+<!-- Substitua o select multiple por esta estrutura -->
+<div class="form-group">
+    <label>Cursos de Interesse *</label>
+    <div class="courses-selection">
+        <div class="course-category">
+            <h4>Cursos Livres</h4>
+            <div class="checkbox-group-container courses-checkboxes" data-category="curso">
+                <!-- Será preenchido pelo JavaScript -->
+            </div>
+        </div>
+        <div class="course-category">
+            <h4>Contraturnos</h4>
+            <div class="checkbox-group-container courses-checkboxes" data-category="contraturno">
+                <!-- Será preenchido pelo JavaScript -->
+            </div>
+        </div>
+    </div>
+    <div class="error-message">Selecione pelo menos um curso</div>
+</div>
 
                             <div class="form-group">
                                 <label>Restrições Alimentares *</label>
