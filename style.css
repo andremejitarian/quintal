@@ -140,18 +140,6 @@ body {
     position: relative;
 }
 
-.step-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(135deg, #FAC622, #FCD406);
-    border-radius: 2px;
-}
-
 /* Campos do formulário */
 .form-fields {
     margin-bottom: 30px;
