@@ -183,18 +183,7 @@ $(document).ready(function() {
             }
         } else if (currentStep === 5) { // Plano de Pagamento e Resumo (step-4)
             // Plano de Pagamento
-            const $planRadios = $('input[name="planoPagamento"]');
-            const $planErrorDiv = $('.plan-error');
-            if ($planRadios.filter(':checked').length === 0) {
-                isValid = false;
-                if ($planErrorDiv.length === 0) {
-                    $('input[name="planoPagamento"]').closest('.checkbox-group-container').after('<div class="error-message plan-error">Selecione um plano de pagamento.</div>');
-                } else {
-                    $planErrorDiv.text('Selecione um plano de pagamento.').show();
-                }
-            } else {
-                $('.plan-error').hide().text('');
-            }
+isValid = validateField($('#planoPagamento'), null, 'Selecione um plano de pagamento.') && isValid;
 
             // Forma de Pagamento
             isValid = validateField($('#formaPagamento'), null, 'Selecione a forma de pagamento.') && isValid;
@@ -354,7 +343,7 @@ $(document).ready(function() {
             },
             comoSoube: [],
             aprendizes: [],
-            planoPagamento: $('input[name="planoPagamento"]:checked').val(),
+            planoPagamento: $('#planoPagamento').val(),
             formaPagamento: $('#formaPagamento').val(),
             diaVencimento: ($('#formaPagamento').val() === 'PIX/Boleto') ? $('#diaVencimento').val() : '',
             aceiteTermos: $('#aceiteTermos').is(':checked'),
@@ -436,7 +425,7 @@ $(document).ready(function() {
             });
         });
 
-        const paymentPlan = $('input[name="planoPagamento"]:checked').val() || 'mensal';
+        const paymentPlan = $('#planoPagamento').val() || 'mensal';
         const couponCode = $('#cupomCode').val();
         const paymentMethod = $('#formaPagamento').val();
 
@@ -544,9 +533,9 @@ $(document).ready(function() {
         }
 
         // Plano de Pagamento
-        if (data.planoPagamento) {
-            $(`input[name="planoPagamento"][value="${data.planoPagamento}"]`).prop('checked', true);
-        }
+if (data.planoPagamento) {
+    $('#planoPagamento').val(data.planoPagamento);
+}
 
         // Forma de Pagamento e Dia de Vencimento
         if (data.formaPagamento) {
@@ -593,9 +582,9 @@ $(document).ready(function() {
         });
 
         // Disparar cálculo ao mudar seleção de curso, plano ou cupom
-        $('#registrationForm').on('change', '.course-checkbox, input[name="planoPagamento"]', function() {
-            updateSummaryAndTotal();
-        });
+$('#registrationForm').on('change', '.course-checkbox, #planoPagamento', function() {
+    updateSummaryAndTotal();
+});
 
         // Toggle para Dia de Vencimento
         $('#formaPagamento').on('change', function() {
@@ -659,11 +648,6 @@ $(document).ready(function() {
             } else {
                 $photoConsentErrorDiv.hide().text('');
             }
-        });
-
-        // Validação de planos de pagamento
-        $('input[name="planoPagamento"]').on('change', function() {
-            $('.plan-error').hide().text('');
         });
 
         // Botão de redirecionamento para pagamento
