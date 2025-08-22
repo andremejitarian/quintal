@@ -1,24 +1,6 @@
 {
-  "DESCONTO10": {
-    "tipo": "percentual",
-    "valor": 0.10,
-    "maxDesconto": 100,
-    "descricao": "10% de desconto"
-  },
-  "BEMVINDO": {
-    "tipo": "fixo",
-    "valor": 50,
-    "descricao": "R\$ 50 de desconto"
-  },
-  "FAMILIA20": {
-    "tipo": "percentual",
-    "valor": 0.20,
-    "maxDesconto": 200,
-    "descricao": "20% de desconto para famílias"
-  },
-  "BOLSISTA": {
-    "tipo": "percentual",
-    "valor": 1.00,
-    "descricao": "Bolsista integral - 100% de desconto"
-  }
+  "CUPOM10OFF": {"tipo": "percentual", "valor": 0.10, "maxDesconto": 50.00},
+  "CUPOM50FIXO": {"tipo": "fixo", "valor": 50.00},
+  "BOASVINDAS": {"tipo": "percentual", "valor": 0.15, "maxDesconto": 75.00},
+  "GANHE30": {"tipo": "fixo", "valor": 30.00}
 }
