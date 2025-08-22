@@ -38,12 +38,11 @@ body {
     z-index: 2;
 }
 
-/* Logo circular que "salta" do card */
+/* Logo circular posicionado à esquerda */
 .logo-circle {
     position: absolute;
     top: -60px; /* Posiciona o logo para que fique metade no banner, metade no card */
-    left: 50%;
-    transform: translateX(-50%);
+    left: 40px; /* Posicionado à esquerda, não centralizado */
     background-color: white;
     border-radius: 50%;
     width: 120px;
@@ -263,6 +262,11 @@ body {
     border-top: 2px solid #f0f0f0;
 }
 
+/* Ajuste específico para o primeiro passo (só botão Avançar) */
+#step-1 .form-navigation {
+    justify-content: flex-end; /* Alinha o botão à direita quando só há um botão */
+}
+
 .btn {
     padding: 15px 30px;
     border: none;
@@ -480,6 +484,7 @@ body {
         width: 100px;
         height: 100px;
         top: -50px;
+        left: 20px; /* Ajusta posição à esquerda em mobile */
     }
     
     .form-card {
@@ -499,6 +504,10 @@ body {
     .form-navigation {
         flex-direction: column;
         gap: 15px;
+    }
+    
+    #step-1 .form-navigation {
+        justify-content: center; /* Centraliza em mobile quando só há um botão */
     }
     
     .btn {
@@ -533,6 +542,7 @@ body {
         width: 80px;
         height: 80px;
         top: -40px;
+        left: 15px; /* Ajusta posição à esquerda em mobile pequeno */
     }
     
     .form-card {
