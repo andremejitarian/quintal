@@ -20,16 +20,202 @@
             <div class="form-header">
                 <h1 class="form-title">Ficha de Inscrição</h1>
                 <p class="form-description">Que bom que chegou aqui! Se você recebeu este link é porque já passou por uma aula experimental e vai fazer sua inscrição. Estamos muito felizes em receber sua família! A arte e o brincar são elementos centrais na programação do QUINTAL das artes.</p>
-                <p class="form-contact">Para + informações e dúvidas, entre em contato com a Lari no whatsapp <a href="https://wa.me/5511940355159"  class="whatsapp-link">(11) 9 4035.5159</a></p>
+                <p class="form-contact">Para + informações e dúvidas, entre em contato com a Lari no whatsapp <a href="https://wa.me/5511940355159" class="whatsapp-link">(11) 9 4035.5159</a></p>
             </div>
 
             <form id="registrationForm">
                 <!-- Campo oculto para matrícula -->
                 <input type="hidden" id="matricula" name="matricula" value="">
 
-                <!-- Resto do formulário permanece igual... -->
-                <!-- [Todo o conteúdo do formulário que já estava funcionando] -->
-                
+                <!-- ETAPA 1: Dados do Responsável -->
+                <div class="form-step active" id="step-1">
+                    <h2 class="step-title">Dados do Responsável</h2>
+                    
+                    <div class="form-fields">
+                        <div class="form-group">
+                            <label for="nomeResponsavel">Nome Completo do Responsável *</label>
+                            <input type="text" id="nomeResponsavel" name="nomeResponsavel" required>
+                            <div class="error-message">Este campo é obrigatório</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cpfResponsavel">CPF do Responsável *</label>
+                            <input type="text" id="cpfResponsavel" name="cpfResponsavel" required>
+                            <div class="error-message">CPF inválido</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefoneResponsavel">Telefone/WhatsApp *</label>
+                            <input type="tel" id="telefoneResponsavel" name="telefoneResponsavel" required>
+                            <div class="error-message">Este campo é obrigatório</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="emailResponsavel">E-mail *</label>
+                            <input type="email" id="emailResponsavel" name="emailResponsavel" required>
+                            <div class="error-message">E-mail inválido</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="enderecoResponsavel">Endereço Completo *</label>
+                            <textarea id="enderecoResponsavel" name="enderecoResponsavel" rows="3" required placeholder="Rua, número, bairro, cidade, CEP"></textarea>
+                            <div class="error-message">Este campo é obrigatório</div>
+                        </div>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-next" onclick="nextStep()">
+                            Avançar
+                            <span>→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ETAPA 2: Dados do(s) Aprendiz(es) -->
+                <div class="form-step" id="step-2">
+                    <h2 class="step-title">Dados do(s) Aprendiz(es)</h2>
+                    
+                    <div id="apprenticesContainer">
+                        <!-- Template para aprendiz -->
+                        <div class="apprentice-group template" id="apprenticeTemplate">
+                            <h3>Aprendiz <span class="apprentice-number">1</span></h3>
+                            
+                            <div class="form-group">
+                                <label>Nome Completo do Aprendiz *</label>
+                                <input type="text" name="nomeAprendiz[]" required>
+                                <div class="error-message">Este campo é obrigatório</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Data de Nascimento *</label>
+                                <input type="date" name="nascimentoAprendiz[]" required>
+                                <div class="error-message">Este campo é obrigatório</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Modalidades de Interesse *</label>
+                                <div class="checkbox-group-container">
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" name="modalidades[]" value="teatro" id="teatro-1">
+                                        <label for="teatro-1">Teatro</label>
+                                    </div>
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" name="modalidades[]" value="musica" id="musica-1">
+                                        <label for="musica-1">Música</label>
+                                    </div>
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" name="modalidades[]" value="danca" id="danca-1">
+                                        <label for="danca-1">Dança</label>
+                                    </div>
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" name="modalidades[]" value="artes-visuais" id="artes-1">
+                                        <label for="artes-1">Artes Visuais</label>
+                                    </div>
+                                </div>
+                                <div class="error-message">Selecione pelo menos uma modalidade</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Dias da Semana Disponíveis *</label>
+                                <div class="checkbox-group-container">
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" name="diasDisponiveis[]" value="segunda" id="seg-1">
+                                        <label for="seg-1">Segunda-feira</label>
+                                    </div>
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" name="diasDisponiveis[]" value="terca" id="ter-1">
+                                        <label for="ter-1">Terça-feira</label>
+                                    </div>
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" name="diasDisponiveis[]" value="quarta" id="qua-1">
+                                        <label for="qua-1">Quarta-feira</label>
+                                    </div>
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" name="diasDisponiveis[]" value="quinta" id="qui-1">
+                                        <label for="qui-1">Quinta-feira</label>
+                                    </div>
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" name="diasDisponiveis[]" value="sexta" id="sex-1">
+                                        <label for="sex-1">Sexta-feira</label>
+                                    </div>
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" name="diasDisponiveis[]" value="sabado" id="sab-1">
+                                        <label for="sab-1">Sábado</label>
+                                    </div>
+                                </div>
+                                <div class="error-message">Selecione pelo menos um dia</div>
+                            </div>
+
+                            <button type="button" class="btn btn-remove-apprentice" onclick="removeApprentice(this)" style="display: none;">
+                                Remover Aprendiz
+                            </button>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-add-apprentice" onclick="addApprentice()">
+                        + Adicionar Outro Aprendiz
+                    </button>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-prev" onclick="prevStep()">
+                            <span>←</span>
+                            Voltar
+                        </button>
+                        <button type="button" class="btn btn-next" onclick="nextStep()">
+                            Avançar
+                            <span>→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ETAPA 3: Resumo e Pagamento -->
+                <div class="form-step" id="step-3">
+                    <h2 class="step-title">Resumo da Inscrição</h2>
+                    
+                    <div class="summary-section">
+                        <h3>Dados da Inscrição</h3>
+                        <div id="summaryContent">
+                            <!-- Conteúdo será preenchido via JavaScript -->
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cupomDesconto">Cupom de Desconto (opcional)</label>
+                            <input type="text" id="cupomDesconto" name="cupomDesconto" placeholder="Digite seu cupom">
+                            <div class="cupom-feedback"></div>
+                        </div>
+
+                        <div class="price-details">
+                            <p>Subtotal: <span id="subtotal">R\$ 0,00</span></p>
+                            <p>Desconto: <span id="desconto">R\$ 0,00</span></p>
+                            <p class="total-price">Total: <span id="total">R\$ 0,00</span></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="terms-and-conditions">
+                            <p><strong>Termos e Condições de Uso</strong></p>
+                            <p>Ao prosseguir com a inscrição, você concorda com nossos termos e condições...</p>
+                            <!-- Adicione aqui o texto completo dos termos -->
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="aceitarTermos" name="aceitarTermos" required>
+                            <label for="aceitarTermos">Aceito os termos e condições *</label>
+                        </div>
+                        <div class="error-message">Você deve aceitar os termos para continuar</div>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-prev" onclick="prevStep()">
+                            <span>←</span>
+                            Voltar
+                        </button>
+                        <button type="submit" class="btn btn-submit">
+                            Finalizar Inscrição
+                            <span>✓</span>
+                        </button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
