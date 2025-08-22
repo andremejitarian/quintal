@@ -400,7 +400,7 @@ body {
 
 /* Seção de resumo */
 .summary-section {
-    background: linear-gradient(135deg, #F8F1C9, #f5f5f5);
+    background: #ffffff;
     border: 2px solid #ddd;
     border-radius: 16px;
     padding: 30px;
