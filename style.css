@@ -10,16 +10,16 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #f0f2f5; /* Fundo branco/cinza claro */
+    background-color: #F8F1C9; /* Fundo suave da paleta */
     min-height: 100vh;
-    color: #333;
+    color: #5B5B5B; /* Texto escuro da paleta */
     line-height: 1.6;
 }
 
 /* Banner superior */
 .banner-top {
     width: 100%;
-    height: 300px; /* Altura do banner - ajuste conforme necessário */
+    height: 300px;
     background-image: url('images/background.jpg');
     background-size: cover;
     background-position: center;
@@ -33,7 +33,7 @@ body {
     width: 100%;
     max-width: 700px;
     margin: 0 auto;
-    margin-top: -150px; /* Puxa o card para cima, sobrepondo o banner */
+    margin-top: -150px;
     padding: 0 20px 40px;
     z-index: 2;
 }
@@ -41,9 +41,9 @@ body {
 /* Logo circular posicionado à esquerda */
 .logo-circle {
     position: absolute;
-    top: -60px; /* Posiciona o logo para que fique metade no banner, metade no card */
-    left: 60px; /* Posicionado à esquerda, não centralizado */
-    background-color: white;
+    top: -60px;
+    left: 60px;
+    background-color: #ffffff;
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -52,7 +52,7 @@ body {
     align-items: center;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
     z-index: 10;
-    border: 4px solid #fff;
+    border: 4px solid #ffffff;
 }
 
 .logo-circle img {
@@ -64,55 +64,55 @@ body {
 
 /* Card principal do formulário */
 .form-card {
-    background-color: white;
+    background-color: #ffffff;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
     padding: 40px;
     width: 100%;
-    padding-top: 80px; /* Espaço extra no topo para o logo não sobrepor o conteúdo */
+    padding-top: 80px;
     position: relative;
 }
 
 /* Header do formulário */
 .form-header {
-    text-align: left; /* Mudado de center para left */
+    text-align: left;
     margin-bottom: 40px;
     padding-bottom: 30px;
-    border-bottom: 2px solid #f0f0f0;
+    border-bottom: 2px solid #f5f5f5;
 }
 
 .form-title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #2c3e50;
+    color: #5B5B5B;
     margin-bottom: 15px;
     letter-spacing: -0.5px;
-    text-align: left; /* Garantindo alinhamento à esquerda */
+    text-align: left;
 }
 
 .form-description {
     font-size: 1.1rem;
-    color: #666;
+    color: #8a8a8a;
     margin-bottom: 20px;
     line-height: 1.7;
-    text-align: left; /* Garantindo alinhamento à esquerda */
+    text-align: left;
 }
 
 .form-contact {
     font-size: 1rem;
-    color: #777;
-    text-align: left; /* Garantindo alinhamento à esquerda */
+    color: #999;
+    text-align: left;
 }
 
 .whatsapp-link {
-    color: #25D366;
+    color: #FAC622; /* Amarelo de destaque */
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
 }
 
 .whatsapp-link:hover {
-    color: #128C7E;
+    color: #FCD406; /* Amarelo de destaque alternativo */
     text-decoration: underline;
 }
 
@@ -134,7 +134,7 @@ body {
 .step-title {
     font-size: 2rem;
     font-weight: 600;
-    color: #2c3e50;
+    color: #5B5B5B;
     text-align: center;
     margin-bottom: 30px;
     position: relative;
@@ -148,7 +148,7 @@ body {
     transform: translateX(-50%);
     width: 60px;
     height: 3px;
-    background: linear-gradient(135deg, #4CAF50, #45a049);
+    background: linear-gradient(135deg, #FAC622, #FCD406);
     border-radius: 2px;
 }
 
@@ -166,7 +166,7 @@ body {
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
-    color: #2c3e50;
+    color: #5B5B5B;
     font-size: 0.95rem;
 }
 
@@ -175,21 +175,21 @@ body {
 .form-group textarea {
     width: 100%;
     padding: 15px 20px;
-    border: 2px solid #e1e8ed;
+    border: 2px solid #ddd;
     border-radius: 12px;
     font-size: 1rem;
     transition: all 0.3s ease;
-    background: #fafbfc;
-    color: #333;
+    background: #fdfdfd;
+    color: #5B5B5B;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #4CAF50;
-    background: white;
-    box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+    border-color: #FAC622;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(250, 198, 34, 0.1);
     transform: translateY(-2px);
 }
 
@@ -235,7 +235,7 @@ body {
 
 .checkbox-group:hover,
 .radio-group:hover {
-    background-color: #f8f9fa;
+    background-color: #F8F1C9;
 }
 
 .checkbox-group input[type="checkbox"],
@@ -244,7 +244,7 @@ body {
     height: 20px;
     margin: 0;
     cursor: pointer;
-    accent-color: #4CAF50;
+    accent-color: #FAC622;
 }
 
 .checkbox-group label,
@@ -262,12 +262,12 @@ body {
     gap: 20px;
     margin-top: 40px;
     padding-top: 30px;
-    border-top: 2px solid #f0f0f0;
+    border-top: 2px solid #f5f5f5;
 }
 
 /* Ajuste específico para o primeiro passo (só botão Avançar) */
 #step-1 .form-navigation {
-    justify-content: flex-end; /* Alinha o botão à direita quando só há um botão */
+    justify-content: flex-end;
 }
 
 .btn {
@@ -307,9 +307,9 @@ body {
 .btn-submit,
 .btn-add-apprentice,
 #goToPaymentBtn {
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    color: white;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    background: linear-gradient(135deg, #FAC622, #FCD406);
+    color: #5B5B5B;
+    box-shadow: 0 4px 15px rgba(250, 198, 34, 0.3);
 }
 
 .btn-next:hover,
@@ -317,19 +317,20 @@ body {
 .btn-add-apprentice:hover,
 #goToPaymentBtn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+    box-shadow: 0 8px 25px rgba(250, 198, 34, 0.4);
 }
 
 .btn-prev,
 .btn-remove-apprentice {
-    background: #f8f9fa;
-    color: #495057;
-    border: 2px solid #dee2e6;
+    background: #f5f5f5;
+    color: #5B5B5B;
+    border: 2px solid #ddd;
 }
 
 .btn-prev:hover,
 .btn-remove-apprentice:hover {
-    background: #e9ecef;
+    background: #A0A0A0;
+    color: #ffffff;
     transform: translateY(-2px);
 }
 
@@ -342,8 +343,8 @@ body {
 .btn-remove-apprentice {
     width: 100%;
     margin-top: 20px;
-    background: #dc3545;
-    color: white;
+    background: #e74c3c;
+    color: #ffffff;
     border: none;
 }
 
@@ -357,8 +358,8 @@ body {
 }
 
 .apprentice-group {
-    background: #f8f9fa;
-    border: 2px solid #e9ecef;
+    background: #F8F1C9;
+    border: 2px solid #ddd;
     border-radius: 16px;
     padding: 30px;
     margin-bottom: 30px;
@@ -367,18 +368,18 @@ body {
 }
 
 .apprentice-group:hover {
-    border-color: #4CAF50;
-    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.1);
+    border-color: #FAC622;
+    box-shadow: 0 8px 25px rgba(250, 198, 34, 0.1);
 }
 
 .apprentice-group h3 {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #2c3e50;
+    color: #5B5B5B;
     text-align: center;
     margin-bottom: 25px;
     padding-bottom: 15px;
-    border-bottom: 2px solid #dee2e6;
+    border-bottom: 2px solid #ddd;
 }
 
 /* Select múltiplo */
@@ -395,17 +396,24 @@ body {
 }
 
 .cupom-feedback.success {
-    color: #28a745;
+    color: #0c5460;
+    background-color: #e8f4fd;
+    border: 1px solid #bee5eb;
+    padding: 8px 12px;
+    border-radius: 4px;
 }
 
 .cupom-feedback.error {
-    color: #dc3545;
+    color: #e74c3c;
+    background-color: #fdf2f2;
+    padding: 8px 12px;
+    border-radius: 4px;
 }
 
 /* Seção de resumo */
 .summary-section {
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-    border: 2px solid #dee2e6;
+    background: linear-gradient(135deg, #F8F1C9, #f5f5f5);
+    border: 2px solid #ddd;
     border-radius: 16px;
     padding: 30px;
     margin-top: 40px;
@@ -414,7 +422,7 @@ body {
 .summary-section h3 {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #2c3e50;
+    color: #5B5B5B;
     text-align: center;
     margin-bottom: 25px;
 }
@@ -423,17 +431,17 @@ body {
     list-style: none;
     margin-bottom: 25px;
     padding-bottom: 20px;
-    border-bottom: 2px dashed #dee2e6;
+    border-bottom: 2px dashed #ddd;
 }
 
 #summaryApprenticesList li {
     padding: 8px 0;
     font-size: 1rem;
-    color: #495057;
+    color: #5B5B5B;
 }
 
 #summaryApprenticesList li strong {
-    color: #4CAF50;
+    color: #FAC622;
     font-weight: 600;
 }
 
@@ -449,21 +457,21 @@ body {
 .price-details .total-price {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #4CAF50;
+    color: #FAC622;
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 3px solid #4CAF50;
+    border-top: 3px solid #FAC622;
 }
 
 /* Termos e condições */
 .terms-and-conditions {
     max-height: 300px;
     overflow-y: auto;
-    border: 2px solid #e9ecef;
+    border: 2px solid #ddd;
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 25px;
-    background: #fafbfc;
+    background: #fdfdfd;
     font-size: 0.95rem;
     line-height: 1.6;
 }
@@ -475,11 +483,11 @@ body {
 /* Responsividade */
 @media (max-width: 768px) {
     .banner-top {
-        height: 200px; /* Banner menor em mobile */
+        height: 200px;
     }
     
     .main-container {
-        margin-top: -100px; /* Ajusta a sobreposição */
+        margin-top: -100px;
         padding: 0 15px 30px;
     }
     
@@ -487,7 +495,7 @@ body {
         width: 100px;
         height: 100px;
         top: -50px;
-        left: 20px; /* Ajusta posição à esquerda em mobile */
+        left: 20px;
     }
     
     .form-card {
@@ -510,7 +518,7 @@ body {
     }
     
     #step-1 .form-navigation {
-        justify-content: center; /* Centraliza em mobile quando só há um botão */
+        justify-content: center;
     }
     
     .btn {
@@ -545,7 +553,7 @@ body {
         width: 80px;
         height: 80px;
         top: -40px;
-        left: 15px; /* Ajusta posição à esquerda em mobile pequeno */
+        left: 15px;
     }
     
     .form-card {
@@ -595,6 +603,8 @@ body {
     opacity: 0.6;
     cursor: not-allowed;
     transform: none !important;
+    background: #A0A0A0 !important;
+    color: #ffffff !important;
 }
 
 .btn:disabled:hover {
@@ -603,9 +613,9 @@ body {
 }
 
 .cupom-feedback.scholarship {
-    color: #155724;
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
+    color: #0c5460;
+    background-color: #e8f4fd;
+    border: 1px solid #bee5eb;
     padding: 8px 12px;
     border-radius: 4px;
     font-weight: bold;
@@ -621,6 +631,7 @@ body {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
 /* Template escondido */
 .template {
     display: none !important;
