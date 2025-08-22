@@ -10,7 +10,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #F8F1C9; /* Fundo suave da paleta */
+    background-color: #ffffff; /* Fundo suave da paleta */
     min-height: 100vh;
     color: #5B5B5B; /* Texto escuro da paleta */
     line-height: 1.6;
@@ -359,7 +359,7 @@ body {
 
 .apprentice-group {
     background: #ffffff;
-    border: 2px solid #ddd;
+    border: 2px solid #ffffff;
     border-radius: 16px;
     padding: 30px;
     margin-bottom: 30px;
@@ -368,7 +368,7 @@ body {
 }
 
 .apprentice-group:hover {
-    border-color: #FAC622;
+    border-color: #ffffff;
     box-shadow: 0 8px 25px rgba(250, 198, 34, 0.1);
 }
 
