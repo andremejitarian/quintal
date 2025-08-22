@@ -386,9 +386,7 @@ $(document).ready(function() {
             aprendizes: detalhesAprendizesParaBackend,
             planoPagamento: formData.planoPagamento,
             cupomAplicado: formData.cupomCode,
-            valorFinal: formData.valor_calculado_total,
-            valorOriginal: priceDetails.originalTotal || priceDetails.subtotal,
-            isBolsista: priceDetails.isScholarship || formData.formaPagamento === 'Bolsista Integral'
+            valorFinal: formData.valor_calculado_total
         });
 
         return formData;
@@ -449,50 +447,12 @@ $(document).ready(function() {
             $summaryList.append(`<li>Nenhum aprendiz adicionado</li>`);
         }
 
-        // Verifica se é bolsista
-        const isScholarship = totals.isScholarship || paymentMethod === 'Bolsista Integral';
-
         // Atualiza os valores financeiros
         $('#summarySubtotal').text('R$ ' + totals.subtotal.toFixed(2).replace('.', ','));
         $('#summaryDiscount').text('R$ ' + totals.discountAmount.toFixed(2).replace('.', ','));
         $('#summaryCoupon').text('R$ ' + totals.couponAmount.toFixed(2).replace('.', ','));
         $('#summaryCardFee').text('R$ ' + totals.cardFee.toFixed(2).replace('.', ','));
-        
-        // Mostra mensagem especial para bolsista
-        if (isScholarship) {
-            $('#summaryTotal').html('<span style="color: #28a745; font-weight: bold;">R$ 0,00 (BOLSISTA INTEGRAL)</span>');
-            
-            // Adiciona mensagem explicativa
-            if ($('.scholarship-message').length === 0) {
-                $('.price-details').after(`
-                    <div class="scholarship-message" style="background: #d4edda; border: 1px solid #c3e6cb; border-radius: 8px; padding: 15px; margin-top: 15px; color: #155724;">
-                        <h4 style="margin: 0 0 10px 0; color: #155724;">🎓 Parabéns! Você recebeu uma bolsa integral!</h4>
-                        <p style="margin: 0; font-size: 14px;">
-                            Valor original dos cursos: <strong>R$ ${totals.originalTotal.toFixed(2).replace('.', ',')}</strong><br>
-                            Desconto aplicado: <strong>100%</strong><br>
-                            <strong>Não haverá cobrança para esta inscrição.</strong>
-                        </p>
-                    </div>
-                `);
-            } else {
-                $('.scholarship-message p').html(`
-                    Valor original dos cursos: <strong>R$ ${totals.originalTotal.toFixed(2).replace('.', ',')}</strong><br>
-                    Desconto aplicado: <strong>100%</strong><br>
-                    <strong>Não haverá cobrança para esta inscrição.</strong>
-                `);
-            }
-        } else {
-            $('#summaryTotal').text('R$ ' + totals.total.toFixed(2).replace('.', ','));
-            $('.scholarship-message').remove();
-        }
-
-        // Atualiza o texto do botão de submit baseado no tipo
-        const $submitBtn = $('.btn-submit');
-        if (isScholarship) {
-            $submitBtn.html('Finalizar Inscrição Bolsista <span>🎓</span>');
-        } else {
-            $submitBtn.html('Finalizar Inscrição <span>✓</span>');
-        }
+        $('#summaryTotal').text('R$ ' + totals.total.toFixed(2).replace('.', ','));
 
         // Atualiza os campos ocultos
         $('#valor_calculado_total').val(totals.total.toFixed(2));
@@ -640,16 +600,11 @@ $(document).ready(function() {
             const cupomFeedback = $('.cupom-feedback');
             const couponValue = $(this).val().toUpperCase();
             if (couponValue === '') {
-                cupomFeedback.text('').removeClass('error success scholarship');
+                cupomFeedback.text('').removeClass('error success');
             } else if (priceCalculator.getCouponsData()[couponValue]) {
-                const coupon = priceCalculator.getCouponsData()[couponValue];
-                if (priceCalculator.isScholarshipCoupon(couponValue)) {
-                    cupomFeedback.text('🎓 Cupom de Bolsista Integral válido!').addClass('scholarship').removeClass('error success');
-                } else {
-                    cupomFeedback.text('Cupom válido!').addClass('success').removeClass('error scholarship');
-                }
+                cupomFeedback.text('Cupom válido!').addClass('success').removeClass('error');
             } else {
-                cupomFeedback.text('Cupom inválido.').addClass('error').removeClass('success scholarship');
+                cupomFeedback.text('Cupom inválido.').addClass('error').removeClass('success');
             }
             updateSummaryAndTotal();
         });
@@ -705,20 +660,18 @@ $(document).ready(function() {
 
         // Submissão do formulário
         $('#registrationForm').on('submit', async function(event) {
-            event.preventDefault();
+            event.preventDefault(); // Impede o envio padrão do formulário
 
+            // Valida o último passo antes de submeter
             if (validateCurrentStep()) {
                 const formData = collectFormData();
                 console.log('Dados do Formulário para Submissão:', formData);
-
-                // Verifica se é bolsista
-                const isScholarship = priceCalculator.isScholarshipCoupon(formData.cupomCode) || 
-                                     formData.formaPagamento === 'Bolsista Integral';
 
                 // Mostra a tela de sucesso imediatamente
                 showStep('success');
                 $('#paymentRedirectMessage').text('Processando sua inscrição...').show();
 
+                // Enviar dados para o backend via AJAX
                 try {
                     const response = await fetch(WEBHOOK_SUBMISSAO_URL, {
                         method: 'POST',
@@ -735,15 +688,11 @@ $(document).ready(function() {
                     const result = await response.json();
                     console.log('Inscrição enviada com sucesso:', result);
 
-                    if (isScholarship) {
+                    $('#paymentRedirectMessage').text('Inscrição finalizada com sucesso!');
+                    
+                    if (formData.formaPagamento === 'Bolsista Integral') {
                         // Para bolsista integral, não há link de pagamento
-                        $('#paymentRedirectMessage').html(`
-                            <h4 style="color: #155724; margin-bottom: 15px;">🎓 Inscrição de Bolsista Finalizada!</h4>
-                            <p style="margin-bottom: 10px;">Sua inscrição como <strong>bolsista integral</strong> foi registrada com sucesso.</p>
-                            <p style="margin-bottom: 10px;">Valor original dos cursos: <strong>R$ ${formData.resumoFinanceiro.originalTotal.toFixed(2).replace('.', ',')}</strong></p>
-                            <p style="margin-bottom: 15px;"><strong>Desconto aplicado: 100% - Não haverá cobrança.</strong></p>
-                            <p style="font-size: 14px; color: #6c757d;">Em breve entraremos em contato para os próximos passos.</p>
-                        `);
+                        $('#paymentRedirectMessage').text('Sua inscrição como bolsista foi registrada com sucesso. Em breve entraremos em contato para os próximos passos.');
                         $('#goToPaymentBtn').hide();
                     } else if (result.link) {
                         $('#paymentRedirectMessage').text('Sua inscrição foi finalizada com sucesso! Clique abaixo para prosseguir com o pagamento.');
