@@ -1,0 +1,14 @@
+{
+  "CUPOM10OFF": {
+    "tipo": "percentual",
+    "valor": 10,
+    "minimo_compra": 100,
+    "expira_em": "2025-12-31"
+  },
+  "GANHA50": {
+    "tipo": "fixo",
+    "valor": 50,
+    "minimo_compra": 200,
+    "expira_em": "2025-11-30"
+  }
+}
