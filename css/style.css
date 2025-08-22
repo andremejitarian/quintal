@@ -8,6 +8,7 @@
     --success-color: #28A745;
     --border-color: #DEE2E6;
     --shadow-color: rgba(0, 0, 0, 0.1);
+    --dark-text: #1a1a1a; /* Cor para títulos e texto principal na tela de boas-vindas */
 }
 
 * {
@@ -16,18 +17,36 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%; /* Garante que body e html tenham 100% da altura do viewport */
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background-color: #F5F7FA;
+    background-color: #F5F7FA; /* Cor de fundo padrão */
+
+    /* Estilos para o fundo da imagem na tela de boas-vindas */
+    background-image: url('../images/background-farm.jpg'); /* Adicione o caminho da sua imagem de fundo */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex; /* Para centralizar o container principal */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    overflow: hidden; /* Evita barras de rolagem indesejadas */
 }
 
 /* Container */
 .container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    max-width: 800px; /* Mantém para as outras etapas do formulário */
+    width: 100%; /* Adicionado para responsividade */
+    padding: 0 1rem; /* Adicionado para responsividade */
+    position: relative; /* Para que o z-index funcione se houver sobreposição */
+    z-index: 1; /* Para que fique acima do background */
 }
 
 /* Header */
@@ -36,27 +55,88 @@ body {
     margin-bottom: 2rem;
 }
 
-.logo {
-    max-width: 120px;
-    margin-bottom: 1rem;
+/* Estilos específicos para o logo na tela de boas-vindas */
+.logo-container {
+    position: absolute;
+    top: -50px; /* Metade da altura do círculo para ele ficar no topo e centralizado */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px; /* Tamanho do círculo */
+    height: 100px; /* Tamanho do círculo */
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra para o círculo */
+    z-index: 10; /* Garante que o logo esteja acima do card */
 }
 
-.header-description {
-    color: #666;
-    max-width: 600px;
-    margin: 1rem auto;
+.logo-container .logo {
+    max-width: 60px; /* Ajusta o tamanho da SVG dentro do círculo */
+    height: auto;
+    display: block;
+}
+
+/* Estilos para o TÍTULO na tela de boas-vindas */
+.welcome-card .form-header h1 {
+    font-size: 2.5rem; /* Aumenta o tamanho da fonte */
+    font-weight: 800; /* Mais negrito */
+    color: var(--dark-text); /* Cor mais escura para o título */
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    padding-top: 2rem; /* Espaço para o logo que vai por cima */
+}
+
+/* Estilos para a DESCRIÇÃO na tela de boas-vindas */
+.welcome-card .header-description {
+    font-size: 1.1rem; /* Um pouco maior que o padrão */
+    line-height: 1.6;
+    color: #555; /* Um pouco mais escura que o --text-color */
+    max-width: 500px; /* Limita a largura para melhor leitura */
+    margin: 1rem auto 2.5rem auto; /* Mais espaço após a descrição */
 }
 
 /* Form Layout */
-.multi-step-form {
+.form-step {
+    margin-bottom: 2rem; /* Mantido para as outras etapas */
+}
+
+/* Estilos para a tela de boas-vindas */
+.welcome-screen {
+    /* Ocupa a tela inteira, se torna o "viewport" para o card de boas-vindas */
+    position: fixed; /* Fixa na tela */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center; /* Centraliza o card horizontalmente */
+    align-items: center; /* Centraliza o card verticalmente */
+    z-index: 5; /* Garante que esteja acima do conteúdo principal mas abaixo de modals */
+    background-color: transparent; /* A imagem de fundo está no body */
+}
+
+/* Estilos para o cartão de boas-vindas */
+.form-card.welcome-card { /* Usamos a nova classe 'welcome-card' */
+    max-width: 600px; /* Largura máxima do cartão */
+    width: 90%; /* Responsivo: 90% da largura disponível */
+    background: white;
+    border-radius: 20px; /* Mais arredondado */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Sombra mais suave e proeminente */
+    padding: 4rem 2.5rem 2.5rem 2.5rem; /* Padding superior ajustado para o logo, e os outros */
+    position: relative; /* Necessário para posicionar o logo absolutamente */
+    overflow: visible; /* CRUCIAL: permite que o logo ultrapasse os limites do card */
+    text-align: center; /* Centraliza o conteúdo textual dentro do card */
+}
+
+/* Estilos gerais do form-card para as outras etapas */
+.form-card { /* Regras para os outros passos do formulário */
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 6px var(--shadow-color);
     padding: 2rem;
-}
-
-.form-step {
-    margin-bottom: 2rem;
+    margin-bottom: 2rem; /* Mantém o espaçamento entre etapas */
 }
 
 .step-header {
@@ -123,6 +203,29 @@ select:focus {
     transition: all 0.3s ease;
 }
 
+/* Estilos específicos para o botão "Avançar" da tela de boas-vindas */
+.welcome-card .btn-primary {
+    background-color: #000; /* Cor preta */
+    color: white;
+    padding: 0.8rem 2.5rem; /* Aumenta o padding */
+    font-size: 1.1rem; /* Aumenta o tamanho da fonte */
+    font-weight: 600;
+    border-radius: 8px; /* Mais arredondado */
+    display: inline-flex; /* Para alinhar o texto e a seta */
+    align-items: center;
+    gap: 0.5rem; /* Espaço entre o texto e a seta */
+    margin-top: 1.5rem; /* Adiciona espaço acima do botão */
+}
+
+.welcome-card .btn-primary:hover {
+    background-color: #333; /* Hover mais escuro */
+}
+
+.welcome-card .btn-primary .arrow {
+    font-size: 1.3rem; /* Tamanho da seta */
+}
+
+/* Estilos gerais para outros botões primários */
 .btn-primary {
     background-color: var(--primary-color);
     color: white;
@@ -200,6 +303,7 @@ select:focus {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000; /* Garante que o modal esteja acima de tudo */
 }
 
 .modal-content {
@@ -229,8 +333,16 @@ select:focus {
         margin: 1rem auto;
     }
 
-    .multi-step-form {
-        padding: 1.5rem;
+    .form-card.welcome-card {
+        padding: 3.5rem 1.5rem 2rem 1.5rem; /* Ajusta padding para telas menores */
+    }
+
+    .welcome-card .form-header h1 {
+        font-size: 2rem; /* Ajusta tamanho da fonte para telas menores */
+    }
+
+    .welcome-card .header-description {
+        font-size: 1rem; /* Ajusta tamanho da fonte para telas menores */
     }
 
     .form-navigation {
