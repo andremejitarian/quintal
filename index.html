@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Check-in - Fazenda Serrinha</title>
+    <title>Ficha de Matrícula - Quintal das Artes</title>
     <link rel="stylesheet" href="css/style.css">
     <!-- jQuery and jQuery Mask -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -13,17 +13,17 @@
     <div class="container">
         <!-- Welcome Screen -->
         <div class="form-step welcome-screen active" id="welcome-screen">
-            <div class="form-card">
+            <div class="form-card welcome-card">
                 <div class="logo-container">
-                    <img src="images/logo.svg" alt="Fazenda Serrinha" class="logo">
+                    <img src="images/logo.svg" alt="Quintal das Artes" class="logo">
                 </div>
                 <header class="form-header">
-                    <h1>Formulário de Check-in na Fazenda Serrinha</h1>
+                    <h1>Ficha de Matrícula</h1>
                     <p class="header-description">
-                        Damos as boas-vindas à Fazenda Serrinha! Somos bastante informais no nosso
-                        modo de receber, porém o check-in é uma exigência legal que devemos cumprir.
-                        Assim, solicitamos que preencha este formulário antes da chegada, de forma a
-                        agilizar a acomodação na fazenda. Desejamos uma ótima estadia!
+                        Que bom que chegou aqui! Se você recebeu este link é porque já passou por uma aula experimental e vai fazer sua inscrição. Estamos muito felizes em receber sua família! A arte e o brincar são elementos centrais na programação do QUINTAL das artes.
+                    </p>
+                    <p class="contact-info">
+                        Para + informações e dúvidas, entre em contato com a Lari no whatsapp <strong>(11) 9 4035.5159</strong>
                     </p>
                 </header>
                 <button class="btn btn-primary" onclick="nextStep('welcome-screen', 'form-step-1')">
@@ -45,123 +45,134 @@
                     <header class="form-header">
                         <h1>Informações Pessoais</h1>
                     </header>
-                <div class="step-header">
-                    <h2>Dados do Responsável</h2>
-                </div>
+                    <div class="step-header">
+                        <h2>Dados do Responsável</h2>
+                    </div>
 
-                <div class="form-group">
-                    <label for="nome_responsavel">Nome completo *</label>
-                    <input type="text" id="nome_responsavel" name="nome_responsavel" required>
-                </div>
+                    <div class="form-group">
+                        <label for="nome_responsavel">Nome completo *</label>
+                        <input type="text" id="nome_responsavel" name="nome_responsavel" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="cpf_responsavel">CPF *</label>
-                    <input type="text" id="cpf_responsavel" name="cpf_responsavel" required>
-                    <span class="error-message" id="cpf-error"></span>
-                </div>
+                    <div class="form-group">
+                        <label for="cpf_responsavel">CPF *</label>
+                        <input type="text" id="cpf_responsavel" name="cpf_responsavel" required>
+                        <span class="error-message" id="cpf-error"></span>
+                    </div>
 
-                <div class="form-group">
-                    <label for="email_responsavel">E-mail *</label>
-                    <input type="email" id="email_responsavel" name="email_responsavel" required>
-                </div>
+                    <div class="form-group">
+                        <label for="email_responsavel">E-mail *</label>
+                        <input type="email" id="email_responsavel" name="email_responsavel" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="telefone_responsavel">Telefone *</label>
-                    <input type="tel" id="telefone_responsavel" name="telefone_responsavel" required>
-                </div>
+                    <div class="form-group">
+                        <label for="telefone_responsavel">Telefone *</label>
+                        <input type="tel" id="telefone_responsavel" name="telefone_responsavel" required>
+                    </div>
 
-                <!-- Seção de Aprendizes -->
-                <div class="aprendizes-section">
-                    <h3>Aprendizes</h3>
-                    <div id="aprendizes-container"></div>
-                    <button type="button" id="add-aprendiz" class="btn-secondary">+ Adicionar Aprendiz</button>
-                </div>
+                    <!-- Seção de Aprendizes -->
+                    <div class="aprendizes-section">
+                        <h3>Aprendizes</h3>
+                        <div id="aprendizes-container"></div>
+                        <button type="button" id="add-aprendiz" class="btn-secondary">+ Adicionar Aprendiz</button>
+                    </div>
 
-                <!-- Template para Aprendiz -->
-                <template id="aprendiz-template">
-                    <div class="aprendiz-card">
-                        <div class="card-header">
-                            <h4>Aprendiz <span class="aprendiz-numero"></span></h4>
-                            <button type="button" class="remove-aprendiz">&times;</button>
+                    <!-- Template para Aprendiz -->
+                    <template id="aprendiz-template">
+                        <div class="aprendiz-card">
+                            <div class="card-header">
+                                <h4>Aprendiz <span class="aprendiz-numero"></span></h4>
+                                <button type="button" class="remove-aprendiz">&times;</button>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Nome completo *</label>
+                                <input type="text" name="nome_aprendiz[]" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Data de Nascimento *</label>
+                                <input type="date" name="data_nascimento_aprendiz[]" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Cursos/Contraturnos *</label>
+                                <select name="cursos_aprendiz[]" multiple required class="curso-select">
+                                    <optgroup label="Contraturnos">
+                                        <!-- Preenchido dinamicamente via JavaScript -->
+                                    </optgroup>
+                                    <optgroup label="Cursos">
+                                        <!-- Preenchido dinamicamente via JavaScript -->
+                                    </optgroup>
+                                </select>
+                            </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label>Nome completo *</label>
-                            <input type="text" name="nome_aprendiz[]" required>
-                        </div>
+                    </template>
 
-                        <div class="form-group">
-                            <label>Data de Nascimento *</label>
-                            <input type="date" name="data_nascimento_aprendiz[]" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Cursos/Contraturnos *</label>
-                            <select name="cursos_aprendiz[]" multiple required class="curso-select">
-                                <optgroup label="Contraturnos">
-                                    <!-- Preenchido dinamicamente via JavaScript -->
-                                </optgroup>
-                                <optgroup label="Cursos">
-                                    <!-- Preenchido dinamicamente via JavaScript -->
-                                </optgroup>
-                            </select>
+                    <!-- Seção Como Ficou Sabendo -->
+                    <div class="form-group checkbox-group">
+                        <label>Como ficou sabendo sobre o Quintal das Artes? *</label>
+                        <div class="checkbox-options">
+                            <label><input type="checkbox" name="como_conheceu[]" value="indicacao"> Indicação</label>
+                            <label><input type="checkbox" name="como_conheceu[]" value="redes_sociais"> Redes Sociais</label>
+                            <label><input type="checkbox" name="como_conheceu[]" value="site"> Site</label>
+                            <label><input type="checkbox" name="como_conheceu[]" value="outros"> Outros</label>
                         </div>
                     </div>
-                </template>
 
-                <!-- Seção Como Ficou Sabendo -->
-                <div class="form-group checkbox-group">
-                    <label>Como ficou sabendo sobre o Quintal das Artes? *</label>
-                    <div class="checkbox-options">
-                        <label><input type="checkbox" name="como_conheceu[]" value="indicacao"> Indicação</label>
-                        <label><input type="checkbox" name="como_conheceu[]" value="redes_sociais"> Redes Sociais</label>
-                        <label><input type="checkbox" name="como_conheceu[]" value="site"> Site</label>
-                        <label><input type="checkbox" name="como_conheceu[]" value="outros"> Outros</label>
+                    <!-- Planos de Pagamento -->
+                    <div class="form-group">
+                        <label>Plano de Pagamento *</label>
+                        <div class="radio-cards">
+                            <!-- Preenchido dinamicamente via JavaScript -->
+                        </div>
                     </div>
-                </div>
 
-                <!-- Planos de Pagamento -->
-                <div class="form-group">
-                    <label>Plano de Pagamento *</label>
-                    <div class="radio-cards">
-                        <!-- Preenchido dinamicamente via JavaScript -->
+                    <!-- Descontos -->
+                    <div class="form-group">
+                        <label>Desconto Aplicável</label>
+                        <select name="desconto" id="desconto">
+                            <option value="">Selecione um desconto (se aplicável)</option>
+                            <!-- Preenchido dinamicamente via JavaScript -->
+                        </select>
                     </div>
-                </div>
 
-                <!-- Descontos -->
-                <div class="form-group">
-                    <label>Desconto Aplicável</label>
-                    <select name="desconto" id="desconto">
-                        <option value="">Selecione um desconto (se aplicável)</option>
-                        <!-- Preenchido dinamicamente via JavaScript -->
-                    </select>
-                </div>
-
-                <!-- Cupom -->
-                <div class="form-group">
-                    <label for="cupom">Cupom de Desconto</label>
-                    <div class="cupom-container">
-                        <input type="text" id="cupom" name="cupom">
-                        <button type="button" id="aplicar-cupom" class="btn-secondary">Aplicar</button>
+                    <!-- Cupom -->
+                    <div class="form-group">
+                        <label for="cupom">Cupom de Desconto</label>
+                        <div class="cupom-container">
+                            <input type="text" id="cupom" name="cupom">
+                            <button type="button" id="aplicar-cupom" class="btn-secondary">Aplicar</button>
+                        </div>
+                        <span class="cupom-message" id="cupom-message"></span>
                     </div>
-                    <span class="cupom-message" id="cupom-message"></span>
-                </div>
 
-                <!-- Resumo dos Valores -->
-                <div class="resumo-valores">
-                    <h3>Resumo dos Valores</h3>
-                    <div id="valores-container">
-                        <!-- Preenchido dinamicamente via JavaScript -->
+                    <!-- Resumo dos Valores -->
+                    <div class="resumo-valores">
+                        <h3>Resumo dos Valores</h3>
+                        <div id="valores-container">
+                            <!-- Preenchido dinamicamente via JavaScript -->
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-navigation">
-                    <button type="button" class="btn-primary next-step">Continuar</button>
-                </div>
-            </section>
+                    <div class="form-navigation">
+                        <button type="button" class="btn-primary next-step">Continuar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-            <!-- Etapa 2: Termos e Condições -->
-            <section class="form-step" id="step2" style="display: none;">
+        <!-- Form Step 2: Terms and Conditions -->
+        <div class="form-step" id="form-step-2">
+            <div class="form-card">
+                <button class="back-button" onclick="prevStep('form-step-2', 'form-step-1')">
+                    ← Voltar
+                </button>
+                
+                <header class="form-header">
+                    <h1>Termos e Condições</h1>
+                </header>
+
                 <div class="step-header">
                     <h2>Termos e Condições</h2>
                 </div>
@@ -194,11 +205,11 @@
                 </div>
 
                 <div class="form-navigation">
-                    <button type="button" class="btn-secondary prev-step">Voltar</button>
+                    <button type="button" class="btn-secondary prev-step" onclick="prevStep('form-step-2', 'form-step-1')">Voltar</button>
                     <button type="submit" class="btn-primary">Enviar Cadastro</button>
                 </div>
-            </section>
-        </form>
+            </div>
+        </div>
 
         <!-- Modal de Sucesso -->
         <div id="success-modal" class="modal" style="display: none;">
