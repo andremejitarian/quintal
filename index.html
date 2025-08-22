@@ -3,312 +3,306 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha de Matrícula - Quintal das Artes</title>
-    <link rel="stylesheet" href="css/style.css">
-    <!-- jQuery and jQuery Mask -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <title>Inscrição Quintal das Artes</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Favicon (Opcional, adicione sua própria imagem se desejar) -->
+    <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
 </head>
 <body>
-    <div class="container">
-        <!-- TELA 1: Boas-vindas -->
-        <div class="form-screen active" id="screen-1">
-            <div class="form-card welcome-card">
-                <div class="logo-container">
-                    <img src="images/logo.svg" alt="Quintal das Artes" class="logo">
+    <div class="form-wrapper">
+        <div class="form-container">
+            <div class="form-header">
+                <div class="form-logo">
+                    <!-- Substitua pela sua imagem de logo, ou use um ícone/texto -->
+                    <img src="https://via.placeholder.com/80?text=Logo" alt="Logo Quintal das Artes">
                 </div>
-                <header class="form-header">
-                    <h1>Ficha de Matrícula</h1>
-                    <p class="header-description">
-                        Que bom que chegou aqui! Se você recebeu este link é porque já passou por uma aula experimental e vai fazer sua inscrição. Estamos muito felizes em receber sua família! A arte e o brincar são elementos centrais na programação do QUINTAL das artes.
-                    </p>
-                    <p class="contact-info">
-                        Para + informações e dúvidas, entre em contato com a Lari no whatsapp <strong>(11) 9 4035.5159</strong>
-                    </p>
-                </header>
-                <button class="btn btn-primary" onclick="showScreen('screen-2')">
-                    Avançar <span class="arrow">→</span>
-                </button>
+                <h1 class="form-title">Ficha de Inscrição</h1>
+                <p class="form-description">Que bom que chegou aqui! Se você recebeu este link é porque já passou por uma aula experimental e vai fazer sua inscrição. Estamos muito felizes em receber sua família! A arte e o brincar são elementos centrais na programação do QUINTAL das artes.</p>
+                <p class="form-contact">Para + informações e dúvidas, entre em contato com a Lari no whatsapp <a href="https://wa.me/5511940355159"  class="whatsapp-link">(11) 9 4035.5159</a></p>
             </div>
-        </div>
 
-        <!-- TELA 2: Formulário de Dados -->
-        <div class="form-screen" id="screen-2">
-            <div class="form-card">
-                <button class="back-button" onclick="showScreen('screen-1')">
-                    ← Voltar
-                </button>
-                
-                <header class="form-header">
-                    <h1>Informações Pessoais</h1>
-                </header>
+            <form id="registrationForm">
+                <!-- Campo oculto para matrícula -->
+                <input type="hidden" id="matricula" name="matricula" value="">
 
-                <form id="personal-info-form">
-                    <!-- Campo oculto para token de matrícula -->
-                    <input type="hidden" name="matricula" id="matricula">
-                    
-                    <div class="step-header">
-                        <h2>Dados do Responsável</h2>
+                <!-- Passo 1: Boas-vindas e introdução -->
+                <div class="form-step active" id="step-1">
+                    <div class="form-fields">
+                        <p>Clique em "Avançar" para iniciar sua inscrição.</p>
                     </div>
-
-                    <div class="form-group">
-                        <label for="nome_responsavel">Nome completo *</label>
-                        <input type="text" id="nome_responsavel" name="nome_responsavel" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="cpf_responsavel">CPF *</label>
-                        <input type="text" id="cpf_responsavel" name="cpf_responsavel" required>
-                        <span class="error-message" id="cpf-error"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email_responsavel">E-mail *</label>
-                        <input type="email" id="email_responsavel" name="email_responsavel" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="telefone_responsavel">Telefone *</label>
-                        <input type="tel" id="telefone_responsavel" name="telefone_responsavel" required>
-                    </div>
-
-                    <!-- Seção de Aprendizes -->
-                    <div class="aprendizes-section">
-                        <h3>Aprendizes</h3>
-                        <div id="aprendizes-container"></div>
-                        <button type="button" id="add-aprendiz" class="btn-secondary">+ Adicionar Aprendiz</button>
-                    </div>
-
-                    <!-- Template para Aprendiz -->
-                    <template id="aprendiz-template">
-                        <div class="aprendiz-card">
-                            <div class="card-header">
-                                <h4>Aprendiz <span class="aprendiz-numero"></span></h4>
-                                <button type="button" class="remove-aprendiz">&times;</button>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Nome completo *</label>
-                                <input type="text" name="nome_aprendiz[]" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Data de Nascimento *</label>
-                                <input type="date" name="data_nascimento_aprendiz[]" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Cursos/Contraturnos *</label>
-                                <select name="cursos_aprendiz[]" multiple required class="curso-select">
-                                    <optgroup label="Contraturnos">
-                                        <!-- Preenchido dinamicamente via JavaScript -->
-                                    </optgroup>
-                                    <optgroup label="Cursos">
-                                        <!-- Preenchido dinamicamente via JavaScript -->
-                                    </optgroup>
-                                </select>
-                            </div>
-                        </div>
-                    </template>
-
-                    <!-- Seção Como Ficou Sabendo -->
-                    <div class="form-group checkbox-group">
-                        <label>Como ficou sabendo sobre o Quintal das Artes? *</label>
-                        <div class="checkbox-options">
-                            <label><input type="checkbox" name="como_conheceu[]" value="indicacao"> Indicação</label>
-                            <label><input type="checkbox" name="como_conheceu[]" value="redes_sociais"> Redes Sociais</label>
-                            <label><input type="checkbox" name="como_conheceu[]" value="site"> Site</label>
-                            <label><input type="checkbox" name="como_conheceu[]" value="outros"> Outros</label>
-                        </div>
-                    </div>
-
-                    <!-- Planos de Pagamento -->
-                    <div class="form-group">
-                        <label>Plano de Pagamento *</label>
-                        <div class="radio-cards">
-                            <!-- Preenchido dinamicamente via JavaScript -->
-                        </div>
-                    </div>
-
-                    <!-- Descontos -->
-                    <div class="form-group">
-                        <label>Desconto Aplicável</label>
-                        <select name="desconto" id="desconto">
-                            <option value="">Selecione um desconto (se aplicável)</option>
-                            <!-- Preenchido dinamicamente via JavaScript -->
-                        </select>
-                    </div>
-
-                    <!-- Cupom -->
-                    <div class="form-group">
-                        <label for="cupom">Cupom de Desconto</label>
-                        <div class="cupom-container">
-                            <input type="text" id="cupom" name="cupom">
-                            <button type="button" id="aplicar-cupom" class="btn-secondary">Aplicar</button>
-                        </div>
-                        <span class="cupom-message" id="cupom-message"></span>
-                    </div>
-
-                    <!-- Resumo dos Valores -->
-                    <div class="resumo-valores">
-                        <h3>Resumo dos Valores</h3>
-                        <div id="valores-container">
-                            <!-- Preenchido dinamicamente via JavaScript -->
-                        </div>
-                    </div>
-
-                    <!-- Termos e Condições -->
-                    <div class="form-group">
-                        <div class="terms-container">
-                            <h3>Termos e Condições</h3>
-                            <div class="terms-scroll">
-                                <p class="terms-text">
-                                    Ao prosseguir com a matrícula no Quintal das Artes, você concorda com os seguintes termos e condições:
-                                    <br><br>
-                                    1. <strong>Pagamento:</strong> O pagamento das mensalidades deve ser efetuado até o dia 10 de cada mês.
-                                    <br><br>
-                                    2. <strong>Cancelamento:</strong> O cancelamento da matrícula deve ser comunicado com 30 dias de antecedência.
-                                    <br><br>
-                                    3. <strong>Responsabilidade:</strong> Os responsáveis devem acompanhar o desenvolvimento das atividades dos aprendizes.
-                                    <br><br>
-                                    4. <strong>Materiais:</strong> Os materiais básicos estão inclusos no valor da mensalidade.
-                                    <br><br>
-                                    5. <strong>Frequência:</strong> É importante manter a frequência regular para o melhor aproveitamento das atividades.
-                                </p>
-                            </div>
-                        </div>
-                        <label class="checkbox-container">
-                            <input type="checkbox" name="aceite_termos" required>
-                            Eu li e concordo com os termos e condições *
-                        </label>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Autorização de Uso de Imagem *</label>
-                        <div class="radio-group">
-                            <label>
-                                <input type="radio" name="autorizacao_imagem" value="sim" required>
-                                Autorizo o uso de imagem
-                            </label>
-                            <label>
-                                <input type="radio" name="autorizacao_imagem" value="nao" required>
-                                Não autorizo o uso de imagem
-                            </label>
-                        </div>
-                    </div>
-
                     <div class="form-navigation">
-                        <button type="button" class="btn btn-primary" onclick="processForm()">
-                            Enviar <span class="arrow">→</span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- TELA 3: Confirmação e Pagamento -->
-        <div class="form-screen" id="screen-3">
-            <div class="form-card success-card">
-                <div class="success-icon">
-                    <div class="checkmark">✓</div>
-                </div>
-                <header class="form-header">
-                    <h1>Matrícula Realizada com Sucesso!</h1>
-                    <p class="success-description">
-                        Parabéns! Sua matrícula foi processada com sucesso. Agora você faz parte da família Quintal das Artes!
-                    </p>
-                    <p class="next-steps">
-                        Para finalizar o processo, clique no botão abaixo para realizar o pagamento da primeira mensalidade.
-                    </p>
-                </header>
-                
-                <div class="payment-summary">
-                    <h3>Resumo da Matrícula</h3>
-                    <div id="final-summary">
-                        <!-- Será preenchido via JavaScript com os dados do formulário -->
+                        <button type="button" class="btn btn-next">Avançar <span class="arrow-right">→</span></button>
                     </div>
                 </div>
 
-                <button class="btn btn-primary payment-btn" id="btn-pagamento">
-                    Ir para o Pagamento <span class="arrow">→</span>
-                </button>
-                
-                <p class="support-text">
-                    Dúvidas? Entre em contato com a Lari: <strong>(11) 9 4035.5159</strong>
-                </p>
-            </div>
+                <!-- Passo 2: Dados do Responsável -->
+                <div class="form-step" id="step-2">
+                    <h2 class="step-title">Dados do Responsável</h2>
+                    <div class="form-fields">
+                        <div class="form-group">
+                            <label for="nomeResponsavel">Nome Completo:</label>
+                            <input type="text" id="nomeResponsavel" name="nomeResponsavel" required>
+                            <div class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cpfResponsavel">CPF:</label>
+                            <input type="text" id="cpfResponsavel" name="cpfResponsavel" class="mask-cpf" required>
+                            <div class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailResponsavel">Email:</label>
+                            <input type="email" id="emailResponsavel" name="emailResponsavel" required>
+                            <div class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefoneResponsavel">Telefone (WhatsApp):</label>
+                            <input type="text" id="telefoneResponsavel" name="telefoneResponsavel" class="mask-phone" required>
+                            <div class="error-message"></div>
+                        </div>
+                         <div class="form-group">
+                            <label for="enderecoResponsavel">Endereço:</label>
+                            <textarea id="enderecoResponsavel" name="enderecoResponsavel"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="segundoResponsavelNome">Nome do(a) segundo(a) responsável (opcional):</label>
+                            <input type="text" id="segundoResponsavelNome" name="segundoResponsavelNome">
+                        </div>
+                        <div class="form-group">
+                            <label for="segundoResponsavelTelefone">Telefone do segundo responsável (opcional):</label>
+                            <input type="text" id="segundoResponsavelTelefone" name="segundoResponsavelTelefone" class="mask-phone">
+                        </div>
+                        <div class="form-group">
+                            <label>Como ficou sabendo do Quintal das Artes? (selecione pelo menos um)</label>
+                            <div class="checkbox-group-container">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="soubeInstagram" name="comoSoube" value="Instagram">
+                                    <label for="soubeInstagram">Instagram</label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="soubeAmigos" name="comoSoube" value="Amigos">
+                                    <label for="soubeAmigos">Amigos</label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="soubeNaEscola" name="comoSoube" value="Na escola">
+                                    <label for="soubeNaEscola">Na escola</label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="soubeCasaLebre" name="comoSoube" value="Casa Lebre">
+                                    <label for="soubeCasaLebre">Casa Lebre</label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="soubeFlyer" name="comoSoube" value="Flyer">
+                                    <label for="soubeFlyer">Flyer</label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="soubeEventos" name="comoSoube" value="Eventos no Quintal">
+                                    <label for="soubeEventos">Eventos no Quintal</label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="soubePasseiFrente" name="comoSoube" value="Passei em frente">
+                                    <label for="soubePasseiFrente">Passei em frente</label>
+                                </div>
+                            </div>
+                            <div class="error-message how-know-error"></div>
+                        </div>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-prev"><span class="arrow-left">←</span> Voltar</button>
+                        <button type="button" class="btn btn-next">Próximo <span class="arrow-right">→</span></button>
+                    </div>
+                </div>
+
+                <!-- Passo 3: Dados dos Aprendizes -->
+                <div class="form-step" id="step-3">
+                    <h2 class="step-title">Dados dos Aprendizes</h2>
+                    <div id="apprenticesContainer">
+                        <!-- Template de aprendiz será clonado aqui -->
+                    </div>
+                    <button type="button" class="btn btn-add-apprentice">Adicionar Aprendiz</button>
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-prev"><span class="arrow-left">←</span> Voltar</button>
+                        <button type="button" class="btn btn-next">Próximo <span class="arrow-right">→</span></button>
+                    </div>
+                </div>
+
+                <!-- Template para um novo aprendiz (não visível, será clonado via JS) -->
+                <div class="apprentice-group template" style="display: none;">
+                    <h3>Aprendiz <span class="apprentice-number">1</span></h3>
+                    <div class="form-group">
+                        <label for="nomeAprendiz-TEMPLATE">Nome Completo:</label>
+                        <input type="text" class="nomeAprendiz" data-field="nome" required>
+                        <div class="error-message"></div>
+                    </div>
+                     <div class="form-group">
+                        <label for="escolaAprendiz-TEMPLATE">Em qual escola estuda? (opcional)</label>
+                        <input type="text" class="escolaAprendiz" data-field="escola">
+                    </div>
+                    <div class="form-group">
+                        <label for="dataNascimentoAprendiz-TEMPLATE">Data de Nascimento:</label>
+                        <input type="text" class="dataNascimentoAprendiz mask-date" data-field="dataNascimento" placeholder="DD/MM/AAAA" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="generoAprendiz-TEMPLATE">Gênero:</label>
+                        <select class="generoAprendiz" data-field="genero" required>
+                            <option value="">Selecione</option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Feminino</option>
+                            <option value="O">Outro</option>
+                        </select>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cursosAprendiz-TEMPLATE">Cursos Desejados:</label>
+                        <select class="cursosAprendiz" data-field="cursos" multiple required>
+                            <!-- Opções serão carregadas via JS -->
+                        </select>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" class="consentimentoFoto" data-field="consentimentoFoto" id="consentimentoFoto-TEMPLATE">
+                        <label for="consentimentoFoto-TEMPLATE">Concordo com o uso de imagem para divulgação do Quintal das Artes.</label>
+                    </div>
+                     <div class="form-group">
+                        <label for="restricaoAlimentarAprendiz-TEMPLATE">Restrição Alimentar? Se sim, qual?</label>
+                        <textarea class="restricaoAlimentarAprendiz" data-field="restricaoAlimentar" required></textarea>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="questaoSaudeAprendiz-TEMPLATE">Questão de saúde? Se sim, qual?</label>
+                        <textarea class="questaoSaudeAprendiz" data-field="questaoSaude" required></textarea>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="emergenciaQuemChamarAprendiz-TEMPLATE">Em caso de emergência, quem chamar para este aprendiz?</label>
+                        <textarea class="emergenciaQuemChamarAprendiz" data-field="emergenciaQuemChamar" required></textarea>
+                        <div class="error-message"></div>
+                    </div>
+                    <button type="button" class="btn btn-remove-apprentice">Remover Aprendiz</button>
+                </div>
+
+
+                <!-- Passo 4: Plano de Pagamento e Resumo -->
+                <div class="form-step" id="step-4">
+                    <h2 class="step-title">Plano de Pagamento e Resumo</h2>
+                    <div class="form-fields">
+                        <div class="form-group">
+                            <label>Escolha o Plano de Pagamento:</label>
+                            <div class="radio-group">
+                                <input type="radio" id="plano-a-vista" name="planoPagamento" value="a_vista" checked>
+                                <label for="plano-a-vista">À Vista (10% de desconto no curso de menor valor)</label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="plano-parcelado" name="planoPagamento" value="parcelado">
+                                <label for="plano-parcelado">Parcelado (3% de taxa de cartão)</label>
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label>Forma de Pagamento:</label>
+                            <select id="formaPagamento" name="formaPagamento" required>
+                                <option value="">Selecione</option>
+                                <option value="PIX/Boleto">PIX/Boleto</option>
+                                <option value="Cartão de Crédito">Cartão de Crédito</option>
+                                <option value="Bolsista Integral">Bolsista Integral</option>
+                            </select>
+                            <div class="error-message"></div>
+                        </div>
+                        <div class="form-group" id="diaVencimentoGroup" style="display: none;">
+                            <label for="diaVencimento">Dia de Vencimento:</label>
+                            <select id="diaVencimento" name="diaVencimento">
+                                <option value="">Selecione</option>
+                                <option value="Dia 5">Dia 5</option>
+                                <option value="Dia 10">Dia 10</option>
+                                <option value="Dia 15">Dia 15</option>
+                            </select>
+                            <div class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cupomCode">Código de Cupom (Opcional):</label>
+                            <input type="text" id="cupomCode" name="cupomCode">
+                            <div class="cupom-feedback"></div>
+                        </div>
+
+                        <div class="summary-section">
+                            <h3>Resumo da Inscrição</h3>
+                            <ul id="summaryApprenticesList">
+                                <!-- Aprendizes e cursos serão listados aqui -->
+                            </ul>
+                            <div class="price-details">
+                                <p>Subtotal: <span id="summarySubtotal">R\$ 0,00</span></p>
+                                <p>Desconto Plano de Pagamento: <span id="summaryDiscount">R\$ 0,00</span></p>
+                                <p>Desconto Cupom: <span id="summaryCoupon">R\$ 0,00</span></p>
+                                <p>Taxa de Cartão: <span id="summaryCardFee">R\$ 0,00</span></p>
+                                <p class="total-price">Total a Pagar: <span id="summaryTotal">R\$ 0,00</span></p>
+                            </div>
+                             <!-- Campos ocultos para envio do valor e detalhes para o backend -->
+                            <input type="hidden" id="valor_calculado_total" name="valor_calculado_total">
+                            <input type="hidden" id="detalhes_matricula" name="detalhes_matricula">
+                        </div>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-prev"><span class="arrow-left">←</span> Voltar</button>
+                        <button type="submit" class="btn btn-submit">Finalizar Inscrição</button>
+                    </div>
+                </div>
+
+                <!-- Passo de Confirmação/Sucesso -->
+                <div class="form-step" id="step-success" style="display: none;">
+                    <h2 class="step-title">Inscrição Finalizada com Sucesso!</h2>
+                    <div class="form-fields">
+                        <p>Obrigado por preencher sua ficha de inscrição. Em breve entraremos em contato para os próximos passos.</p>
+                        <p>Se tiver qualquer dúvida, entre em contato através do nosso WhatsApp: <a href="https://wa.me/5511940355159"  class="whatsapp-link">(11) 9 4035.5159</a></p>
+                        <p id="paymentRedirectMessage" style="display:none;">Você será redirecionado(a) para a página de pagamento em breve...</p>
+                        <button type="button" id="goToPaymentBtn" class="btn btn-next" style="display:none;">Ir para o pagamento agora</button>
+                    </div>
+                </div>
+
+                 <!-- Passo de Termos e Condições (RF.1.2) -->
+                <div class="form-step" id="step-terms">
+                    <h2 class="step-title">Termos e Condições</h2>
+                    <div class="form-fields terms-and-conditions">
+                        <!-- Conteúdo dos termos e condições (substitua pelo seu texto real) -->
+                        <p>Ao prosseguir com esta inscrição, você concorda com os seguintes termos e condições do Quintal das Artes:</p>
+                        <p>1. **Matrícula e Mensalidades:** A matrícula é confirmada mediante o preenchimento completo deste formulário e o pagamento da primeira mensalidade/parcela. As mensalidades subsequentes deverão ser pagas até o dia 5, 10 ou 15 de cada mês, conforme sua escolha.</p>
+                        <p>2. **Cancelamento:** Em caso de cancelamento da matrícula, solicitamos aviso prévio de 30 dias. Mensalidades não são reembolsáveis para o mês corrente.</p>
+                        <p>3. **Ausências:** Aulas perdidas por ausência do aluno não serão reembolsadas ou repostas, salvo em casos de emergência médica comprovada, a critério da coordenação.</p>
+                        <p>4. **Materiais:** Alguns cursos podem exigir materiais específicos. A lista será fornecida no início do curso e é de responsabilidade do responsável a aquisição.</p>
+                        <p>5. **Segurança:** O Quintal das Artes se compromete a zelar pela segurança dos alunos durante as atividades. Em caso de emergência, as informações de contato fornecidas serão utilizadas.</p>
+                        <p>6. **Alterações:** O Quintal das Artes reserva-se o direito de alterar horários, professores ou conteúdo programático dos cursos, mediante aviso prévio aos responsáveis.</p>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="aceiteTermos" name="aceiteTermos" required>
+                            <label for="aceiteTermos">Eu li e concordo com os termos e condições do Quintal das Artes.</label>
+                            <div class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Autorização de Uso de Imagem:</label>
+                            <div class="radio-group">
+                                <input type="radio" id="autorizaFotoSim" name="autorizaFoto" value="sim" required>
+                                <label for="autorizaFotoSim">Sim, autorizo o uso de imagem do(s) meu(s) filho(s) para divulgação do Quintal das Artes.</label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="autorizaFotoNao" name="autorizaFoto" value="nao">
+                                <label for="autorizaFotoNao">Não, não autorizo o uso de imagem do(s) meu(s) filho(s) para divulgação do Quintal das Artes.</label>
+                            </div>
+                            <div class="error-message photo-consent-error"></div>
+                        </div>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-prev"><span class="arrow-left">←</span> Voltar</button>
+                        <button type="button" class="btn btn-next">Próximo <span class="arrow-right">→</span></button>
+                    </div>
+                </div>
+
+            </form>
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- Scripts jQuery e jQuery Mask -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <!-- Seus scripts personalizados -->
     <script src="js/cpfValidation.js"></script>
     <script src="js/priceCalculator.js"></script>
-    <script src="js/main.js"></script>
-    
-    <script>
-        // Função para mostrar telas
-        function showScreen(screenId) {
-            // Esconde todas as telas
-            document.querySelectorAll('.form-screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-            
-            // Mostra a tela solicitada
-            document.getElementById(screenId).classList.add('active');
-            
-            // Rola para o topo
-            window.scrollTo(0, 0);
-        }
-
-        // Função para processar o formulário
-        function processForm() {
-            // Aqui você pode adicionar validação do formulário
-            const form = document.getElementById('personal-info-form');
-            
-            if (form.checkValidity()) {
-                // Processa os dados do formulário
-                // Aqui você pode enviar os dados para o servidor
-                
-                // Atualiza o resumo final
-                updateFinalSummary();
-                
-                // Vai para a tela de sucesso
-                showScreen('screen-3');
-            } else {
-                // Mostra erros de validação
-                form.reportValidity();
-            }
-        }
-
-        // Função para atualizar o resumo final
-        function updateFinalSummary() {
-            const nome = document.getElementById('nome_responsavel').value;
-            const email = document.getElementById('email_responsavel').value;
-            
-            const summaryHtml = `
-                <div class="summary-item">
-                    <span class="label">Responsável:</span>
-                    <span class="value">${nome}</span>
-                </div>
-                <div class="summary-item">
-                    <span class="label">E-mail:</span>
-                    <span class="value">${email}</span>
-                </div>
-                <div class="summary-item">
-                    <span class="label">Status:</span>
-                    <span class="value status-pending">Aguardando Pagamento</span>
-                </div>
-            `;
-            
-            document.getElementById('final-summary').innerHTML = summaryHtml;
-        }
-
-        // Event listener para o botão de pagamento
-        document.getElementById('btn-pagamento').addEventListener('click', function() {
-            // Aqui você pode redirecionar para a página de pagamento
-            // window.location.href = 'https://seu-link-de-pagamento.com';
-            alert('Redirecionando para o pagamento...');
-        });
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
