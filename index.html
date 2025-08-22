@@ -11,8 +11,8 @@
 </head>
 <body>
     <div class="container">
-        <!-- Welcome Screen -->
-        <div class="form-step welcome-screen active" id="welcome-screen">
+        <!-- TELA 1: Boas-vindas -->
+        <div class="form-screen active" id="screen-1">
             <div class="form-card welcome-card">
                 <div class="logo-container">
                     <img src="images/logo.svg" alt="Quintal das Artes" class="logo">
@@ -26,25 +26,27 @@
                         Para + informações e dúvidas, entre em contato com a Lari no whatsapp <strong>(11) 9 4035.5159</strong>
                     </p>
                 </header>
-                <button class="btn btn-primary" onclick="nextStep('welcome-screen', 'form-step-1')">
+                <button class="btn btn-primary" onclick="showScreen('screen-2')">
                     Avançar <span class="arrow">→</span>
                 </button>
             </div>
         </div>
 
-        <!-- Form Step 1: Personal Information -->
-        <div class="form-step" id="form-step-1">
+        <!-- TELA 2: Formulário de Dados -->
+        <div class="form-screen" id="screen-2">
             <div class="form-card">
-                <button class="back-button" onclick="prevStep('form-step-1', 'welcome-screen')">
+                <button class="back-button" onclick="showScreen('screen-1')">
                     ← Voltar
                 </button>
+                
+                <header class="form-header">
+                    <h1>Informações Pessoais</h1>
+                </header>
+
                 <form id="personal-info-form">
                     <!-- Campo oculto para token de matrícula -->
                     <input type="hidden" name="matricula" id="matricula">
                     
-                    <header class="form-header">
-                        <h1>Informações Pessoais</h1>
-                    </header>
                     <div class="step-header">
                         <h2>Dados do Responsável</h2>
                     </div>
@@ -155,68 +157,85 @@
                         </div>
                     </div>
 
+                    <!-- Termos e Condições -->
+                    <div class="form-group">
+                        <div class="terms-container">
+                            <h3>Termos e Condições</h3>
+                            <div class="terms-scroll">
+                                <p class="terms-text">
+                                    Ao prosseguir com a matrícula no Quintal das Artes, você concorda com os seguintes termos e condições:
+                                    <br><br>
+                                    1. <strong>Pagamento:</strong> O pagamento das mensalidades deve ser efetuado até o dia 10 de cada mês.
+                                    <br><br>
+                                    2. <strong>Cancelamento:</strong> O cancelamento da matrícula deve ser comunicado com 30 dias de antecedência.
+                                    <br><br>
+                                    3. <strong>Responsabilidade:</strong> Os responsáveis devem acompanhar o desenvolvimento das atividades dos aprendizes.
+                                    <br><br>
+                                    4. <strong>Materiais:</strong> Os materiais básicos estão inclusos no valor da mensalidade.
+                                    <br><br>
+                                    5. <strong>Frequência:</strong> É importante manter a frequência regular para o melhor aproveitamento das atividades.
+                                </p>
+                            </div>
+                        </div>
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="aceite_termos" required>
+                            Eu li e concordo com os termos e condições *
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Autorização de Uso de Imagem *</label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="autorizacao_imagem" value="sim" required>
+                                Autorizo o uso de imagem
+                            </label>
+                            <label>
+                                <input type="radio" name="autorizacao_imagem" value="nao" required>
+                                Não autorizo o uso de imagem
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="form-navigation">
-                        <button type="button" class="btn-primary next-step">Continuar</button>
+                        <button type="button" class="btn btn-primary" onclick="processForm()">
+                            Enviar <span class="arrow">→</span>
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
 
-        <!-- Form Step 2: Terms and Conditions -->
-        <div class="form-step" id="form-step-2">
-            <div class="form-card">
-                <button class="back-button" onclick="prevStep('form-step-2', 'form-step-1')">
-                    ← Voltar
+        <!-- TELA 3: Confirmação e Pagamento -->
+        <div class="form-screen" id="screen-3">
+            <div class="form-card success-card">
+                <div class="success-icon">
+                    <div class="checkmark">✓</div>
+                </div>
+                <header class="form-header">
+                    <h1>Matrícula Realizada com Sucesso!</h1>
+                    <p class="success-description">
+                        Parabéns! Sua matrícula foi processada com sucesso. Agora você faz parte da família Quintal das Artes!
+                    </p>
+                    <p class="next-steps">
+                        Para finalizar o processo, clique no botão abaixo para realizar o pagamento da primeira mensalidade.
+                    </p>
+                </header>
+                
+                <div class="payment-summary">
+                    <h3>Resumo da Matrícula</h3>
+                    <div id="final-summary">
+                        <!-- Será preenchido via JavaScript com os dados do formulário -->
+                    </div>
+                </div>
+
+                <button class="btn btn-primary payment-btn" id="btn-pagamento">
+                    Ir para o Pagamento <span class="arrow">→</span>
                 </button>
                 
-                <header class="form-header">
-                    <h1>Termos e Condições</h1>
-                </header>
-
-                <div class="step-header">
-                    <h2>Termos e Condições</h2>
-                </div>
-
-                <div class="form-group">
-                    <div class="terms-container">
-                        <!-- Termos e condições aqui -->
-                        <p class="terms-text">
-                            [Texto dos termos e condições]
-                        </p>
-                    </div>
-                    <label class="checkbox-container">
-                        <input type="checkbox" name="aceite_termos" required>
-                        Eu li e concordo com os termos e condições *
-                    </label>
-                </div>
-
-                <div class="form-group">
-                    <label>Autorização de Uso de Imagem *</label>
-                    <div class="radio-group">
-                        <label>
-                            <input type="radio" name="autorizacao_imagem" value="sim" required>
-                            Autorizo o uso de imagem
-                        </label>
-                        <label>
-                            <input type="radio" name="autorizacao_imagem" value="nao" required>
-                            Não autorizo o uso de imagem
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-navigation">
-                    <button type="button" class="btn-secondary prev-step" onclick="prevStep('form-step-2', 'form-step-1')">Voltar</button>
-                    <button type="submit" class="btn-primary">Enviar Cadastro</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal de Sucesso -->
-        <div id="success-modal" class="modal" style="display: none;">
-            <div class="modal-content">
-                <h2>Inscrição Realizada com Sucesso!</h2>
-                <p>Sua inscrição foi recebida com sucesso. Para finalizar o processo, clique no botão abaixo para realizar o pagamento.</p>
-                <button id="btn-pagamento" class="btn-primary">Ir para o pagamento agora</button>
+                <p class="support-text">
+                    Dúvidas? Entre em contato com a Lari: <strong>(11) 9 4035.5159</strong>
+                </p>
             </div>
         </div>
     </div>
@@ -225,5 +244,71 @@
     <script src="js/cpfValidation.js"></script>
     <script src="js/priceCalculator.js"></script>
     <script src="js/main.js"></script>
+    
+    <script>
+        // Função para mostrar telas
+        function showScreen(screenId) {
+            // Esconde todas as telas
+            document.querySelectorAll('.form-screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            // Mostra a tela solicitada
+            document.getElementById(screenId).classList.add('active');
+            
+            // Rola para o topo
+            window.scrollTo(0, 0);
+        }
+
+        // Função para processar o formulário
+        function processForm() {
+            // Aqui você pode adicionar validação do formulário
+            const form = document.getElementById('personal-info-form');
+            
+            if (form.checkValidity()) {
+                // Processa os dados do formulário
+                // Aqui você pode enviar os dados para o servidor
+                
+                // Atualiza o resumo final
+                updateFinalSummary();
+                
+                // Vai para a tela de sucesso
+                showScreen('screen-3');
+            } else {
+                // Mostra erros de validação
+                form.reportValidity();
+            }
+        }
+
+        // Função para atualizar o resumo final
+        function updateFinalSummary() {
+            const nome = document.getElementById('nome_responsavel').value;
+            const email = document.getElementById('email_responsavel').value;
+            
+            const summaryHtml = `
+                <div class="summary-item">
+                    <span class="label">Responsável:</span>
+                    <span class="value">${nome}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">E-mail:</span>
+                    <span class="value">${email}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">Status:</span>
+                    <span class="value status-pending">Aguardando Pagamento</span>
+                </div>
+            `;
+            
+            document.getElementById('final-summary').innerHTML = summaryHtml;
+        }
+
+        // Event listener para o botão de pagamento
+        document.getElementById('btn-pagamento').addEventListener('click', function() {
+            // Aqui você pode redirecionar para a página de pagamento
+            // window.location.href = 'https://seu-link-de-pagamento.com';
+            alert('Redirecionando para o pagamento...');
+        });
+    </script>
 </body>
 </html>
