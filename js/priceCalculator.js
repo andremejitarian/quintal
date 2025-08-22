@@ -1,207 +1,112 @@
-// Cache para dados de preços e cupons
-let precosData = null;
-let cuponsData = null;
+// js/priceCalculator.js
 
-// Carrega dados necessários
-async function carregarDados() {
-    if (!precosData) {
-        const responsePrecos = await fetch('precos.json');
-        precosData = await responsePrecos.json();
-    }
-    if (!cuponsData) {
-        const responseCupons = await fetch('cupons.json');
-        cuponsData = await responseCupons.json();
+let pricesData = null;
+let couponsData = null;
+
+// Função para carregar os dados JSON
+async function loadPriceData() {
+    try {
+        const [pricesResponse, couponsResponse] = await Promise.all([
+            fetch('precos.json'),
+            fetch('cupons.json')
+        ]);
+
+        if (!pricesResponse.ok) throw new Error('Erro ao carregar precos.json');
+        if (!couponsResponse.ok) throw new Error('Erro ao carregar cupons.json');
+
+        pricesData = await pricesResponse.json();
+        couponsData = await couponsResponse.json();
+
+        console.log('Dados de preços e cupons carregados:', { pricesData, couponsData });
+        return true;
+    } catch (error) {
+        console.error('Erro ao carregar dados de preços/cupons:', error);
+        alert('Ocorreu um erro ao carregar os dados de preços. Por favor, tente novamente mais tarde.');
+        return false;
     }
 }
 
-// Função principal de cálculo
-async function calcularValorTotal(detalhesMatricula) {
-    await carregarDados();
-    
-    // 1. Calcula valor base dos cursos
-    let valorBase = calcularValorBaseCursos(detalhesMatricula);
-    
-    // 2. Aplica desconto (no curso de menor valor, se aplicável)
-    let valorComDesconto = aplicarDesconto(valorBase, detalhesMatricula);
-    
-    // 3. Aplica cupom (se houver)
-    let valorComCupom = aplicarCupom(valorComDesconto, detalhesMatricula.cupom);
-    
-    // 4. Adiciona taxa de cartão (se aplicável)
-    let valorFinal = aplicarTaxaCartao(valorComCupom, detalhesMatricula.formaPagamento);
-    
-    return valorFinal;
-}
+/**
+ * Calcula o total da inscrição com base nos cursos selecionados, plano de pagamento e cupom.
+ * Regras:
+ * 1. O plano de pagamento e o desconto são globais para todos os cursos.
+ * 2. O desconto do plano de pagamento (se 'a_vista') é aplicado *apenas* no curso de menor valor.
+ * 3. A ordem de cálculo é: Desconto do Plano -> Desconto do Cupom -> Taxa de Cartão.
+ * @param {Array<Object>} selectedCourses - Array de objetos de curso selecionados (vindos do pricesData.cursos).
+ * @param {string} paymentPlanKey - Chave do plano de pagamento ('a_vista' ou 'parcelado').
+ * @param {string} couponCode - Código do cupom.
+ * @returns {Object} Objeto contendo subtotal, desconto do plano, desconto do cupom, taxa de cartão e total final.
+ */
+function calculateTotal(selectedCourses, paymentPlanKey, couponCode) {
+    if (!pricesData || !couponsData) {
+        console.error("Dados de preços ou cupons não carregados.");
+        return { subtotal: 0, discountAmount: 0, couponAmount: 0, cardFee: 0, total: 0 };
+    }
 
-// Calcula o valor base dos cursos selecionados
-function calcularValorBaseCursos(detalhesMatricula) {
-    const plano = detalhesMatricula.plano;
-    let valorTotal = 0;
-    
-    // Para cada aprendiz
-    detalhesMatricula.aprendizes.forEach(aprendiz => {
-        aprendiz.cursos.forEach(cursoId => {
-            const curso = precosData.cursos[cursoId];
-            if (curso) {
-                valorTotal += curso.precos[plano];
+    let subtotal = 0;
+    let lowestCourseValue = Infinity;
+    let discountAmount = 0;
+    let couponAmount = 0;
+    let cardFee = 0;
+
+    // 1. Calcular subtotal e identificar o curso de menor valor
+    if (selectedCourses && selectedCourses.length > 0) {
+        selectedCourses.forEach(course => {
+            subtotal += course.valor;
+            if (course.valor < lowestCourseValue) {
+                lowestCourseValue = course.valor;
             }
         });
-    });
-    
-    return valorTotal;
-}
+    }
 
-// Aplica desconto no curso de menor valor
-function aplicarDesconto(valorBase, detalhesMatricula) {
-    if (!detalhesMatricula.desconto) return valorBase;
-    
-    const desconto = precosData.descontos[detalhesMatricula.desconto];
-    if (!desconto) return valorBase;
-    
-    // Encontra o curso de menor valor
-    let menorValor = Infinity;
-    detalhesMatricula.aprendizes.forEach(aprendiz => {
-        aprendiz.cursos.forEach(cursoId => {
-            const curso = precosData.cursos[cursoId];
-            if (curso) {
-                const valorCurso = curso.precos[detalhesMatricula.plano];
-                if (valorCurso < menorValor) {
-                    menorValor = valorCurso;
+    let currentTotal = subtotal;
+
+    // 2. Aplicar Desconto do Plano de Pagamento (apenas se 'a_vista' e no curso de menor valor)
+    const paymentPlan = pricesData.planosPagamento[paymentPlanKey];
+    if (paymentPlan && paymentPlan.descontoPercentualNoCursoMenorValor > 0 && lowestCourseValue !== Infinity) {
+        discountAmount = lowestCourseValue * paymentPlan.descontoPercentualNoCursoMenorValor;
+        currentTotal -= discountAmount;
+    }
+
+    // 3. Aplicar Desconto do Cupom (sobre o total atual)
+    if (couponCode) {
+        const normalizedCouponCode = couponCode.toUpperCase();
+        const coupon = couponsData[normalizedCouponCode];
+
+        if (coupon) {
+            if (coupon.tipo === 'percentual') {
+                couponAmount = currentTotal * coupon.valor;
+                if (coupon.maxDesconto && couponAmount > coupon.maxDesconto) {
+                    couponAmount = coupon.maxDesconto;
                 }
+            } else if (coupon.tipo === 'fixo') {
+                couponAmount = coupon.valor;
             }
-        });
-    });
-    
-    // Calcula o desconto
-    const valorDesconto = (menorValor * desconto.percentual) / 100;
-    return valorBase - valorDesconto;
-}
-
-// Aplica cupom de desconto
-function aplicarCupom(valor, codigoCupom) {
-    if (!codigoCupom || !cuponsData[codigoCupom]) return valor;
-    
-    const cupom = cuponsData[codigoCupom];
-    const hoje = new Date();
-    const dataExpiracao = new Date(cupom.expira_em);
-    
-    // Verifica se o cupom está válido
-    if (hoje > dataExpiracao) return valor;
-    
-    // Verifica valor mínimo
-    if (valor < cupom.minimo_compra) return valor;
-    
-    // Aplica o desconto
-    if (cupom.tipo === 'percentual') {
-        return valor - (valor * cupom.valor / 100);
-    } else if (cupom.tipo === 'fixo') {
-        return valor - cupom.valor;
-    }
-    
-    return valor;
-}
-
-// Aplica taxa de cartão
-function aplicarTaxaCartao(valor, formaPagamento) {
-    // Se for pagamento em cartão, adiciona 2.5% de taxa
-    if (formaPagamento === 'cartao') {
-        return valor * 1.025;
-    }
-    return valor;
-}
-
-// Função para validar cupom
-function validarCupom(codigoCupom, valorTotal) {
-    if (!cuponsData || !cuponsData[codigoCupom]) {
-        return {
-            valido: false,
-            mensagem: 'Cupom inválido'
-        };
-    }
-
-    const cupom = cuponsData[codigoCupom];
-    const hoje = new Date();
-    const dataExpiracao = new Date(cupom.expira_em);
-
-    if (hoje > dataExpiracao) {
-        return {
-            valido: false,
-            mensagem: 'Cupom expirado'
-        };
-    }
-
-    if (valorTotal < cupom.minimo_compra) {
-        return {
-            valido: false,
-            mensagem: `Valor mínimo para este cupom: R$ ${cupom.minimo_compra.toFixed(2)}`
-        };
-    }
-
-    return {
-        valido: true,
-        mensagem: 'Cupom aplicado com sucesso!',
-        desconto: cupom.tipo === 'percentual' ? 
-            (valorTotal * cupom.valor / 100) : 
-            cupom.valor
-    };
-}
-
-// Função para atualizar o resumo de valores na interface
-function atualizarResumoValores(valorTotal, detalhesMatricula) {
-    const container = document.getElementById('valores-container');
-    let html = '';
-
-    // Valor base
-    const valorBase = calcularValorBaseCursos(detalhesMatricula);
-    html += `<div class="valor-item">
-        <span>Valor dos cursos:</span>
-        <span>R$ ${valorBase.toFixed(2)}</span>
-    </div>`;
-
-    // Desconto (se houver)
-    if (detalhesMatricula.desconto) {
-        const valorComDesconto = aplicarDesconto(valorBase, detalhesMatricula);
-        const valorDesconto = valorBase - valorComDesconto;
-        html += `<div class="valor-item desconto">
-            <span>Desconto aplicado:</span>
-            <span>-R$ ${valorDesconto.toFixed(2)}</span>
-        </div>`;
-    }
-
-    // Cupom (se houver)
-    if (detalhesMatricula.cupom) {
-        const validacao = validarCupom(detalhesMatricula.cupom, valorTotal);
-        if (validacao.valido) {
-            html += `<div class="valor-item cupom">
-                <span>Cupom ${detalhesMatricula.cupom}:</span>
-                <span>-R$ ${validacao.desconto.toFixed(2)}</span>
-            </div>`;
+            // Garante que o desconto do cupom não torne o total negativo
+            couponAmount = Math.min(couponAmount, currentTotal);
+            currentTotal -= couponAmount;
         }
     }
 
-    // Taxa de cartão (se aplicável)
-    if (detalhesMatricula.formaPagamento === 'cartao') {
-        const taxaCartao = valorTotal * 0.025;
-        html += `<div class="valor-item taxa">
-            <span>Taxa cartão (2.5%):</span>
-            <span>R$ ${taxaCartao.toFixed(2)}</span>
-        </div>`;
+    // 4. Aplicar Taxa de Cartão (se 'parcelado' e sobre o total final após descontos)
+    if (paymentPlan && paymentPlan.taxaCartaoPercentual > 0 && paymentPlanKey === 'parcelado') { // Aplica taxa apenas se for 'parcelado'
+        cardFee = currentTotal * paymentPlan.taxaCartaoPercentual;
+        currentTotal += cardFee;
     }
 
-    // Valor final
-    html += `<div class="valor-item total">
-        <span>Valor total:</span>
-        <span>R$ ${valorTotal.toFixed(2)}</span>
-    </div>`;
-
-    container.innerHTML = html;
-}
-
-// Exporta as funções necessárias
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        calcularValorTotal,
-        validarCupom,
-        atualizarResumoValores
+    return {
+        subtotal: parseFloat(subtotal.toFixed(2)),
+        discountAmount: parseFloat(discountAmount.toFixed(2)),
+        couponAmount: parseFloat(couponAmount.toFixed(2)),
+        cardFee: parseFloat(cardFee.toFixed(2)),
+        total: parseFloat(currentTotal.toFixed(2))
     };
 }
+
+// Exportar funções para serem acessíveis em script.js
+window.priceCalculator = {
+    loadPriceData,
+    calculateTotal,
+    getPricesData: () => pricesData,
+    getCouponsData: () => couponsData
+};
