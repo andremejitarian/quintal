@@ -287,12 +287,24 @@ function getCouponInfo(couponCode) {
 }
 
 /**
- * Formata um valor monetário para exibição
+ * Formata um valor monetário para exibição no padrão brasileiro
  * @param {number} value - Valor a ser formatado
- * @returns {string} Valor formatado como "R$ 123,45"
+ * @returns {string} Valor formatado como "R$ 1.245,67"
  */
 function formatCurrency(value) {
-    return `R$ ${value.toFixed(2).replace('.', ',')}`;
+    // Converte para número se for string
+    const numValue = typeof value === 'string' ? parseFloat(value) : value;
+    
+    // Verifica se é um número válido
+    if (isNaN(numValue)) return 'R$ 0,00';
+    
+    // Formata o número usando toLocaleString para padrão brasileiro
+    return numValue.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
 }
 
 /**
