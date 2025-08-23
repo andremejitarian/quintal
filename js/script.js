@@ -131,7 +131,8 @@ $(document).ready(function() {
                 $('#nomeResponsavel'),
                 $('#emailResponsavel'),
                 $('#telefoneResponsavel'),
-                $('#cpfResponsavel')
+                $('#cpfResponsavel'),
+                $('#emergenciaQuemChamar')
             ];
 
             // Validação dos campos do responsável
@@ -139,6 +140,7 @@ $(document).ready(function() {
             isValid = validateField($('#emailResponsavel'), (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val), 'Email inválido.') && isValid;
             isValid = validateField($('#telefoneResponsavel'), (val) => val.replace(/\D/g, '').length === 11, 'Telefone inválido.') && isValid;
             isValid = validateField($('#cpfResponsavel'), (val) => isValidCPF(val), 'CPF inválido.') && isValid;
+            isValid = validateField($('#emergenciaQuemChamar'), null, 'Campo obrigatório.') && isValid;
 
             // Validação "Como ficou sabendo"
             const $howKnowCheckboxes = $('input[name="comoSoube"]');
@@ -165,7 +167,6 @@ $(document).ready(function() {
                 isValid = validateField($group.find('.generoAprendiz'), (val) => val !== '', 'Selecione o gênero.') && isValid;
                 isValid = validateField($group.find('.restricaoAlimentarAprendiz'), null, 'Campo obrigatório.') && isValid;
                 isValid = validateField($group.find('.questaoSaudeAprendiz'), null, 'Campo obrigatório.') && isValid;
-                isValid = validateField($group.find('.emergenciaQuemChamarAprendiz'), null, 'Campo obrigatório.') && isValid;
 
                 // Validação de cursos usando a nova função
                 isValid = validateApprenticesCourses($group) && isValid;
@@ -273,10 +274,6 @@ $(document).ready(function() {
             $newApprentice.find('.generoAprendiz').val(apprenticeData.genero);
             $newApprentice.find('.restricaoAlimentarAprendiz').val(apprenticeData.restricaoAlimentar);
             $newApprentice.find('.questaoSaudeAprendiz').val(apprenticeData.questaoSaude);
-            $newApprentice.find('.emergenciaQuemChamarAprendiz').val(apprenticeData.emergenciaQuemChamar);
-            if (apprenticeData.consentimentoFoto) {
-                $newApprentice.find('.consentimentoFoto').prop('checked', true);
-            }
 
             // Seleciona os cursos. Os dados do webhook vêm com nomes, precisamos dos IDs
             if (apprenticeData.cursos && Array.isArray(apprenticeData.cursos)) {
@@ -341,6 +338,7 @@ $(document).ready(function() {
                 segundoResponsavelNome: $('#segundoResponsavelNome').val(),
                 segundoResponsavelTelefone: $('#segundoResponsavelTelefone').val().replace(/\D/g, '')
             },
+            emergenciaQuemChamar: $('#emergenciaQuemChamar').val(),
             comoSoube: [],
             aprendizes: [],
             planoPagamento: $('#planoPagamento').val(),
@@ -364,10 +362,8 @@ $(document).ready(function() {
                 dataNascimento: $group.find('.dataNascimentoAprendiz').val(),
                 genero: $group.find('.generoAprendiz').val(),
                 cursos: getSelectedCourses($group), // Usa a nova função
-                consentimentoFoto: $group.find('.consentimentoFoto').is(':checked'),
                 restricaoAlimentar: $group.find('.restricaoAlimentarAprendiz').val(),
-                questaoSaude: $group.find('.questaoSaudeAprendiz').val(),
-                emergenciaQuemChamar: $group.find('.emergenciaQuemChamarAprendiz').val()
+                questaoSaude: $group.find('.questaoSaudeAprendiz').val()
             };
             formData.aprendizes.push(aprendiz);
         });
@@ -521,6 +517,11 @@ $(document).ready(function() {
             $('#segundoResponsavelTelefone').val(data.responsavel.segundoResponsavelTelefone || '').trigger('input');
         }
 
+        // Campo de emergência (agora no responsável)
+        if (data.emergenciaQuemChamar) {
+            $('#emergenciaQuemChamar').val(data.emergenciaQuemChamar);
+        }
+
         // Como ficou sabendo
         if (data.comoSoube && Array.isArray(data.comoSoube)) {
             $('input[name="comoSoube"]').prop('checked', false); // Desmarcar todos primeiro
@@ -554,6 +555,11 @@ $(document).ready(function() {
         // Cupom Code
         if (data.couponCode) {
             $('#cupomCode').val(data.couponCode).trigger('input');
+        }
+
+        // Autorização de foto (agora está nos termos)
+        if (data.autorizaFoto) {
+            $(`input[name="autorizaFoto"][value="${data.autorizaFoto}"]`).prop('checked', true);
         }
 
         updateSummaryAndTotal(); // Atualiza o resumo com os dados pré-preenchidos
