@@ -61,9 +61,9 @@ $(document).ready(function() {
         $('.btn-submit').toggle(isFinalDataStep);
         $('#goToPaymentBtn').toggle(false); // Esconde por padrão, só mostra se tiver link de pagamento
 
-        // Rola para o topo da página após a mudança de passo
+        // Rola para o topo absoluto da página
         $('html, body').animate({
-            scrollTop: $(".form-container").offset().top
+            scrollTop: 0
         }, 500);
     }
 
