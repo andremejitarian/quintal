@@ -565,10 +565,73 @@ $(document).ready(function() {
         updateSummaryAndTotal(); // Atualiza o resumo com os dados pré-preenchidos
     }
     
+    // Função para processar a submissão do formulário
+    async function processFormSubmission() {
+        console.log('Iniciando processamento da submissão...');
+        
+        // Valida o último passo antes de submeter
+        if (!validateCurrentStep()) {
+            alert('Por favor, preencha todos os campos obrigatórios corretamente antes de prosseguir.');
+            return;
+        }
+
+        const formData = collectFormData();
+        console.log('Dados do Formulário para Submissão:', formData);
+
+        // Mostra a tela de sucesso imediatamente
+        showStep('success');
+        $('#paymentRedirectMessage').text('Processando sua inscrição...').show();
+
+        // Enviar dados para o backend via AJAX
+        try {
+            console.log('Enviando dados para:', WEBHOOK_SUBMISSAO_URL);
+            
+            const response = await fetch(WEBHOOK_SUBMISSAO_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+
+            if (!response.ok) {
+                throw new Error(`Erro ao enviar inscrição: ${response.status} - ${response.statusText}`);
+            }
+
+            const result = await response.json();
+            console.log('Inscrição enviada com sucesso:', result);
+
+            $('#paymentRedirectMessage').text('Inscrição finalizada com sucesso!');
+            
+            if (formData.formaPagamento === 'Bolsista Integral') {
+                // Para bolsista integral, não há link de pagamento
+                $('#paymentRedirectMessage').text('Sua inscrição como bolsista foi registrada com sucesso. Em breve entraremos em contato para os próximos passos.');
+                $('#goToPaymentBtn').hide();
+            } else if (result.link) {
+                $('#paymentRedirectMessage').text('Sua inscrição foi finalizada com sucesso! Clique abaixo para prosseguir com o pagamento.');
+                $('#goToPaymentBtn').data('payment-link', result.link).show();
+            } else {
+                $('#paymentRedirectMessage').text('Inscrição finalizada com sucesso! Não foi possível obter o link de pagamento. Por favor, entre em contato.');
+                $('#goToPaymentBtn').hide();
+            }
+
+        } catch (error) {
+            console.error('Erro ao enviar inscrição:', error);
+            $('#paymentRedirectMessage').text('Ocorreu um erro ao finalizar a inscrição. Por favor, tente novamente ou entre em contato.');
+            $('#goToPaymentBtn').hide();
+        }
+    }
+    
     // Configura todos os event listeners
     function setupEventListeners() {
+        console.log('Configurando event listeners...');
+        
         // Navegação entre passos
         $('.btn-next').on('click', function() {
+            console.log('Botão próximo clicado, passo atual:', currentStep);
             if (validateCurrentStep()) {
                 if (currentStep < totalSteps + 1) { // totalSteps + 1 para incluir o passo de termos
                     showStep(currentStep + 1);
@@ -579,9 +642,26 @@ $(document).ready(function() {
         });
 
         $('.btn-prev').on('click', function() {
+            console.log('Botão anterior clicado, passo atual:', currentStep);
             if (currentStep > 1) {
                 showStep(currentStep - 1);
             }
+        });
+
+        // Event listener específico para o botão de submit
+        $('.btn-submit').on('click', function(event) {
+            console.log('Botão Finalizar Inscrição clicado!');
+            event.preventDefault();
+            event.stopPropagation();
+            processFormSubmission();
+        });
+
+        // Previne o envio padrão do formulário
+        $('#registrationForm').on('submit', function(event) {
+            console.log('Form submit event interceptado');
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
         });
 
         // Adicionar/Remover Aprendiz
@@ -670,59 +750,7 @@ $(document).ready(function() {
             }
         });
 
-        // Submissão do formulário
-        $('#registrationForm').on('submit', async function(event) {
-            event.preventDefault(); // Impede o envio padrão do formulário
-
-            // Valida o último passo antes de submeter
-            if (validateCurrentStep()) {
-                const formData = collectFormData();
-                console.log('Dados do Formulário para Submissão:', formData);
-
-                // Mostra a tela de sucesso imediatamente
-                showStep('success');
-                $('#paymentRedirectMessage').text('Processando sua inscrição...').show();
-
-                // Enviar dados para o backend via AJAX
-                try {
-                    const response = await fetch(WEBHOOK_SUBMISSAO_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(formData)
-                    });
-
-                    if (!response.ok) {
-                        throw new Error(`Erro ao enviar inscrição: ${response.statusText}`);
-                    }
-
-                    const result = await response.json();
-                    console.log('Inscrição enviada com sucesso:', result);
-
-                    $('#paymentRedirectMessage').text('Inscrição finalizada com sucesso!');
-                    
-                    if (formData.formaPagamento === 'Bolsista Integral') {
-                        // Para bolsista integral, não há link de pagamento
-                        $('#paymentRedirectMessage').text('Sua inscrição como bolsista foi registrada com sucesso. Em breve entraremos em contato para os próximos passos.');
-                        $('#goToPaymentBtn').hide();
-                    } else if (result.link) {
-                        $('#paymentRedirectMessage').text('Sua inscrição foi finalizada com sucesso! Clique abaixo para prosseguir com o pagamento.');
-                        $('#goToPaymentBtn').data('payment-link', result.link).show();
-                    } else {
-                        $('#paymentRedirectMessage').text('Inscrição finalizada com sucesso! Não foi possível obter o link de pagamento. Por favor, entre em contato.');
-                        $('#goToPaymentBtn').hide();
-                    }
-
-                } catch (error) {
-                    console.error('Erro ao enviar inscrição:', error);
-                    $('#paymentRedirectMessage').text('Ocorreu um erro ao finalizar a inscrição. Por favor, tente novamente ou entre em contato.');
-                    $('#goToPaymentBtn').hide();
-                }
-            } else {
-                alert('Por favor, preencha todos os campos obrigatórios corretamente antes de prosseguir.');
-            }
-        });
+        console.log('Event listeners configurados com sucesso!');
     }
 
     // Inicia o formulário quando o DOM estiver pronto
