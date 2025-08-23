@@ -221,7 +221,7 @@ $(document).ready(function() {
                                id="${uniqueId}">
                         <label for="${uniqueId}">
                             ${course.nome} 
-                            <span class="course-price">(a partir de R$ ${referencePrice.toFixed(2).replace('.', ',')})</span>
+                            <span class="course-price">(a partir de ${priceCalculator.formatCurrency(referencePrice)})</span>
                         </label>
                     </div>
                 `;
@@ -422,8 +422,8 @@ $(document).ready(function() {
                 // Pegar o preço do curso para o plano de pagamento selecionado
                 const coursePrice = priceCalculator.getCoursePrice(courseId, paymentPlan); 
                 
-                // Formatar a string para incluir o preço (SEM barra invertida)
-                coursesDetails.push(`${courseName} (R$ ${coursePrice.toFixed(2).replace('.', ',')})`);
+                // Usar a função formatCurrency para formatar o preço
+                coursesDetails.push(`${courseName} (${priceCalculator.formatCurrency(coursePrice)})`);
             });
             
             apprenticesSummary.push({ 
@@ -458,12 +458,12 @@ $(document).ready(function() {
             $summaryList.append(`<li>Nenhum aprendiz adicionado</li>`);
         }
 
-        // Atualiza os valores financeiros (SEM barras invertidas)
-        $('#summarySubtotal').text('R$ ' + totals.subtotal.toFixed(2).replace('.', ','));
-        $('#summaryDiscount').text('R$ ' + totals.discountAmount.toFixed(2).replace('.', ','));
-        $('#summaryCoupon').text('R$ ' + totals.couponAmount.toFixed(2).replace('.', ','));
-        $('#summaryCardFee').text('R$ ' + totals.cardFee.toFixed(2).replace('.', ','));
-        $('#summaryTotal').text('R$ ' + totals.total.toFixed(2).replace('.', ','));
+        // Atualiza os valores financeiros usando formatCurrency
+        $('#summarySubtotal').text(priceCalculator.formatCurrency(totals.subtotal));
+        $('#summaryDiscount').text(priceCalculator.formatCurrency(totals.discountAmount));
+        $('#summaryCoupon').text(priceCalculator.formatCurrency(totals.couponAmount));
+        $('#summaryCardFee').text(priceCalculator.formatCurrency(totals.cardFee));
+        $('#summaryTotal').text(priceCalculator.formatCurrency(totals.total));
 
         // Atualiza os campos ocultos
         $('#valor_calculado_total').val(totals.total.toFixed(2));
