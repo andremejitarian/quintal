@@ -8,8 +8,8 @@ $(document).ready(function() {
     let prefilledData = null; // Para armazenar dados pré-preenchidos
 
     // URLs dos webhooks
-    const WEBHOOK_CONSULTA_URL = 'https://criadordigital-n8n-webhook.kttqgl.easypanel.host/webhook/sua_webhook_de_consulta_dados_matricula';
-    const WEBHOOK_SUBMISSAO_URL = 'https://criadordigital-n8n-webhook.kttqgl.easypanel.host/webhook/c51bd45c-c232-44db-8490-f52f22ae34ce';
+    const WEBHOOK_CONSULTA_URL = 'https://criadordigital-n8n-webhook.kttqgl.easypanel.host/webhook/consulta-matricula';
+    const WEBHOOK_SUBMISSAO_URL = 'https://criadordigital-n8n-webhook.kttqgl.easypanel.host/webhook/envio-matricula';
 
     // Inicializa as máscaras para os campos
     function initializeMasks() {
