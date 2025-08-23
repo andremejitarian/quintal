@@ -183,7 +183,7 @@ $(document).ready(function() {
             }
         } else if (currentStep === 5) { // Plano de Pagamento e Resumo (step-4)
             // Plano de Pagamento
-isValid = validateField($('#planoPagamento'), null, 'Selecione um plano de pagamento.') && isValid;
+            isValid = validateField($('#planoPagamento'), null, 'Selecione um plano de pagamento.') && isValid;
 
             // Forma de Pagamento
             isValid = validateField($('#formaPagamento'), null, 'Selecione a forma de pagamento.') && isValid;
@@ -405,10 +405,13 @@ isValid = validateField($('#planoPagamento'), null, 'Selecione um plano de pagam
         const apprenticesSummary = [];
         let apprenticesCount = 0;
 
+        // OBTENHA O PLANO DE PAGAMENTO AQUI, ANTES DE ITERAR PELOS APRENDIZES
+        const paymentPlan = $('#planoPagamento').val() || 'mensal'; // 'mensal' como padrão
+
         $('#apprenticesContainer .apprentice-group:not(.template)').each(function() {
             const $group = $(this);
             const apprenticeName = $group.find('.nomeAprendiz').val() || `Aprendiz ${$group.find('.apprentice-number').text()}`;
-            const selectedCourseIds = getSelectedCourses($group); // Usa a nova função
+            const selectedCourseIds = getSelectedCourses($group);
             
             apprenticesCount++;
             
@@ -416,7 +419,11 @@ isValid = validateField($('#planoPagamento'), null, 'Selecione um plano de pagam
             selectedCourseIds.forEach(courseId => {
                 allSelectedCourseIds.push(courseId);
                 const courseName = priceCalculator.getCourseNameById(courseId);
-                coursesDetails.push(courseName);
+                // Pegar o preço do curso para o plano de pagamento selecionado
+                const coursePrice = priceCalculator.getCoursePrice(courseId, paymentPlan); 
+                
+                // Formatar a string para incluir o preço (SEM barra invertida)
+                coursesDetails.push(`${courseName} (R$ ${coursePrice.toFixed(2).replace('.', ',')})`);
             });
             
             apprenticesSummary.push({ 
@@ -425,7 +432,6 @@ isValid = validateField($('#planoPagamento'), null, 'Selecione um plano de pagam
             });
         });
 
-        const paymentPlan = $('#planoPagamento').val() || 'mensal';
         const couponCode = $('#cupomCode').val();
         const paymentMethod = $('#formaPagamento').val();
 
@@ -443,7 +449,7 @@ isValid = validateField($('#planoPagamento'), null, 'Selecione um plano de pagam
         if (apprenticesSummary.length > 0) {
             apprenticesSummary.forEach(app => {
                 if (app.courses.length > 0) {
-                    $summaryList.append(`<li><strong>${app.name}:</strong> ${app.courses.join(', ')}</li>`);
+                    $summaryList.append(`<li><strong>${app.name}:</strong><br>${app.courses.join('<br>')}</li>`);
                 } else {
                     $summaryList.append(`<li><strong>${app.name}:</strong> Nenhum curso selecionado</li>`);
                 }
@@ -452,7 +458,7 @@ isValid = validateField($('#planoPagamento'), null, 'Selecione um plano de pagam
             $summaryList.append(`<li>Nenhum aprendiz adicionado</li>`);
         }
 
-        // Atualiza os valores financeiros
+        // Atualiza os valores financeiros (SEM barras invertidas)
         $('#summarySubtotal').text('R$ ' + totals.subtotal.toFixed(2).replace('.', ','));
         $('#summaryDiscount').text('R$ ' + totals.discountAmount.toFixed(2).replace('.', ','));
         $('#summaryCoupon').text('R$ ' + totals.couponAmount.toFixed(2).replace('.', ','));
@@ -533,9 +539,9 @@ isValid = validateField($('#planoPagamento'), null, 'Selecione um plano de pagam
         }
 
         // Plano de Pagamento
-if (data.planoPagamento) {
-    $('#planoPagamento').val(data.planoPagamento);
-}
+        if (data.planoPagamento) {
+            $('#planoPagamento').val(data.planoPagamento);
+        }
 
         // Forma de Pagamento e Dia de Vencimento
         if (data.formaPagamento) {
@@ -582,9 +588,9 @@ if (data.planoPagamento) {
         });
 
         // Disparar cálculo ao mudar seleção de curso, plano ou cupom
-$('#registrationForm').on('change', '.course-checkbox, #planoPagamento', function() {
-    updateSummaryAndTotal();
-});
+        $('#registrationForm').on('change', '.course-checkbox, #planoPagamento', function() {
+            updateSummaryAndTotal();
+        });
 
         // Toggle para Dia de Vencimento
         $('#formaPagamento').on('change', function() {
