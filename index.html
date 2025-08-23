@@ -84,6 +84,12 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="emergenciaQuemChamar">Em caso de emergência, quem chamar? *</label>
+                            <input type="text" id="emergenciaQuemChamar" name="emergenciaQuemChamar" placeholder="Nome e telefone" required>
+                            <div class="error-message">Este campo é obrigatório</div>
+                        </div>
+
+                        <div class="form-group">
                             <label>Como ficou sabendo do Quintal das Artes? *</label>
                             <div class="checkbox-group-container">
                                 <div class="checkbox-group">
@@ -195,19 +201,6 @@
                                 <label>Questões de Saúde *</label>
                                 <textarea class="questaoSaudeAprendiz" rows="2" placeholder="Descreva qualquer questão de saúde relevante ou digite 'Nenhuma'" required></textarea>
                                 <div class="error-message">Este campo é obrigatório</div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Em caso de emergência, quem chamar? *</label>
-                                <input type="text" class="emergenciaQuemChamarAprendiz" placeholder="Nome e telefone" required>
-                                <div class="error-message">Este campo é obrigatório</div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="checkbox-group">
-                                    <input type="checkbox" class="consentimentoFoto" id="consentimento-TEMPLATE">
-                                    <label for="consentimento-TEMPLATE">Autorizo o uso da imagem do aprendiz para divulgação das atividades do Quintal das Artes</label>
-                                </div>
                             </div>
 
                             <button type="button" class="btn btn-remove-apprentice" style="display: none;">
