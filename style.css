@@ -671,3 +671,24 @@ body {
 .courses-checkboxes .checkbox-group {
     margin-bottom: 8px;
 }
+
+
+/* Melhora a formatação do resumo */
+#summaryApprenticesList li {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+}
+
+#summaryApprenticesList li strong {
+    color: #495057;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.course-price {
+    color: #28a745;
+    font-weight: 600;
+}
