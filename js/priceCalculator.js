@@ -39,6 +39,7 @@ function getAllCourses() {
     Object.keys(pricesData.cursos).forEach(courseId => {
         allCourses.push({
             id: courseId,
+            categoria: 'curso', // Adiciona categoria para facilitar a separação
             ...pricesData.cursos[courseId]
         });
     });
@@ -47,6 +48,7 @@ function getAllCourses() {
     Object.keys(pricesData.contraturnos).forEach(courseId => {
         allCourses.push({
             id: courseId,
+            categoria: 'contraturno', // Adiciona categoria para facilitar a separação
             ...pricesData.contraturnos[courseId]
         });
     });
@@ -74,6 +76,35 @@ function getCoursePrice(courseId, planKey) {
     }
     
     return 0;
+}
+
+/**
+ * Obtém os detalhes completos de um curso pelo ID
+ * @param {string} courseId - ID do curso
+ * @returns {Object|null} Objeto com detalhes do curso ou null se não encontrado
+ */
+function getCourseById(courseId) {
+    if (!pricesData) return null;
+    
+    // Verifica se é um curso
+    if (pricesData.cursos[courseId]) {
+        return {
+            id: courseId,
+            categoria: 'curso',
+            ...pricesData.cursos[courseId]
+        };
+    }
+    
+    // Verifica se é um contraturno
+    if (pricesData.contraturnos[courseId]) {
+        return {
+            id: courseId,
+            categoria: 'contraturno',
+            ...pricesData.contraturnos[courseId]
+        };
+    }
+    
+    return null;
 }
 
 /**
@@ -127,12 +158,13 @@ function calculateTotal(selectedCourseIds, paymentPlanKey, couponCode, paymentMe
     // 2. Aplicar desconto de múltiplos cursos (10% no curso de menor valor)
     if (selectedCourseIds.length > 1) {
         const lowestPrice = Math.min(...coursesDetails.map(c => c.price));
-        discountAmount = lowestPrice * pricesData.descontos.multiplos_cursos.percentual;
-        currentTotal -= discountAmount;
+        const multipleCoursesDiscount = lowestPrice * pricesData.descontos.multiplos_cursos.percentual;
+        discountAmount += multipleCoursesDiscount;
+        currentTotal -= multipleCoursesDiscount;
         appliedDiscounts.push({
             type: 'multiplos_cursos',
             name: pricesData.descontos.multiplos_cursos.nome,
-            amount: discountAmount
+            amount: multipleCoursesDiscount
         });
     }
 
@@ -219,13 +251,102 @@ function getCourseNameById(courseId) {
     return courseId;
 }
 
+/**
+ * Obtém informações sobre um plano de pagamento
+ * @param {string} planKey - Chave do plano (mensal, bimestral, quadrimestral)
+ * @returns {Object|null} Objeto com informações do plano ou null se não encontrado
+ */
+function getPaymentPlanInfo(planKey) {
+    if (!pricesData || !pricesData.planos[planKey]) return null;
+    
+    return pricesData.planos[planKey];
+}
+
+/**
+ * Verifica se um cupom é válido
+ * @param {string} couponCode - Código do cupom
+ * @returns {boolean} true se o cupom for válido, false caso contrário
+ */
+function isValidCoupon(couponCode) {
+    if (!couponsData || !couponCode) return false;
+    
+    const normalizedCouponCode = couponCode.toUpperCase();
+    return !!couponsData[normalizedCouponCode];
+}
+
+/**
+ * Obtém informações sobre um cupom
+ * @param {string} couponCode - Código do cupom
+ * @returns {Object|null} Objeto com informações do cupom ou null se não encontrado
+ */
+function getCouponInfo(couponCode) {
+    if (!couponsData || !couponCode) return null;
+    
+    const normalizedCouponCode = couponCode.toUpperCase();
+    return couponsData[normalizedCouponCode] || null;
+}
+
+/**
+ * Formata um valor monetário para exibição
+ * @param {number} value - Valor a ser formatado
+ * @returns {string} Valor formatado como "R$ 123,45"
+ */
+function formatCurrency(value) {
+    return `R$ ${value.toFixed(2).replace('.', ',')}`;
+}
+
+/**
+ * Obtém todos os planos de pagamento disponíveis
+ * @returns {Object} Objeto com todos os planos de pagamento
+ */
+function getAllPaymentPlans() {
+    if (!pricesData || !pricesData.planos) return {};
+    
+    return pricesData.planos;
+}
+
+/**
+ * Calcula o desconto percentual de um plano em relação ao mensal
+ * @param {string} planKey - Chave do plano
+ * @param {string} courseId - ID do curso
+ * @returns {number} Percentual de desconto (0 a 1)
+ */
+function calculatePlanDiscount(planKey, courseId) {
+    if (!pricesData || planKey === 'mensal') return 0;
+    
+    const monthlyPrice = getCoursePrice(courseId, 'mensal');
+    const planPrice = getCoursePrice(courseId, planKey);
+    
+    if (monthlyPrice === 0) return 0;
+    
+    return (monthlyPrice - planPrice) / monthlyPrice;
+}
+
 // Exportar funções para serem acessíveis em script.js
 window.priceCalculator = {
+    // Funções principais
     loadPriceData,
     calculateTotal,
+    
+    // Funções de consulta de cursos
     getAllCourses,
     getCoursePrice,
     getCourseNameById,
+    getCourseById,
+    
+    // Funções de planos de pagamento
+    getPaymentPlanInfo,
+    getAllPaymentPlans,
+    calculatePlanDiscount,
+    
+    // Funções de cupons
+    isValidCoupon,
+    getCouponInfo,
+    
+    // Funções utilitárias
+    formatCurrency,
+    
+    // Getters para dados brutos
     getPricesData: () => pricesData,
     getCouponsData: () => couponsData
 };
