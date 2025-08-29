@@ -692,3 +692,91 @@ body {
     color: #28a745;
     font-weight: 600;
 }
+
+/* style.css */
+
+/* Estilos base para a caixa de status */
+.status-box {
+    padding: 30px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    text-align: center; /* Centraliza o texto dentro da caixa */
+    /* Transições suaves para a mudança de estado */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.status-box #statusHeading,
+.status-box #statusMessage {
+    margin-bottom: 20px;
+    font-size: 1.1rem; /* Mantém o tamanho da fonte do parágrafo */
+    transition: color 0.3s ease;
+}
+
+/* Estado de processamento/carregamento */
+.status-box.status-processing {
+    background: #e0f2f7; /* Um azul claro */
+    border: 2px solid #a7d9ed; /* Borda azul clara */
+}
+.status-box.status-processing #statusHeading,
+.status-box.status-processing #statusMessage {
+    color: #007bff; /* Texto azul */
+}
+
+/* Estado de sucesso */
+.status-box.status-success {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb); /* Verde claro */
+    border: 2px solid #28a745; /* Borda verde */
+}
+.status-box.status-success #statusHeading,
+.status-box.status-success #statusMessage {
+    color: #155724; /* Texto verde escuro */
+}
+
+/* Estado de erro */
+.status-box.status-error {
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb); /* Vermelho claro */
+    border: 2px solid #dc3545; /* Borda vermelha */
+}
+.status-box.status-error #statusHeading,
+.status-box.status-error #statusMessage {
+    color: #721c24; /* Texto vermelho escuro */
+}
+
+/* Ajuste para o h3 dentro da caixa, para não ser muito grande se não for o título da seção */
+.status-box h3 {
+    font-size: 1.8rem; /* Um pouco menor que o h2 da seção, mas ainda proeminente */
+    margin-top: 0;
+}
+
+/* Estilo para o spinner de carregamento (se você estiver usando Bootstrap) */
+.spinner-border {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  vertical-align: text-bottom;
+  border: .125em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: .75s linear infinite spinner-border;
+  animation: .75s linear infinite spinner-border;
+}
+
+@-webkit-keyframes spinner-border {
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner-border {
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.spinner-border-sm {
+  width: .8rem;
+  height: .8rem;
+  border-width: .1em;
+}
