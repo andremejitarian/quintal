@@ -155,29 +155,31 @@ function calculateTotal(selectedCourseIds, paymentPlanKey, couponCode, paymentMe
     let couponAmount = 0;
     let cardFee = 0;
 
-    // 2. Aplicar desconto de múltiplos cursos (10% no curso de menor valor)
-    if (selectedCourseIds.length > 1) {
+    // 2 e 3. Aplicar desconto de múltiplos cursos OU desconto de irmãos (não cumulativos)
+    if (selectedCourseIds.length > 1 || apprenticesCount > 1) {
         const lowestPrice = Math.min(...coursesDetails.map(c => c.price));
-        const multipleCoursesDiscount = lowestPrice * pricesData.descontos.multiplos_cursos.percentual;
-        discountAmount += multipleCoursesDiscount;
-        currentTotal -= multipleCoursesDiscount;
-        appliedDiscounts.push({
-            type: 'multiplos_cursos',
-            name: pricesData.descontos.multiplos_cursos.nome,
-            amount: multipleCoursesDiscount
-        });
-    }
 
-    // 3. Aplicar desconto de irmãos (se mais de 1 aprendiz)
-    if (apprenticesCount > 1) {
-        const brotherDiscount = currentTotal * pricesData.descontos.irmaos.percentual;
-        discountAmount += brotherDiscount;
-        currentTotal -= brotherDiscount;
-        appliedDiscounts.push({
-            type: 'irmaos',
-            name: pricesData.descontos.irmaos.nome,
-            amount: brotherDiscount
-        });
+        if (selectedCourseIds.length > 1) {
+            // Desconto múltiplos cursos tem prioridade
+            const multipleCoursesDiscount = lowestPrice * pricesData.descontos.multiplos_cursos.percentual;
+            discountAmount += multipleCoursesDiscount;
+            currentTotal -= multipleCoursesDiscount;
+            appliedDiscounts.push({
+                type: 'multiplos_cursos',
+                name: pricesData.descontos.multiplos_cursos.nome,
+                amount: multipleCoursesDiscount
+            });
+        } else if (apprenticesCount > 1) {
+            // Só aplica o desconto de irmãos se não tiver múltiplos cursos
+            const brotherDiscount = lowestPrice * pricesData.descontos.irmaos.percentual;
+            discountAmount += brotherDiscount;
+            currentTotal -= brotherDiscount;
+            appliedDiscounts.push({
+                type: 'irmaos',
+                name: pricesData.descontos.irmaos.nome,
+                amount: brotherDiscount
+            });
+        }
     }
 
     // 4. Aplicar desconto do cupom
@@ -231,6 +233,7 @@ function calculateTotal(selectedCourseIds, paymentPlanKey, couponCode, paymentMe
         paymentPlan: pricesData.planos[paymentPlanKey]
     };
 }
+
 
 /**
  * Obtém o nome de um curso pelo ID
