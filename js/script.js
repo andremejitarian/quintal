@@ -565,7 +565,7 @@ $(document).ready(function() {
         updateSummaryAndTotal(); // Atualiza o resumo com os dados pré-preenchidos
     }
     
-    // Função para processar a submissão do formulário
+// Função para processar a submissão do formulário
     async function processFormSubmission() {
         console.log('Iniciando processamento da submissão...');
         
@@ -578,9 +578,19 @@ $(document).ready(function() {
         const formData = collectFormData();
         console.log('Dados do Formulário para Submissão:', formData);
 
-        // Mostra a tela de sucesso imediatamente
-        showStep('success');
-        $('#paymentRedirectMessage').text('Processando sua inscrição...').show();
+        // Referências aos elementos da tela de status
+        const $statusBox = $('#registrationStatusBox');
+        const $statusHeading = $('#statusHeading');
+        const $statusMessage = $('#statusMessage');
+        const $goToPaymentBtn = $('#goToPaymentBtn');
+
+        // 1. Mostrar a tela de sucesso e definir estado de "processando"
+        showStep('success'); // Mova para a tela de status
+        
+        $statusBox.removeClass('status-success status-error').addClass('status-processing');
+        $statusHeading.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Aguarde...'); // Opcional: ícone de carregamento
+        $statusMessage.text('Estamos processando sua inscrição...');
+        $goToPaymentBtn.hide(); // Esconde o botão inicialmente
 
         // Enviar dados para o backend via AJAX
         try {
@@ -598,30 +608,36 @@ $(document).ready(function() {
             console.log('Response headers:', response.headers);
 
             if (!response.ok) {
+                // Se a resposta não for OK (status 4xx, 5xx), lança um erro
                 throw new Error(`Erro ao enviar inscrição: ${response.status} - ${response.statusText}`);
             }
 
             const result = await response.json();
-            console.log('Inscrição enviada com sucesso:', result);
+            console.log('Inscrição enviada com sucesso (resposta do webhook):', result);
 
-            $('#paymentRedirectMessage').text('Inscrição finalizada com sucesso!');
+            // 2. Processamento bem-sucedido do webhook
+            $statusBox.removeClass('status-processing').addClass('status-success');
+            $statusHeading.html('✅ Sucesso!');
             
             if (formData.formaPagamento === 'Bolsista Integral') {
-                // Para bolsista integral, não há link de pagamento
-                $('#paymentRedirectMessage').text('Sua inscrição como bolsista foi registrada com sucesso. Em breve entraremos em contato para os próximos passos.');
-                $('#goToPaymentBtn').hide();
+                $statusMessage.text('Sua inscrição como bolsista foi registrada com sucesso. Em breve entraremos em contato para os próximos passos.');
+                $goToPaymentBtn.hide();
             } else if (result.link) {
-                $('#paymentRedirectMessage').text('Sua inscrição foi finalizada com sucesso! Clique abaixo para prosseguir com o pagamento.');
-                $('#goToPaymentBtn').data('payment-link', result.link).show();
+                $statusMessage.text('Sua inscrição foi finalizada com sucesso! Clique abaixo para prosseguir com o pagamento.');
+                $goToPaymentBtn.data('payment-link', result.link).show();
             } else {
-                $('#paymentRedirectMessage').text('Inscrição finalizada com sucesso! Não foi possível obter o link de pagamento. Por favor, entre em contato.');
-                $('#goToPaymentBtn').hide();
+                // Cenário onde a submissão foi OK, mas o webhook não retornou link de pagamento
+                $statusMessage.text('Inscrição finalizada com sucesso, mas não foi possível obter o link de pagamento. Por favor, entre em contato com a administração do Quintal das Artes.');
+                $goToPaymentBtn.hide();
             }
 
         } catch (error) {
+            // 3. Captura de erro (rede, servidor, ou response.ok false)
             console.error('Erro ao enviar inscrição:', error);
-            $('#paymentRedirectMessage').text('Ocorreu um erro ao finalizar a inscrição. Por favor, tente novamente ou entre em contato.');
-            $('#goToPaymentBtn').hide();
+            $statusBox.removeClass('status-processing status-success').addClass('status-error');
+            $statusHeading.html('❌ Erro!');
+            $statusMessage.text('Ocorreu um erro ao finalizar a inscrição. Por favor, tente novamente ou entre em contato.');
+            $goToPaymentBtn.hide();
         }
     }
     
