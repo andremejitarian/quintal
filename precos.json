@@ -14,11 +14,11 @@
       "parcelas": 2,
       "taxaCartaoPercentual": 0.0421
     },
-    "quadrimestral": {
-      "nome": "Quadrimestral",
-      "descricao": "4 meses com maior desconto", 
-      "meses": 4,
-      "parcelas": 4,
+    "trimestral": {
+      "nome": "Trimestral",
+      "descricao": "3 meses com maior desconto", 
+      "meses": 3,
+      "parcelas": 3,
       "taxaCartaoPercentual": 0.0421
     }
   },
