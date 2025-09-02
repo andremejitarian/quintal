@@ -1,7 +1,7 @@
 {
   "CUPOM10OFF": {"tipo": "percentual", "valor": 0.10, "maxDesconto": 999.00},
   "CUPOM50FIXO": {"tipo": "fixo", "valor": 50.00},
- "CUPOM50OFF": {"tipo": "percentual", "valor": 0.50},
+ "CUPOM50": {"tipo": "percentual", "valor": 0.50},
   "BOASVINDAS": {"tipo": "percentual", "valor": 0.15},
   "FILHOPROF10": {"tipo": "percentual", "valor": 0.10},
   "GANHE30": {"tipo": "fixo", "valor": 30.00}
