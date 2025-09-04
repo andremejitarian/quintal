@@ -41,6 +41,15 @@
         "trimestral": 215
       }
     },
+       "parkour": {
+      "nome": "PARKOUR // 20 de Setembro // sab 10H-13H // 6-12a // Rafa",
+      "categoria": "curso",
+      "precos": {
+        "mensal": 90,
+        "bimestral": 90,
+        "trimestral": 90
+      }
+    },
     "trabalhos_manuais_manha": {
       "nome": "TRABALHOS MANUAIS // qui 9H-11H30 // 6-12a // Betina",
       "categoria": "curso",
