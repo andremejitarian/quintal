@@ -59,7 +59,7 @@ function getAllCourses() {
 /**
  * Obtém o preço de um curso específico para um plano específico
  * @param {string} courseId - ID do curso
- * @param {string} planKey - Chave do plano (mensal, bimestral, quadrimestral)
+ * @param {string} planKey - Chave do plano (mensal, bimestral, trimestral)
  * @returns {number} Preço do curso para o plano
  */
 function getCoursePrice(courseId, planKey) {
@@ -110,7 +110,7 @@ function getCourseById(courseId) {
 /**
  * Calcula o total da inscrição com base nos cursos selecionados, plano de pagamento e cupom.
  * @param {Array<string>} selectedCourseIds - Array de IDs dos cursos selecionados
- * @param {string} paymentPlanKey - Chave do plano de pagamento (mensal, bimestral, quadrimestral)
+ * @param {string} paymentPlanKey - Chave do plano de pagamento (mensal, bimestral, trimestral)
  * @param {string} couponCode - Código do cupom
  * @param {string} paymentMethod - Método de pagamento (Cartão de Crédito, PIX/Boleto, Bolsista Integral)
  * @param {number} apprenticesCount - Número de aprendizes (para desconto de irmãos)
@@ -256,7 +256,7 @@ function getCourseNameById(courseId) {
 
 /**
  * Obtém informações sobre um plano de pagamento
- * @param {string} planKey - Chave do plano (mensal, bimestral, quadrimestral)
+ * @param {string} planKey - Chave do plano (mensal, bimestral, trimestral)
  * @returns {Object|null} Objeto com informações do plano ou null se não encontrado
  */
 function getPaymentPlanInfo(planKey) {
