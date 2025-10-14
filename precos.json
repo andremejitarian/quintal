@@ -34,7 +34,7 @@
       "nome": "DESENHO // seg 9H30-11H // 7-10a // José",
       "categoria": "curso",
       "precos": {
-        "avulso": 70,
+        "avulso": 72,
         "mensal": 230,
         "bimestral": 220,
         "trimestral": 215
@@ -44,7 +44,7 @@
       "nome": "DESENHO // qua 16H-17H30 // 10-12a // José",
       "categoria": "curso",
       "precos": {
-        "avulso": 70,
+        "avulso": 72,
         "mensal": 230,
         "bimestral": 220,
         "trimestral": 215
@@ -64,7 +64,7 @@
       "nome": "TRABALHOS MANUAIS // qui 9H-11H30 // 6-12a // Betina",
       "categoria": "curso",
       "precos": {
-        "avulso": 70,
+        "avulso": 72,
         "mensal": 260,
         "bimestral": 250,
         "trimestral": 245
@@ -74,7 +74,7 @@
       "nome": "ARTES extendido // seg 14H-17H // 7-10a // Bia",
       "categoria": "curso",
       "precos": {
-        "avulso": 70,
+        "avulso": 72,
         "mensal": 290,
         "bimestral": 280,
         "trimestral": 275
@@ -84,7 +84,7 @@
       "nome": "ARTES // qua 14H-15H30 // 6-11a // Maria Fernanda",
       "categoria": "curso",
       "precos": {
-        "avulso": 70,
+        "avulso": 72,
         "mensal": 230,
         "bimestral": 220,
         "trimestral": 215
@@ -94,7 +94,7 @@
       "nome": "MARCENARIA // seg 9H30-11H // 7-11a // David",
       "categoria": "curso",
       "precos": {
-        "avulso": 70,
+        "avulso": 72,
         "mensal": 260,
         "bimestral": 250,
         "trimestral": 245
@@ -104,7 +104,7 @@
       "nome": "MARCENARIA // qua 14H-15H30 // 7-11a // David",
       "categoria": "curso",
       "precos": {
-        "avulso": 70,
+        "avulso": 72,
         "mensal": 260,
         "bimestral": 250,
         "trimestral": 245
@@ -114,7 +114,7 @@
       "nome": "MODELAGEM // sex 10H-11H30 // 6-9a // Marta",
       "categoria": "curso",
       "precos": {
-        "avulso": 70,
+        "avulso": 72,
         "mensal": 260,
         "bimestral": 255,
         "trimestral": 250
@@ -124,7 +124,7 @@
       "nome": "MODELAGEM // sex 14H-15H30 // 6-10a // Marta",
       "categoria": "curso",
       "precos": {
-        "avulso": 70,
+        "avulso": 72,
         "mensal": 260,
         "bimestral": 255,
         "trimestral": 250
@@ -134,7 +134,7 @@
       "nome": "MODELAGEM // sex 16H-17H30 // 6-10a // Marta",
       "categoria": "curso",
       "precos": {
-        "avulso": 70,
+        "avulso": 72,
         "mensal": 260,
         "bimestral": 255,
         "trimestral": 250
@@ -144,7 +144,7 @@
       "nome": "INGLÊS // sex 14H-15H30 // 6-10a // Lucas",
       "categoria": "curso",
       "precos": {
-        "avulso": 70,
+        "avulso": 72,
         "mensal": 260,
         "bimestral": 255,
         "trimestral": 250
@@ -154,7 +154,7 @@
       "nome": "INGLÊS // sex 16H-17H30 // 6-10a // Lucas",
       "categoria": "curso",
       "precos": {
-        "avulso": 70,
+        "avulso": 72,
         "mensal": 260,
         "bimestral": 255,
         "trimestral": 250
@@ -166,7 +166,7 @@
       "nome": "CONTRATURNO TARDE (ter e/ou qui) 1x/semana 13H-17h30",
       "categoria": "contraturno",
       "precos": {
-        "avulso": 70,
+        "avulso": 72,
         "mensal": 290,
         "bimestral": 285,
         "trimestral": 280
@@ -176,7 +176,7 @@
       "nome": "CONTRATURNO TARDE (ter e/ou qui) 2x/semana 13H-17h30",
       "categoria": "contraturno",
       "precos": {
-        "avulso": 70,
+        "avulso": 72,
         "mensal": 520,
         "bimestral": 515,
         "trimestral": 510
@@ -186,7 +186,7 @@
       "nome": "CONTRATURNO MANHÃ (qua e/ou sex) 1x/semana 8h30-11h30",
       "categoria": "contraturno",
       "precos": {
-        "avulso": 70,
+        "avulso": 72,
         "mensal": 250,
         "bimestral": 245,
         "trimestral": 240
@@ -196,7 +196,7 @@
       "nome": "CONTRATURNO MANHÃ (qua e/ou sex) 2x/semana 8h30-11h30",
       "categoria": "contraturno",
       "precos": {
-        "avulso": 70,
+        "avulso": 72,
         "mensal": 480,
         "bimestral": 475,
         "trimestral": 470
