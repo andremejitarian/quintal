@@ -1,5 +1,12 @@
 {
   "planos": {
+    "avulso": {
+      "nome": "Diaria avulsa",
+      "descricao": "Pagamento por diária",
+      "meses": 1,
+      "parcelas": 1,
+      "taxaCartaoPercentual": 0.0421
+    },
     "mensal": {
       "nome": "Mensal",
       "descricao": "Pagamento mensal",
@@ -27,6 +34,7 @@
       "nome": "DESENHO // seg 9H30-11H // 7-10a // José",
       "categoria": "curso",
       "precos": {
+        "avulso": 70,
         "mensal": 230,
         "bimestral": 220,
         "trimestral": 215
