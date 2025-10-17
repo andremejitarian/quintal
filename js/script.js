@@ -1,5 +1,7 @@
 // js/script.js
 
+let isSubmitting = false;
+
 $(document).ready(function() {
     let currentStep = 1; // Inicia no primeiro passo (bem-vindo)
     const totalSteps = 4; // Contando os passos de dados (1 a 4)
@@ -567,79 +569,118 @@ $(document).ready(function() {
     
 // Função para processar a submissão do formulário
     async function processFormSubmission() {
-        console.log('Iniciando processamento da submissão...');
+    console.log('Iniciando processamento da submissão...');
+    
+    // ✅ PROTEÇÃO CONTRA MÚLTIPLOS ENVIOS
+    if (isSubmitting) {
+        console.log('⚠️ Envio já em andamento, ignorando clique duplicado');
+        return;
+    }
+    
+    // Valida o último passo antes de submeter
+    if (!validateCurrentStep()) {
+        alert('Por favor, preencha todos os campos obrigatórios corretamente antes de prosseguir.');
+        return;
+    }
+
+    // ✅ MARCA COMO "ENVIANDO"
+    isSubmitting = true;
+    
+    // ✅ DESABILITA O BOTÃO IMEDIATAMENTE
+    const $submitBtn = $('.btn-submit');
+    const originalBtnText = $submitBtn.text();
+    $submitBtn.prop('disabled', true).text('Enviando...');
+
+    const formData = collectFormData();
+    console.log('Dados do Formulário para Submissão:', formData);
+
+    // Referências aos elementos da tela de status
+    const $statusBox = $('#registrationStatusBox');
+    const $statusHeading = $('#statusHeading');
+    const $statusMessage = $('#statusMessage');
+    const $goToPaymentBtn = $('#goToPaymentBtn');
+
+    // 1. Mostrar a tela de sucesso e definir estado de "processando"
+    showStep('success');
+    
+    $statusBox.removeClass('status-success status-error').addClass('status-processing');
+    $statusHeading.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Aguarde...');
+    $statusMessage.text('Estamos processando sua inscrição...');
+    $goToPaymentBtn.hide();
+
+    // Enviar dados para o backend via AJAX
+    try {
+        console.log('Enviando dados para:', WEBHOOK_SUBMISSAO_URL);
         
-        // Valida o último passo antes de submeter
-        if (!validateCurrentStep()) {
-            alert('Por favor, preencha todos os campos obrigatórios corretamente antes de prosseguir.');
-            return;
+        // ✅ ADICIONA TIMEOUT DE 60 SEGUNDOS
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 segundos
+        
+        const response = await fetch(WEBHOOK_SUBMISSAO_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData),
+            signal: controller.signal // ✅ Adiciona controle de timeout
+        });
+
+        clearTimeout(timeoutId); // ✅ Limpa o timeout se a resposta chegar
+
+        console.log('Response status:', response.status);
+        console.log('Response headers:', response.headers);
+
+        if (!response.ok) {
+            throw new Error(`Erro ao enviar inscrição: ${response.status} - ${response.statusText}`);
         }
 
-        const formData = collectFormData();
-        console.log('Dados do Formulário para Submissão:', formData);
+        const result = await response.json();
+        console.log('Inscrição enviada com sucesso (resposta do webhook):', result);
 
-        // Referências aos elementos da tela de status
-        const $statusBox = $('#registrationStatusBox');
-        const $statusHeading = $('#statusHeading');
-        const $statusMessage = $('#statusMessage');
-        const $goToPaymentBtn = $('#goToPaymentBtn');
-
-        // 1. Mostrar a tela de sucesso e definir estado de "processando"
-        showStep('success'); // Mova para a tela de status
+        // 2. Processamento bem-sucedido do webhook
+        $statusBox.removeClass('status-processing').addClass('status-success');
+        $statusHeading.html('✅ Sucesso!');
         
-        $statusBox.removeClass('status-success status-error').addClass('status-processing');
-        $statusHeading.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Aguarde...'); // Opcional: ícone de carregamento
-        $statusMessage.text('Estamos processando sua inscrição...');
-        $goToPaymentBtn.hide(); // Esconde o botão inicialmente
-
-        // Enviar dados para o backend via AJAX
-        try {
-            console.log('Enviando dados para:', WEBHOOK_SUBMISSAO_URL);
-            
-            const response = await fetch(WEBHOOK_SUBMISSAO_URL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
-            console.log('Response status:', response.status);
-            console.log('Response headers:', response.headers);
-
-            if (!response.ok) {
-                // Se a resposta não for OK (status 4xx, 5xx), lança um erro
-                throw new Error(`Erro ao enviar inscrição: ${response.status} - ${response.statusText}`);
-            }
-
-            const result = await response.json();
-            console.log('Inscrição enviada com sucesso (resposta do webhook):', result);
-
-            // 2. Processamento bem-sucedido do webhook
-            $statusBox.removeClass('status-processing').addClass('status-success');
-            $statusHeading.html('✅ Sucesso!');
-            
-            if (formData.formaPagamento === 'Bolsista Integral') {
-                $statusMessage.text('Sua inscrição como bolsista foi registrada com sucesso. Em breve entraremos em contato para os próximos passos.');
-                $goToPaymentBtn.hide();
-            } else if (result.link) {
-                $statusMessage.text('Sua inscrição foi finalizada com sucesso! Clique abaixo para prosseguir com o pagamento.');
-                $goToPaymentBtn.data('payment-link', result.link).show();
-            } else {
-                // Cenário onde a submissão foi OK, mas o webhook não retornou link de pagamento
-                $statusMessage.text('Inscrição finalizada com sucesso, mas não foi possível obter o link de pagamento. Por favor, entre em contato com a administração do Quintal das Artes.');
-                $goToPaymentBtn.hide();
-            }
-
-        } catch (error) {
-            // 3. Captura de erro (rede, servidor, ou response.ok false)
-            console.error('Erro ao enviar inscrição:', error);
-            $statusBox.removeClass('status-processing status-success').addClass('status-error');
-            $statusHeading.html('❌ Erro!');
-            $statusMessage.text('Ocorreu um erro ao finalizar a inscrição. Por favor, tente novamente ou entre em contato.');
+        if (formData.formaPagamento === 'Bolsista Integral') {
+            $statusMessage.text('Sua inscrição como bolsista foi registrada com sucesso. Em breve entraremos em contato para os próximos passos.');
+            $goToPaymentBtn.hide();
+        } else if (result.link) {
+            $statusMessage.text('Sua inscrição foi finalizada com sucesso! Clique abaixo para prosseguir com o pagamento.');
+            $goToPaymentBtn.data('payment-link', result.link).show();
+        } else {
+            $statusMessage.text('Inscrição finalizada com sucesso, mas não foi possível obter o link de pagamento. Por favor, entre em contato com a administração do Quintal das Artes.');
             $goToPaymentBtn.hide();
         }
+
+    } catch (error) {
+        // 3. Captura de erro (rede, servidor, timeout, ou response.ok false)
+        console.error('Erro ao enviar inscrição:', error);
+        
+        $statusBox.removeClass('status-processing status-success').addClass('status-error');
+        $statusHeading.html('❌ Erro!');
+        
+        // ✅ MENSAGEM ESPECÍFICA PARA TIMEOUT
+        if (error.name === 'AbortError') {
+            $statusMessage.text('A requisição demorou muito para responder. Por favor, verifique sua conexão e tente novamente.');
+        } else {
+            $statusMessage.text('Ocorreu um erro ao finalizar a inscrição. Por favor, tente novamente ou entre em contato.');
+        }
+        
+        $goToPaymentBtn.hide();
+        
+        // ✅ REABILITA O BOTÃO EM CASO DE ERRO
+        $submitBtn.prop('disabled', false).text(originalBtnText);
+        isSubmitting = false;
+        
+    } finally {
+        // ✅ GARANTE QUE A FLAG SEJA RESETADA APENAS EM CASO DE SUCESSO
+        // (em caso de erro, já foi resetada no catch)
+        if ($statusBox.hasClass('status-success')) {
+            // Não reseta isSubmitting em caso de sucesso para evitar reenvios
+            console.log('✅ Submissão concluída com sucesso');
+        }
     }
+}
     
     // Configura todos os event listeners
     function setupEventListeners() {
