@@ -568,7 +568,7 @@ $(document).ready(function() {
     }
     
 // Função para processar a submissão do formulário
-    async function processFormSubmission() {
+async function processFormSubmission() {
     console.log('Iniciando processamento da submissão...');
     
     // ✅ PROTEÇÃO CONTRA MÚLTIPLOS ENVIOS
@@ -652,6 +652,9 @@ $(document).ready(function() {
             $goToPaymentBtn.hide();
         }
 
+        // ✅ ESCONDE O BOTÃO DE SUBMIT APÓS SUCESSO (já que mudamos para tela de sucesso)
+        $submitBtn.hide();
+
     } catch (error) {
         // 3. Captura de erro (rede, servidor, timeout, ou response.ok false)
         console.error('Erro ao enviar inscrição:', error);
@@ -671,6 +674,9 @@ $(document).ready(function() {
         // ✅ REABILITA O BOTÃO EM CASO DE ERRO
         $submitBtn.prop('disabled', false).text(originalBtnText);
         isSubmitting = false;
+        
+        // ✅ VOLTA PARA O PASSO ANTERIOR (passo do resumo) PARA PERMITIR NOVA TENTATIVA
+        showStep(5); // Volta para o passo de resumo financeiro
         
     } finally {
         // ✅ GARANTE QUE A FLAG SEJA RESETADA APENAS EM CASO DE SUCESSO
