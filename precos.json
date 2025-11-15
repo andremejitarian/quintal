@@ -30,6 +30,13 @@
     }
   },
   "cursos": {
+    "artes_segunda_tarde_promo": {
+      "nome": "ARTES // 4 seg 14H-17H // 7-11a // Bia Polidori",
+      "categoria": "curso",
+      "precos": {
+        "avulso": 145
+      }
+    }, 
     "desenho_segunda_manha": {
       "nome": "DESENHO // seg 9H30-11H // 7-10a // José",
       "categoria": "curso",
