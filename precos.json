@@ -6,209 +6,60 @@
       "meses": 1,
       "parcelas": 1,
       "taxaCartaoPercentual": 0.0421
-    },
-    "mensal": {
-      "nome": "Mensal",
-      "descricao": "Pagamento mensal",
-      "meses": 1,
-      "parcelas": 1,
-      "taxaCartaoPercentual": 0.0421
-    },
-    "bimestral": {
-      "nome": "Bimestral", 
-      "descricao": "2 meses com desconto",
-      "meses": 2,
-      "parcelas": 2,
-      "taxaCartaoPercentual": 0.0421
-    },
-    "trimestral": {
-      "nome": "Trimestral",
-      "descricao": "3 meses com maior desconto", 
-      "meses": 3,
-      "parcelas": 3,
-      "taxaCartaoPercentual": 0.0421
     }
   },
   "cursos": {
-    "artes_segunda_tarde_promo": {
-      "nome": "PROMOÇÃO!! ARTES // 4 aulas de segunda 14H-17H // 7-11a // Bia Polidori",
-      "categoria": "curso",
-      "precos": {
-        "mensal": 145
-      }
-    }, 
     "desenho_segunda_manha": {
-      "nome": "DESENHO // seg 9H30-11H // 7-10a // José",
+      "nome": "DESENHO // dia 15/12 // segunda 10-11H // 6-10 anos ",
       "categoria": "curso",
       "precos": {
-        "avulso": 72,
-        "mensal": 230,
-        "bimestral": 220,
-        "trimestral": 215
+        "avulso": 50
       }
     },
-    "desenho_quarta_tarde": {
-      "nome": "DESENHO // qua 16H-17H30 // 10-12a // José",
+    "parkour_segunda_manha": {
+      "nome": "PARKOUR // dia 15/12 // segunda 11h15-12H15 // 6-12 anos ",
       "categoria": "curso",
       "precos": {
-        "avulso": 72,
-        "mensal": 230,
-        "bimestral": 220,
-        "trimestral": 215
+        "avulso": 50
       }
     },
-       "parkour": {
-      "nome": "PARKOUR // 30 de Novembro // sab 15H-17H // 6-12a // Rafa",
+    "artes_segunda_tarde": {
+      "nome": "ARTES // dia 15/12 // segunda 14h-17h // 6-10 anos ",
       "categoria": "curso",
       "precos": {
-        "avulso": 70,
-        "mensal": 70,
-        "bimestral": 70,
-        "trimestral": 70
+        "avulso": 70
       }
     },
-    "trabalhos_manuais_manha": {
-      "nome": "TRABALHOS MANUAIS // qui 9H-11H30 // 6-12a // Betina",
+    "musicalizacao_terca_manha": {
+      "nome": "MUSICALIZAÇÃO // dia 16/12 // terça 9h30-11h // 6-10 anos ",
       "categoria": "curso",
       "precos": {
-        "avulso": 72,
-        "mensal": 260,
-        "bimestral": 250,
-        "trimestral": 245
+        "avulso": 60
       }
     },
-    "artes_extendido_segunda_tarde": {
-      "nome": "ARTES extendido // seg 14H-17H // 7-10a // Bia",
+    "artesbrincar_terca_tarde": {
+      "nome": "ARTES + BRINCAR // dia 16/12 // terça 13h-17h30 // 3-7 anos ",
       "categoria": "curso",
       "precos": {
-        "avulso": 72,
-        "mensal": 290,
-        "bimestral": 280,
-        "trimestral": 275
+        "avulso": 70
       }
     },
-    "artes_quarta_tarde": {
-      "nome": "ARTES // qua 14H-15H30 // 6-11a // Maria Fernanda",
+    "artesbrincar_quarta_manha": {
+      "nome": "ARTES + BRINCAR // dia 17/12 // quarta 8h30-11h30 // 3-7 anos ",
       "categoria": "curso",
       "precos": {
-        "avulso": 72,
-        "mensal": 230,
-        "bimestral": 220,
-        "trimestral": 215
+        "avulso": 65
       }
     },
-    "marcenaria_segunda_manha": {
-      "nome": "MARCENARIA // seg 9H30-11H // 7-11a // David",
+    "parkout_quarta_tarde": {
+      "nome": "PARKOUR // dia 17/12 // quarta 16h-17h // 6-12 anos ",
       "categoria": "curso",
       "precos": {
-        "avulso": 72,
-        "mensal": 260,
-        "bimestral": 250,
-        "trimestral": 245
+        "avulso": 50
       }
     },
-    "marcenaria_quarta_tarde": {
-      "nome": "MARCENARIA // qua 14H-15H30 // 7-11a // David",
-      "categoria": "curso",
-      "precos": {
-        "avulso": 72,
-        "mensal": 260,
-        "bimestral": 250,
-        "trimestral": 245
-      }
-    },
-    "modelagem_sexta_manha": {
-      "nome": "MODELAGEM // sex 10H-11H30 // 6-9a // Marta",
-      "categoria": "curso",
-      "precos": {
-        "avulso": 72,
-        "mensal": 260,
-        "bimestral": 255,
-        "trimestral": 250
-      }
-    },
-    "modelagem_sexta_tarde_14": {
-      "nome": "MODELAGEM // sex 14H-15H30 // 6-10a // Marta",
-      "categoria": "curso",
-      "precos": {
-        "avulso": 72,
-        "mensal": 260,
-        "bimestral": 255,
-        "trimestral": 250
-      }
-    },
-    "modelagem_sexta_tarde_16": {
-      "nome": "MODELAGEM // sex 16H-17H30 // 6-10a // Marta",
-      "categoria": "curso",
-      "precos": {
-        "avulso": 72,
-        "mensal": 260,
-        "bimestral": 255,
-        "trimestral": 250
-      }
-    },
-    "ingles_sexta_tarde_14": {
-      "nome": "INGLÊS // sex 14H-15H30 // 6-10a // Lucas",
-      "categoria": "curso",
-      "precos": {
-        "avulso": 72,
-        "mensal": 260,
-        "bimestral": 255,
-        "trimestral": 250
-      }
-    },
-    "ingles_sexta_tarde_16": {
-      "nome": "INGLÊS // sex 16H-17H30 // 6-10a // Lucas",
-      "categoria": "curso",
-      "precos": {
-        "avulso": 72,
-        "mensal": 260,
-        "bimestral": 255,
-        "trimestral": 250
-      }
-    }
   },
   "contraturnos": {
-    "contraturno_tarde_1x": {
-      "nome": "CONTRATURNO TARDE (ter e/ou qui) 1x/semana 13H-17h30",
-      "categoria": "contraturno",
-      "precos": {
-        "avulso": 72,
-        "mensal": 290,
-        "bimestral": 285,
-        "trimestral": 280
-      }
-    },
-    "contraturno_tarde_2x": {
-      "nome": "CONTRATURNO TARDE (ter e/ou qui) 2x/semana 13H-17h30",
-      "categoria": "contraturno",
-      "precos": {
-        "avulso": 72,
-        "mensal": 520,
-        "bimestral": 515,
-        "trimestral": 510
-      }
-    },
-    "contraturno_manha_1x": {
-      "nome": "CONTRATURNO MANHÃ (qua e/ou sex) 1x/semana 8h30-11h30",
-      "categoria": "contraturno",
-      "precos": {
-        "avulso": 72,
-        "mensal": 250,
-        "bimestral": 245,
-        "trimestral": 240
-      }
-    },
-    "contraturno_manha_2x": {
-      "nome": "CONTRATURNO MANHÃ (qua e/ou sex) 2x/semana 8h30-11h30",
-      "categoria": "contraturno",
-      "precos": {
-        "avulso": 72,
-        "mensal": 480,
-        "bimestral": 475,
-        "trimestral": 470
-      }
-    }
   },
   "descontos": {
     "irmaos": {
