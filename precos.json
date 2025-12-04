@@ -10,112 +10,112 @@
   },
   "cursos": {
     "desenho_segunda_manha": {
-      "nome": "DESENHO // dia 15/12 // segunda 10-11H // 6-10 anos ",
+      "nome": "DESENHO // dia 15/dez // segunda 10-11H // 6-10 anos ",
       "categoria": "curso",
       "precos": {
         "avulso": 50
       }
     },
     "parkour_segunda_manha": {
-      "nome": "PARKOUR // dia 15/12 // segunda 11h15-12H15 // 6-12 anos ",
+      "nome": "PARKOUR // dia 15/dez // segunda 11h15-12H15 // 6-12 anos ",
       "categoria": "curso",
       "precos": {
         "avulso": 50
       }
     },
     "artes_segunda_tarde": {
-      "nome": "ARTES // dia 15/12 // segunda 14h-17h // 6-10 anos ",
+      "nome": "ARTES // dia 15/dez // segunda 14h-17h // 6-10 anos ",
       "categoria": "curso",
       "precos": {
         "avulso": 70
       }
     },
     "musicalizacao_terca_manha": {
-      "nome": "MUSICALIZAÇÃO // dia 16/12 // terça 9h30-11h // 6-10 anos ",
+      "nome": "MUSICALIZAÇÃO // dia 16/dez // terça 9h30-11h // 6-10 anos ",
       "categoria": "curso",
       "precos": {
         "avulso": 60
       }
     },
     "artesbrincar_terca_tarde": {
-      "nome": "ARTES + BRINCAR // dia 16/12 // terça 13h-17h30 // 3-7 anos ",
+      "nome": "ARTES + BRINCAR // dia 16/dez // terça 13h-17h30 // 3-7 anos ",
       "categoria": "curso",
       "precos": {
         "avulso": 70
       }
     },
     "artesbrincar_quarta_manha": {
-      "nome": "ARTES + BRINCAR // dia 17/12 // quarta 8h30-11h30 // 3-7 anos ",
+      "nome": "ARTES + BRINCAR // dia 17/dez // quarta 8h30-11h30 // 3-7 anos ",
       "categoria": "curso",
       "precos": {
         "avulso": 65
       }
     },
     "parkout_quarta_tarde": {
-      "nome": "PARKOUR // dia 17/12 // quarta 16h-17h // 6-12 anos ",
+      "nome": "PARKOUR // dia 17/dez // quarta 16h-17h // 6-12 anos ",
       "categoria": "curso",
       "precos": {
         "avulso": 50
       }
     },
     "musicalizacao_quinta_manha": {
-      "nome": "MUSICALIZAÇÃO // dia 18/12 // quinta 9h30-11h // 6-10 anos ",
+      "nome": "MUSICALIZAÇÃO // dia 18/dez // quinta 9h30-11h // 6-10 anos ",
       "categoria": "curso",
       "precos": {
         "avulso": 60
       }
     },
     "artesbrincar_quinta_tarde": {
-      "nome": "ARTES + BRINCAR // dia 18/12 // quinta 13h-17h30 // 3-7 anos ",
+      "nome": "ARTES + BRINCAR // dia 18/dez // quinta 13h-17h30 // 3-7 anos ",
       "categoria": "curso",
       "precos": {
         "avulso": 70
       }
     },
     "artesbrincar_sexta_manha": {
-      "nome": "ARTES + BRINCAR // dia 19/12 // sexta 8h30-11h30 // 3-7 anos ",
+      "nome": "ARTES + BRINCAR // dia 19/dez // sexta 8h30-11h30 // 3-7 anos ",
       "categoria": "curso",
       "precos": {
         "avulso": 65
       }
     },
     "jogosinglesturma1_sexta_tarde": {
-      "nome": "JOGOS > INLGES TURMA 1 // dia 19/12 // sexta 14h-15h30 // 6-10 anos ",
+      "nome": "JOGOS > INLGES TURMA 1 // dia 19/dez // sexta 14h-15h30 // 6-10 anos ",
       "categoria": "curso",
       "precos": {
         "avulso": 60
       }
     },
     "jogosinglesturma2_sexta_tarde": {
-      "nome": "JOGOS > INLGES TURMA 2 // dia 19/12 // sexta 16h-17h30 // 6-10 anos ",
+      "nome": "JOGOS > INLGES TURMA 2 // dia 19/dez // sexta 16h-17h30 // 6-10 anos ",
       "categoria": "curso",
       "precos": {
         "avulso": 60
       }
     },
     "modelagemargilaturma1_sexta_tarde": {
-      "nome": "MODELAGEM EM ARGILA TURMA 1 // dia 19/12 // sexta 14h-15h30 // 6-10 anos ",
+      "nome": "MODELAGEM EM ARGILA TURMA 1 // dia 19/dez // sexta 14h-15h30 // 6-10 anos ",
       "categoria": "curso",
       "precos": {
         "avulso": 65
       }
     },
     "modelagemargilaturma2_sexta_tarde": {
-      "nome": "MODELAGEM EM ARGILA TURMA 2 // dia 19/12 // sexta 16h-17h30 // 6-10 anos ",
+      "nome": "MODELAGEM EM ARGILA TURMA 2 // dia 19/dez // sexta 16h-17h30 // 6-10 anos ",
       "categoria": "curso",
       "precos": {
         "avulso": 65
       }
     },
     "artesbricar_sabado_manha": {
-      "nome": "ARTES + BRINCAR // dia 20/12 // sábado 8h30-11h30 // 3-7 anos ",
+      "nome": "ARTES + BRINCAR // dia 20/dez // sábado 8h30-11h30 // 3-7 anos ",
       "categoria": "curso",
       "precos": {
         "avulso": 65
       }
     },
     "parkour_sabado_tarde": {
-      "nome": "PARKOUR // dia 20/12 // sábado 16h-17h // 6-12 anos ",
+      "nome": "PARKOUR // dia 20/dez // sábado 16h-17h // 6-12 anos ",
       "categoria": "curso",
       "precos": {
         "avulso": 50
