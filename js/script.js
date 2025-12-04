@@ -214,7 +214,7 @@ $(document).ready(function() {
         // Função para criar checkboxes
         function createCheckboxes(courseList, categoryContainer) {
             courseList.forEach(course => {
-                const referencePrice = course.precos.mensal;
+                const referencePrice = course.precos.avulso;
                 const uniqueId = `course-${course.id}-${apprenticeNumber}`;
                 const checkboxHtml = `
                     <div class="checkbox-group">
