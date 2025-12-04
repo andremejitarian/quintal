@@ -404,7 +404,7 @@ $(document).ready(function() {
         let apprenticesCount = 0;
 
         // OBTENHA O PLANO DE PAGAMENTO AQUI, ANTES DE ITERAR PELOS APRENDIZES
-        const paymentPlan = $('#planoPagamento').val() || 'mensal'; // 'mensal' como padrão
+        const paymentPlan = $('#planoPagamento').val() || 'avulso'; // 'avulso' como padrão
 
         $('#apprenticesContainer .apprentice-group:not(.template)').each(function() {
             const $group = $(this);
