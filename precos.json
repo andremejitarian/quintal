@@ -58,6 +58,27 @@
         "avulso": 50
       }
     },
+    "musicalizacao_quinta_manha": {
+      "nome": "MUSICALIZAÇÃO // dia 18/12 // quinta 9h30-11h // 6-10 anos ",
+      "categoria": "curso",
+      "precos": {
+        "avulso": 60
+      }
+    },
+    "artesbrincar_quinta_tarde": {
+      "nome": "ARTES + BRINCAR // dia 18/12 // quinta 13h-17h30 // 3-7 anos ",
+      "categoria": "curso",
+      "precos": {
+        "avulso": 70
+      }
+    },
+    "artesbrincar_sexta_manha": {
+      "nome": "ARTES + BRINCAR // dia 19/12 // sexta 8h30-11h30 // 3-7 anos ",
+      "categoria": "curso",
+      "precos": {
+        "avulso": 65
+      }
+    },
   },
   "contraturnos": {
   },
