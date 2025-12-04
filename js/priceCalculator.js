@@ -155,8 +155,38 @@ function calculateTotal(selectedCourseIds, paymentPlanKey, couponCode, paymentMe
     let couponAmount = 0;
     let cardFee = 0;
 
-    // 2 e 3. Aplicar desconto de múltiplos cursos OU desconto de irmãos (não cumulativos)
-    if (selectedCourseIds.length > 1 || apprenticesCount > 1) {
+    // 2 e 3. Aplicar desconto de quantidade de cursos OU desconto de múltiplos cursos OU desconto de irmãos
+    // Prioridade: desconto_quantidade_cursos (se ativo) > multiplos_cursos > irmaos
+    const quantityDiscountConfig = pricesData.descontos.desconto_quantidade_cursos;
+    
+    if (quantityDiscountConfig && quantityDiscountConfig.ativo && selectedCourseIds.length >= 2) {
+        // Aplicar desconto de quantidade de cursos (sobre o total)
+        let discountPercentage = 0;
+        let discountDescription = '';
+        
+        if (selectedCourseIds.length === 2) {
+            discountPercentage = quantityDiscountConfig.regras["2"].percentual;
+            discountDescription = quantityDiscountConfig.regras["2"].descricao;
+        } else if (selectedCourseIds.length === 3) {
+            discountPercentage = quantityDiscountConfig.regras["3"].percentual;
+            discountDescription = quantityDiscountConfig.regras["3"].descricao;
+        } else if (selectedCourseIds.length >= 4) {
+            discountPercentage = quantityDiscountConfig.regras["4_ou_mais"].percentual;
+            discountDescription = quantityDiscountConfig.regras["4_ou_mais"].descricao;
+        }
+        
+        if (discountPercentage > 0) {
+            const quantityDiscount = currentTotal * discountPercentage;
+            discountAmount += quantityDiscount;
+            currentTotal -= quantityDiscount;
+            appliedDiscounts.push({
+                type: 'desconto_quantidade_cursos',
+                name: `${quantityDiscountConfig.nome} (${discountDescription})`,
+                amount: quantityDiscount
+            });
+        }
+    } else if (selectedCourseIds.length > 1 || apprenticesCount > 1) {
+        // Lógica original: desconto de múltiplos cursos ou irmãos
         const lowestPrice = Math.min(...coursesDetails.map(c => c.price));
 
         if (selectedCourseIds.length > 1) {
