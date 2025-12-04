@@ -79,6 +79,48 @@
         "avulso": 65
       }
     },
+    "jogosinglesturma1_sexta_tarde": {
+      "nome": "JOGOS > INLGES TURMA 1 // dia 19/12 // sexta 14h-15h30 // 6-10 anos ",
+      "categoria": "curso",
+      "precos": {
+        "avulso": 60
+      }
+    },
+    "jogosinglesturma2_sexta_tarde": {
+      "nome": "JOGOS > INLGES TURMA 2 // dia 19/12 // sexta 16h-17h30 // 6-10 anos ",
+      "categoria": "curso",
+      "precos": {
+        "avulso": 60
+      }
+    },
+    "modelagemargilaturma1_sexta_tarde": {
+      "nome": "MODELAGEM EM ARGILA TURMA 1 // dia 19/12 // sexta 14h-15h30 // 6-10 anos ",
+      "categoria": "curso",
+      "precos": {
+        "avulso": 65
+      }
+    },
+    "modelagemargilaturma2_sexta_tarde": {
+      "nome": "MODELAGEM EM ARGILA TURMA 2 // dia 19/12 // sexta 16h-17h30 // 6-10 anos ",
+      "categoria": "curso",
+      "precos": {
+        "avulso": 65
+      }
+    },
+    "artesbricar_sabado_manha": {
+      "nome": "ARTES + BRINCAR // dia 20/12 // sábado 8h30-11h30 // 3-7 anos ",
+      "categoria": "curso",
+      "precos": {
+        "avulso": 65
+      }
+    },
+    "parkour_sabado_tarde": {
+      "nome": "PARKOUR // dia 20/12 // sábado 16h-17h // 6-12 anos ",
+      "categoria": "curso",
+      "precos": {
+        "avulso": 50
+      }
+    }
   },
   "contraturnos": {
   },
