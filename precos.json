@@ -231,7 +231,47 @@
       }
     },    
   },
-  "contraturnos": {
+"contraturnos": {
+    "contraturno_tarde_1x": {
+      "nome": "CONTRATURNO TARDE (ter e/ou qui) 1x/semana 13H-17h30",
+      "categoria": "contraturno",
+      "precos": {
+        "avulso": 72,
+        "mensal": 290,
+        "bimestral": 285,
+        "trimestral": 280
+      }
+    },
+    "contraturno_tarde_2x": {
+      "nome": "CONTRATURNO TARDE (ter e/ou qui) 2x/semana 13H-17h30",
+      "categoria": "contraturno",
+      "precos": {
+        "avulso": 72,
+        "mensal": 520,
+        "bimestral": 515,
+        "trimestral": 510
+      }
+    },
+    "contraturno_manha_1x": {
+      "nome": "CONTRATURNO MANHÃ (qua e/ou sex) 1x/semana 8h30-11h30",
+      "categoria": "contraturno",
+      "precos": {
+        "avulso": 72,
+        "mensal": 250,
+        "bimestral": 245,
+        "trimestral": 240
+      }
+    },
+    "contraturno_manha_2x": {
+      "nome": "CONTRATURNO MANHÃ (qua e/ou sex) 2x/semana 8h30-11h30",
+      "categoria": "contraturno",
+      "precos": {
+        "avulso": 72,
+        "mensal": 480,
+        "bimestral": 475,
+        "trimestral": 470
+      }
+    }
   },
   "descontos": {
     "irmaos": {
@@ -245,24 +285,6 @@
       "descricao": "Desconto para filhos de professores",
       "percentual": 0.10,
       "observacao": "Não cumulativo com outros descontos"
-    },
-    "bolsistas": {
-      "nome": "Bolsistas",
-      "descricao": "Desconto para bolsistas",
-      "percentual": 0.10,
-      "observacao": "Não cumulativo com outros descontos"
-    },
-    "bolsistas100": {
-      "nome": "Bolsista Integral",
-      "descricao": "Desconto para bolsistas",
-      "percentual": 1.00,
-      "observacao": "Não cumulativo com outros descontos"
-    },
-    "multiplos_cursos": {
-      "nome": "Múltiplos cursos",
-      "descricao": "Desconto no curso de menor valor ao fazer mais de um curso",
-      "percentual": 0.10,
-      "observacao": "Aplicado no curso de menor valor. Não cumulativo com outros descontos"
     },
     "desconto_quantidade_cursos": {
       "ativo": true,
@@ -278,8 +300,8 @@
           "descricao": "15% de desconto para 3 cursos"
         },
         "4_ou_mais": {
-          "percentual": 0.20,
-          "descricao": "20% de desconto para 4 ou mais cursos"
+          "percentual": 0.15,
+          "descricao": "15% de desconto para 4 ou mais cursos"
         }
       },
       "observacao": "Desconto aplicado sobre o valor total. Não cumulativo com desconto de múltiplos cursos."
