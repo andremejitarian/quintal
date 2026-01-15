@@ -30,6 +30,13 @@
     }
   },
   "cursos": {
+    "aula_experimental": {
+      "nome": "AULA EXPERIMENTAL",
+      "categoria": "curso",
+      "precos": {
+        "avulso": 50
+      }
+    },
     "desenho_segunda_manha": {
       "nome": "DESENHO // segunda 8h30-9H45 // 7-11 anos",
       "categoria": "curso",
