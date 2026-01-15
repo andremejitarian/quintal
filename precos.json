@@ -52,9 +52,9 @@
       "categoria": "curso",
       "precos": {
         "avulso": 76,
-        "mensal": 210,
-        "semestral": 189,
-        "anual": 178.50
+        "mensal": 250,
+        "semestral": 225,
+        "anual": 212.50
       }
     },
     "artes_segunda_tarde": {
@@ -102,9 +102,9 @@
       "categoria": "curso",
       "precos": {
         "avulso": 76,
-        "mensal": 210,
-        "semestral": 189,
-        "anual": 178.50
+        "mensal": 250,
+        "semestral": 225,
+        "anual": 212.50
       }
     },
     "trabalhos_manuais_quarta_manha": {
@@ -112,9 +112,9 @@
       "categoria": "curso",
       "precos": {
         "avulso": 76,
-        "mensal": 210,
-        "semestral": 189,
-        "anual": 178.50
+        "mensal": 250,
+        "semestral": 225,
+        "anual": 212.50
       }
     },
     "musicalizacao_quarta_tarde": {
@@ -122,9 +122,9 @@
       "categoria": "curso",
       "precos": {
         "avulso": 76,
-        "mensal": 210,
-        "semestral": 189,
-        "anual": 178.50
+        "mensal": 250,
+        "semestral": 225,
+        "anual": 212.50
       }
     },
     "trabalhos_manuais_quarta_tarde": {
@@ -132,9 +132,9 @@
       "categoria": "curso",
       "precos": {
         "avulso": 76,
-        "mensal": 210,
-        "semestral": 189,
-        "anual": 178.50
+        "mensal": 250,
+        "semestral": 225,
+        "anual": 212.50
       }
     },
      "desenho_quarta_tarde": {
@@ -172,9 +172,9 @@
       "categoria": "curso",
       "precos": {
         "avulso": 76,
-        "mensal": 210,
-        "semestral": 189,
-        "anual": 178.50
+        "mensal": 250,
+        "semestral": 225,
+        "anual": 212.50
       }
     },
     "modelagem_argila_sexta_manha": {
