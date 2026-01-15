@@ -89,7 +89,7 @@
         "semestral": 300,
         "anual": 250
       }
-    },    
+    },
     "musicalizacao_quarta_manha": {
       "nome": "MUSICALIZAÇÃO // quarta 8h30-9H45 // 7-11 anos",
       "categoria": "curso",
@@ -169,7 +169,7 @@
         "semestral": 300,
         "anual": 250
       }
-    },    
+    },
     "modelagem_argila_sexta_manha": {
       "nome": "MODELAGEM EM ARGILA // sexta 10h-11h15 // 7-11 anos",
       "categoria": "curso",
@@ -199,7 +199,7 @@
         "semestral": 300,
         "anual": 250
       }
-    },    
+    },
      "modelagem_argila_t1_sexta_tarde": {
       "nome": "MODELAGEM EM ARGILA // sexta 14h-15h30 // 6-10 anos",
       "categoria": "curso",
@@ -229,7 +229,7 @@
         "semestral": 300,
         "anual": 250  
       }
-    },    
+    },
   },
 "contraturnos": {
     "contraturno_tarde_1x": {
