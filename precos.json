@@ -62,9 +62,9 @@
       "categoria": "curso",
       "precos": {
         "avulso": 85,
-        "mensal": 295,
-        "semestral": 265.50,
-        "anual": 250.75
+        "mensal": 310,
+        "semestral": 279,
+        "anual": 263.50
       }
     },
     "artes_brincar_terca_manha": {
@@ -92,9 +92,9 @@
       "categoria": "curso",
       "precos": {
         "avulso": 76,
-        "mensal": 265,
-        "semestral": 238.50,
-        "anual": 225.25
+        "mensal": 280,
+        "semestral": 252,
+        "anual": 238
       }
     },
     "musicalizacao_quarta_manha": {
@@ -192,9 +192,9 @@
       "categoria": "curso",
       "precos": {
         "avulso": 76,
-        "mensal": 265,
-        "semestral": 238.50,
-        "anual": 225.25
+        "mensal": 280,
+        "semestral": 252,
+        "anual": 238
       }
     },
     "jogos_ingles_t2_sexta_tarde": {
@@ -202,9 +202,9 @@
       "categoria": "curso",
       "precos": {
         "avulso": 76,
-        "mensal": 265,
-        "semestral": 238.50,
-        "anual": 225.25
+        "mensal": 280,
+        "semestral": 252,
+        "anual": 238
       }
     },
      "modelagem_argila_t1_sexta_tarde": {
