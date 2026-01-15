@@ -1,10 +1,24 @@
 {
   "planos": {
     "avulso": {
-      "nome": "Diaria avulsa",
+      "nome": "Aula avulsa",
       "descricao": "Pagamento por diária",
       "meses": 1,
       "parcelas": 1,
+      "taxaCartaoPercentual": 0.0421
+    },
+    "mensal": {
+      "nome": "Mensal",
+      "descricao": "Pagamento mensal",
+      "meses": 1,
+      "parcelas": 1,
+      "taxaCartaoPercentual": 0.0421
+    },
+    "semestral": {
+      "nome": "Semestral",
+      "descricao": "6 meses de aulas", 
+      "meses": 6,
+      "parcelas": 6,
       "taxaCartaoPercentual": 0.0421
     }
   },
