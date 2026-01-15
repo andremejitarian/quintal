@@ -67,26 +67,6 @@
         "anual": 263.50
       }
     },
-    "artes_brincar_terca_manha": {
-      "nome": "ARTES + BRINCAR // terca 8h-11H30 // 3-7 anos",
-      "categoria": "curso",
-      "precos": {
-        "avulso": 82,
-        "mensal": 285,
-        "semestral": 256.50,
-        "anual": 242.25
-      }
-    },
-    "artes_brincar_terca_tarde": {
-      "nome": "ARTES + BRINCAR // terca 13h-17H30 // 3-7 anos",
-      "categoria": "curso",
-      "precos": {
-        "avulso": 86,
-        "mensal": 300,
-        "semestral": 270,
-        "anual": 255
-      }
-    },
     "jogos_ingles_terca_tarde": {
       "nome": "JOGOS > INGLÊS // terca 14h-15H30 // 6-10 anos",
       "categoria": "curso",
@@ -145,26 +125,6 @@
         "mensal": 265,
         "semestral": 238.50,
         "anual": 225.25
-      }
-    },
-     "artes_brincar_quinta_manha": {
-      "nome": "ARTES + BRINCAR // quinta 8h-11h30 // 3-7 anos",
-      "categoria": "curso",
-      "precos": {
-        "avulso": 82,
-        "mensal": 285,
-        "semestral": 256.50,
-        "anual": 242.25
-      }
-    },
-     "artes_brincar_quinta_tarde": {
-      "nome": "ARTES + BRINCAR // quinta 13h-17h30 // 3-7 anos",
-      "categoria": "curso",
-      "precos": {
-        "avulso": 86,
-        "mensal": 300,
-        "semestral": 270,
-        "anual": 255
       }
     },
     "musicalizacao_sexta_manha": {
@@ -239,44 +199,44 @@
     }
   },
 "contraturnos": {
-    "contraturno_tarde_1x": {
-      "nome": "CONTRATURNO TARDE (ter e/ou qui) 1x/semana 13H-17h30",
-      "categoria": "contraturno",
+    "artes_brincar_terca_manha": {
+      "nome": "ARTES + BRINCAR // terca 8h-11H30 // 3-7 anos",
+      "categoria": "curso",
       "precos": {
-        "avulso": 72,
-        "mensal": 290,
-        "bimestral": 285,
-        "trimestral": 280
+        "avulso": 82,
+        "mensal": 285,
+        "semestral": 256.50,
+        "anual": 242.25
       }
     },
-    "contraturno_tarde_2x": {
-      "nome": "CONTRATURNO TARDE (ter e/ou qui) 2x/semana 13H-17h30",
-      "categoria": "contraturno",
+      "artes_brincar_terca_tarde": {
+      "nome": "ARTES + BRINCAR // terca 13h-17H30 // 3-7 anos",
+      "categoria": "curso",
       "precos": {
-        "avulso": 72,
-        "mensal": 520,
-        "bimestral": 515,
-        "trimestral": 510
+        "avulso": 86,
+        "mensal": 300,
+        "semestral": 270,
+        "anual": 255
       }
     },
-    "contraturno_manha_1x": {
-      "nome": "CONTRATURNO MANHÃ (qua e/ou sex) 1x/semana 8h30-11h30",
-      "categoria": "contraturno",
+       "artes_brincar_quinta_manha": {
+      "nome": "ARTES + BRINCAR // quinta 8h-11h30 // 3-7 anos",
+      "categoria": "curso",
       "precos": {
-        "avulso": 72,
-        "mensal": 250,
-        "bimestral": 245,
-        "trimestral": 240
+        "avulso": 82,
+        "mensal": 285,
+        "semestral": 256.50,
+        "anual": 242.25
       }
     },
-    "contraturno_manha_2x": {
-      "nome": "CONTRATURNO MANHÃ (qua e/ou sex) 2x/semana 8h30-11h30",
-      "categoria": "contraturno",
+     "artes_brincar_quinta_tarde": {
+      "nome": "ARTES + BRINCAR // quinta 13h-17h30 // 3-7 anos",
+      "categoria": "curso",
       "precos": {
-        "avulso": 72,
-        "mensal": 480,
-        "bimestral": 475,
-        "trimestral": 470
+        "avulso": 86,
+        "mensal": 300,
+        "semestral": 270,
+        "anual": 255
       }
     }
   },
