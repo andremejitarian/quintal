@@ -31,7 +31,7 @@
   },
   "cursos": {
     "desenho_segunda_manha": {
-      "nome": "DESENHO // segunda 9h30-11H // 8-11 anos",
+      "nome": "DESENHO // segunda 8h30-9H45 // 7-11 anos",
       "categoria": "curso",
       "precos": {
         "avulso": 50,
@@ -41,7 +41,7 @@
       }
     },
     "trabalhos_manuais_segunda_manha": {
-      "nome": "TRABALHOS MANUAIS // segunda 9h30-11H // 7-11 anos",
+      "nome": "TRABALHOS MANUAIS // segunda 10h-11h15 // 7-11 anos",
       "categoria": "curso",
       "precos": {
         "avulso": 50,
@@ -80,8 +80,18 @@
         "anual": 250
       }
     },
+    "jogos_ingles_terca_tarde": {
+      "nome": "JOGOS > INGLÊS // terca 14h-15H30 // 6-10 anos",
+      "categoria": "curso",
+      "precos": {
+        "avulso": 50,
+        "mensal": 400,
+        "semestral": 300,
+        "anual": 250
+      }
+    },    
     "musicalizacao_quarta_manha": {
-      "nome": "MUSICALIZAÇÃO // quarta 9h30-11H // 6-12 anos",
+      "nome": "MUSICALIZAÇÃO // quarta 8h30-9H45 // 7-11 anos",
       "categoria": "curso",
       "precos": {
         "avulso": 50,
@@ -91,17 +101,7 @@
       }
     },
     "trabalhos_manuais_quarta_manha": {
-      "nome": "TRABALHOS MANUAIS // quarta 9h30-11H // 7-11 anos",
-      "categoria": "curso",
-      "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
-      }
-    },    
-    "modelagem_argila_t1_quarta_tarde": {
-      "nome": "MODELAGEM EM ARGILA // quarta 14h-15h30 // 6-10 anos",
+      "nome": "TRABALHOS MANUAIS // quarta 10h-11h15 // 7-11 anos",
       "categoria": "curso",
       "precos": {
         "avulso": 50,
@@ -110,8 +110,8 @@
         "anual": 250
       }
     },
-    "modelagem_argila_t2_quarta_tarde": {
-      "nome": "MODELAGEM EM ARGILA // quarta 16h-17h30 // 6-10 anos",
+    "musicalizacao_quarta_tarde": {
+      "nome": "MUSICALIZAÇÃO // quarta 14h-15h30 // 7-11 anos",
       "categoria": "curso",
       "precos": {
         "avulso": 50,
@@ -120,16 +120,6 @@
         "anual": 250
       }
     },
-    "jogos_ingles_quarta_tarde": {
-      "nome": "JOGOS > INGLÊS // quarta 14h-15h30 // 6-10 anos",
-      "categoria": "curso",
-      "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
-      }
-    },    
     "trabalhos_manuais_quarta_tarde": {
       "nome": "TRABALHOS MANUAIS // quarta 16h-17h30 // 6-10 anos",
       "categoria": "curso",
@@ -139,8 +129,18 @@
         "semestral": 300,
         "anual": 250
       }
-    }, 
-    "artes_brincar_quinta_manha": {
+    },
+     "desenho_quarta_tarde": {
+      "nome": "DESENHO // quarta 18h-19h // 10-12 anos",
+      "categoria": "curso",
+      "precos": {
+        "avulso": 50,
+        "mensal": 400,
+        "semestral": 300,
+        "anual": 250
+      }
+    },
+     "artes_brincar_quinta_manha": {
       "nome": "ARTES + BRINCAR // quinta 8h-11h30 // 3-7 anos",
       "categoria": "curso",
       "precos": {
@@ -150,7 +150,7 @@
         "anual": 250
       }
     },
-    "artes_brincar_quinta_tarde": {
+     "artes_brincar_quinta_tarde": {
       "nome": "ARTES + BRINCAR // quinta 13h-17h30 // 3-7 anos",
       "categoria": "curso",
       "precos": {
@@ -161,7 +161,17 @@
       }
     },
     "musicalizacao_sexta_manha": {
-      "nome": "MUSICALIZAÇÃO // sexta 9h30-11H // 6-12 anos",
+      "nome": "MUSICALIZAÇÃO // sexta 8h30-9H45 // 7-11 anos",
+      "categoria": "curso",
+      "precos": {
+        "avulso": 50,
+        "mensal": 400,
+        "semestral": 300,
+        "anual": 250
+      }
+    },    
+    "modelagem_argila_sexta_manha": {
+      "nome": "MODELAGEM EM ARGILA // sexta 10h-11h15 // 7-11 anos",
       "categoria": "curso",
       "precos": {
         "avulso": 50,
@@ -170,16 +180,6 @@
         "anual": 250
       }
     },
-     "modelagem_argila_sexta_manha": {
-      "nome": "MODELAGEM EM ARGILA // sexta 9h30-11H // 8-11 anos",
-      "categoria": "curso",
-      "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
-      }
-    },   
     "jogos_ingles_t1_sexta_tarde": {
       "nome": "JOGOS > INGLÊS // sexta 14h-15h30 // 6-10 anos",
       "categoria": "curso",
@@ -189,7 +189,7 @@
         "semestral": 300,
         "anual": 250
       }
-    }, 
+    },
     "jogos_ingles_t2_sexta_tarde": {
       "nome": "JOGOS > INGLÊS // sexta 16h-17h30 // 6-10 anos",
       "categoria": "curso",
@@ -197,11 +197,11 @@
         "avulso": 50,
         "mensal": 400,
         "semestral": 300,
-        "anual": 250 
+        "anual": 250
       }
-    }, 
-    "trabalhos_manuais_sexta_tarde": {
-      "nome": "TRABALHOS MANUAIS // sexta 14h-15h30 // 6-10 anos",
+    },    
+     "modelagem_argila_t1_sexta_tarde": {
+      "nome": "MODELAGEM EM ARGILA // sexta 14h-15h30 // 6-10 anos",
       "categoria": "curso",
       "precos": {
         "avulso": 50,
@@ -210,8 +210,8 @@
         "anual": 250
       }
     },
-    "musicalizacao_sexta_tarde": {
-      "nome": "MUSICALIZAÇÃO // sexta 16h-17h30 // 6-12 anos",
+     "modelagem_argila_t2_sexta_tarde": {
+      "nome": "MODELAGEM EM ARGILA // sexta 16h-17h30 // 6-10 anos",
       "categoria": "curso",
       "precos": {
         "avulso": 50,
