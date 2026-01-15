@@ -201,7 +201,7 @@
 "contraturnos": {
     "artes_brincar_terca_manha": {
       "nome": "ARTES + BRINCAR // terca 8h-11H30 // 3-7 anos",
-      "categoria": "curso",
+      "categoria": "contraturnos",
       "precos": {
         "avulso": 82,
         "mensal": 285,
@@ -211,7 +211,7 @@
     },
       "artes_brincar_terca_tarde": {
       "nome": "ARTES + BRINCAR // terca 13h-17H30 // 3-7 anos",
-      "categoria": "curso",
+      "categoria": "contraturnos",
       "precos": {
         "avulso": 86,
         "mensal": 300,
@@ -221,7 +221,7 @@
     },
        "artes_brincar_quinta_manha": {
       "nome": "ARTES + BRINCAR // quinta 8h-11h30 // 3-7 anos",
-      "categoria": "curso",
+      "categoria": "contraturnos",
       "precos": {
         "avulso": 82,
         "mensal": 285,
@@ -231,7 +231,7 @@
     },
      "artes_brincar_quinta_tarde": {
       "nome": "ARTES + BRINCAR // quinta 13h-17h30 // 3-7 anos",
-      "categoria": "curso",
+      "categoria": "contraturnos",
       "precos": {
         "avulso": 86,
         "mensal": 300,
