@@ -34,200 +34,200 @@
       "nome": "DESENHO // segunda 8h30-9H45 // 7-11 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 75,
+        "mensal": 265,
+        "semestral": 238.50,
+        "anual": 225.25
       }
     },
     "trabalhos_manuais_segunda_manha": {
       "nome": "TRABALHOS MANUAIS // segunda 10h-11h15 // 7-11 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 76,
+        "mensal": 265,
+        "semestral": 238.50,
+        "anual": 225.25
       }
     },
     "artes_segunda_tarde": {
       "nome": "ARTES // segunda 14h-17H // 6-10 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 85,
+        "mensal": 295,
+        "semestral": 265.50,
+        "anual": 250.75
       }
     },
     "artes_brincar_terca_manha": {
       "nome": "ARTES + BRINCAR // terca 8h-11H30 // 3-7 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 82,
+        "mensal": 285,
+        "semestral": 256.50,
+        "anual": 242.25
       }
     },
     "artes_brincar_terca_tarde": {
       "nome": "ARTES + BRINCAR // terca 13h-17H30 // 3-7 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 86,
+        "mensal": 300,
+        "semestral": 270,
+        "anual": 255
       }
     },
     "jogos_ingles_terca_tarde": {
       "nome": "JOGOS > INGLÊS // terca 14h-15H30 // 6-10 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 76,
+        "mensal": 265,
+        "semestral": 238.50,
+        "anual": 225.25
       }
     },
     "musicalizacao_quarta_manha": {
       "nome": "MUSICALIZAÇÃO // quarta 8h30-9H45 // 7-11 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 73,
+        "mensal": 255,
+        "semestral": 229.50,
+        "anual": 216.75
       }
     },
     "trabalhos_manuais_quarta_manha": {
       "nome": "TRABALHOS MANUAIS // quarta 10h-11h15 // 7-11 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 76,
+        "mensal": 265,
+        "semestral": 238.50,
+        "anual": 225.25
       }
     },
     "musicalizacao_quarta_tarde": {
       "nome": "MUSICALIZAÇÃO // quarta 14h-15h30 // 7-11 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 73,
+        "mensal": 255,
+        "semestral": 229.50,
+        "anual": 216.75
       }
     },
     "trabalhos_manuais_quarta_tarde": {
       "nome": "TRABALHOS MANUAIS // quarta 16h-17h30 // 6-10 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 76,
+        "mensal": 265,
+        "semestral": 238.50,
+        "anual": 225.25
       }
     },
      "desenho_quarta_tarde": {
       "nome": "DESENHO // quarta 18h-19h // 10-12 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 75,
+        "mensal": 265,
+        "semestral": 238.50,
+        "anual": 225.25
       }
     },
      "artes_brincar_quinta_manha": {
       "nome": "ARTES + BRINCAR // quinta 8h-11h30 // 3-7 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 82,
+        "mensal": 285,
+        "semestral": 256.50,
+        "anual": 242.25
       }
     },
      "artes_brincar_quinta_tarde": {
       "nome": "ARTES + BRINCAR // quinta 13h-17h30 // 3-7 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 86,
+        "mensal": 300,
+        "semestral": 270,
+        "anual": 255
       }
     },
     "musicalizacao_sexta_manha": {
       "nome": "MUSICALIZAÇÃO // sexta 8h30-9H45 // 7-11 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 73,
+        "mensal": 255,
+        "semestral": 229.50,
+        "anual": 216.75
       }
     },
     "modelagem_argila_sexta_manha": {
       "nome": "MODELAGEM EM ARGILA // sexta 10h-11h15 // 7-11 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 76,
+        "mensal": 265,
+        "semestral": 238.50,
+        "anual": 225.25
       }
     },
     "jogos_ingles_t1_sexta_tarde": {
       "nome": "JOGOS > INGLÊS // sexta 14h-15h30 // 6-10 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 76,
+        "mensal": 265,
+        "semestral": 238.50,
+        "anual": 225.25
       }
     },
     "jogos_ingles_t2_sexta_tarde": {
       "nome": "JOGOS > INGLÊS // sexta 16h-17h30 // 6-10 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 76,
+        "mensal": 265,
+        "semestral": 238.50,
+        "anual": 225.25
       }
     },
      "modelagem_argila_t1_sexta_tarde": {
       "nome": "MODELAGEM EM ARGILA // sexta 14h-15h30 // 6-10 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 76,
+        "mensal": 265,
+        "semestral": 238.50,
+        "anual": 225.25
       }
     },
      "modelagem_argila_t2_sexta_tarde": {
       "nome": "MODELAGEM EM ARGILA // sexta 16h-17h30 // 6-10 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250
+        "avulso": 76,
+        "mensal": 265,
+        "semestral": 238.50,
+        "anual": 225.25
       }
     },
     "parkour_sabado_tarde": {
       "nome": "PARKOUR // sábado 16h-17h30 // 6-12 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 50,
-        "mensal": 400,
-        "semestral": 300,
-        "anual": 250  
+        "avulso": 70,
+        "mensal": 200,
+        "semestral": 180,
+        "anual": 170  
       }
     }
   },
