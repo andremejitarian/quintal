@@ -52,9 +52,9 @@
       "categoria": "curso",
       "precos": {
         "avulso": 76,
-        "mensal": 265,
-        "semestral": 238.50,
-        "anual": 225.25
+        "mensal": 210,
+        "semestral": 189,
+        "anual": 178.50
       }
     },
     "artes_segunda_tarde": {
@@ -101,10 +101,10 @@
       "nome": "MUSICALIZAÇÃO // quarta 8h30-9H45 // 7-11 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 73,
-        "mensal": 255,
-        "semestral": 229.50,
-        "anual": 216.75
+        "avulso": 76,
+        "mensal": 210,
+        "semestral": 189,
+        "anual": 178.50
       }
     },
     "trabalhos_manuais_quarta_manha": {
@@ -112,19 +112,19 @@
       "categoria": "curso",
       "precos": {
         "avulso": 76,
-        "mensal": 265,
-        "semestral": 238.50,
-        "anual": 225.25
+        "mensal": 210,
+        "semestral": 189,
+        "anual": 178.50
       }
     },
     "musicalizacao_quarta_tarde": {
       "nome": "MUSICALIZAÇÃO // quarta 14h-15h30 // 7-11 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 73,
-        "mensal": 255,
-        "semestral": 229.50,
-        "anual": 216.75
+        "avulso": 76,
+        "mensal": 210,
+        "semestral": 189,
+        "anual": 178.50
       }
     },
     "trabalhos_manuais_quarta_tarde": {
@@ -132,9 +132,9 @@
       "categoria": "curso",
       "precos": {
         "avulso": 76,
-        "mensal": 265,
-        "semestral": 238.50,
-        "anual": 225.25
+        "mensal": 210,
+        "semestral": 189,
+        "anual": 178.50
       }
     },
      "desenho_quarta_tarde": {
@@ -171,10 +171,10 @@
       "nome": "MUSICALIZAÇÃO // sexta 8h30-9H45 // 7-11 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 73,
-        "mensal": 255,
-        "semestral": 229.50,
-        "anual": 216.75
+        "avulso": 76,
+        "mensal": 210,
+        "semestral": 189,
+        "anual": 178.50
       }
     },
     "modelagem_argila_sexta_manha": {
