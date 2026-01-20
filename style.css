@@ -10,9 +10,11 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #ffffff; /* Fundo suave da paleta */
+    background-color: #ffffff;
+    /* Fundo suave da paleta */
     min-height: 100vh;
-    color: #5B5B5B; /* Texto escuro da paleta */
+    color: #5B5B5B;
+    /* Texto escuro da paleta */
     line-height: 1.6;
 }
 
@@ -105,14 +107,16 @@ body {
 }
 
 .whatsapp-link {
-    color: #FAC622; /* Amarelo de destaque */
+    color: #FAC622;
+    /* Amarelo de destaque */
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
 }
 
 .whatsapp-link:hover {
-    color: #FCD406; /* Amarelo de destaque alternativo */
+    color: #FCD406;
+    /* Amarelo de destaque alternativo */
     text-decoration: underline;
 }
 
@@ -127,8 +131,15 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .step-title {
@@ -283,7 +294,7 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     transition: left 0.5s;
 }
 
@@ -429,7 +440,8 @@ body {
     padding: 8px 0;
     font-size: 1rem;
     color: #5B5B5B;
-    margin-bottom: 25px; /* Espaço entre diferentes aprendizes */
+    margin-bottom: 25px;
+    /* Espaço entre diferentes aprendizes */
 }
 
 /* Remove margem do último aprendiz */
@@ -448,8 +460,10 @@ body {
 /* Cada curso em linha separada com indentação */
 .course-details-line {
     display: block;
-    margin-bottom: 5px; /* Espaço entre cada curso */
-    padding-left: 20px; /* Indentação para mostrar que é subcategoria */
+    margin-bottom: 5px;
+    /* Espaço entre cada curso */
+    padding-left: 20px;
+    /* Indentação para mostrar que é subcategoria */
     line-height: 1.4;
 }
 
@@ -469,6 +483,29 @@ body {
     margin-top: 20px;
     padding-top: 20px;
     border-top: 3px solid #FAC622;
+    margin-bottom: 10px;
+}
+
+.price-notes {
+    background-color: #fff9e6;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #FAC622;
+    margin-top: 15px;
+}
+
+.price-notes p {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 5px !important;
+    display: block !important;
+    text-align: left;
+    line-height: 1.4;
+}
+
+.price-notes p:last-child {
+    margin-bottom: 0 !important;
+    font-weight: 500;
 }
 
 /* Termos e condições */
@@ -493,55 +530,55 @@ body {
     .banner-top {
         height: 200px;
     }
-    
+
     .main-container {
         margin-top: -100px;
         padding: 0 15px 30px;
     }
-    
+
     .logo-circle {
         width: 100px;
         height: 100px;
         top: -50px;
         left: 20px;
     }
-    
+
     .form-card {
         padding: 25px 20px;
         padding-top: 70px;
         border-radius: 12px;
     }
-    
+
     .form-title {
         font-size: 2rem;
     }
-    
+
     .step-title {
         font-size: 1.6rem;
     }
-    
+
     .form-navigation {
         flex-direction: column;
         gap: 15px;
     }
-    
+
     #step-1 .form-navigation {
         justify-content: center;
     }
-    
+
     .btn {
         width: 100%;
         justify-content: center;
     }
-    
+
     .checkbox-group-container {
         grid-template-columns: 1fr;
     }
-    
+
     .apprentice-group {
         padding: 20px;
     }
-    
+
     .summary-section {
         padding: 20px;
     }
@@ -551,28 +588,28 @@ body {
     .banner-top {
         height: 150px;
     }
-    
+
     .main-container {
         margin-top: -75px;
         padding: 0 10px 20px;
     }
-    
+
     .logo-circle {
         width: 80px;
         height: 80px;
         top: -40px;
         left: 15px;
     }
-    
+
     .form-card {
         padding: 20px 15px;
         padding-top: 60px;
     }
-    
+
     .form-title {
         font-size: 1.8rem;
     }
-    
+
     .form-group input,
     .form-group select,
     .form-group textarea {
@@ -596,6 +633,7 @@ body {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -723,7 +761,8 @@ body {
     padding: 30px;
     border-radius: 16px;
     margin-bottom: 30px;
-    text-align: center; /* Centraliza o texto dentro da caixa */
+    text-align: center;
+    /* Centraliza o texto dentro da caixa */
     /* Transições suaves para a mudança de estado */
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
@@ -731,75 +770,89 @@ body {
 .status-box #statusHeading,
 .status-box #statusMessage {
     margin-bottom: 20px;
-    font-size: 1.1rem; /* Mantém o tamanho da fonte do parágrafo */
+    font-size: 1.1rem;
+    /* Mantém o tamanho da fonte do parágrafo */
     transition: color 0.3s ease;
 }
 
 /* Estado de processamento/carregamento */
 .status-box.status-processing {
-    background: #e0f2f7; /* Um azul claro */
-    border: 2px solid #a7d9ed; /* Borda azul clara */
+    background: #e0f2f7;
+    /* Um azul claro */
+    border: 2px solid #a7d9ed;
+    /* Borda azul clara */
 }
+
 .status-box.status-processing #statusHeading,
 .status-box.status-processing #statusMessage {
-    color: #007bff; /* Texto azul */
+    color: #007bff;
+    /* Texto azul */
 }
 
 /* Estado de sucesso */
 .status-box.status-success {
-    background: linear-gradient(135deg, #d4edda, #c3e6cb); /* Verde claro */
-    border: 2px solid #28a745; /* Borda verde */
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    /* Verde claro */
+    border: 2px solid #28a745;
+    /* Borda verde */
 }
+
 .status-box.status-success #statusHeading,
 .status-box.status-success #statusMessage {
-    color: #155724; /* Texto verde escuro */
+    color: #155724;
+    /* Texto verde escuro */
 }
 
 /* Estado de erro */
 .status-box.status-error {
-    background: linear-gradient(135deg, #f8d7da, #f5c6cb); /* Vermelho claro */
-    border: 2px solid #dc3545; /* Borda vermelha */
+    background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+    /* Vermelho claro */
+    border: 2px solid #dc3545;
+    /* Borda vermelha */
 }
+
 .status-box.status-error #statusHeading,
 .status-box.status-error #statusMessage {
-    color: #721c24; /* Texto vermelho escuro */
+    color: #721c24;
+    /* Texto vermelho escuro */
 }
 
 /* Ajuste para o h3 dentro da caixa, para não ser muito grande se não for o título da seção */
 .status-box h3 {
-    font-size: 1.8rem; /* Um pouco menor que o h2 da seção, mas ainda proeminente */
+    font-size: 1.8rem;
+    /* Um pouco menor que o h2 da seção, mas ainda proeminente */
     margin-top: 0;
 }
 
 /* Estilo para o spinner de carregamento (se você estiver usando Bootstrap) */
 .spinner-border {
-  display: inline-block;
-  width: 1rem;
-  height: 1rem;
-  vertical-align: text-bottom;
-  border: .125em solid currentColor;
-  border-right-color: transparent;
-  border-radius: 50%;
-  -webkit-animation: .75s linear infinite spinner-border;
-  animation: .75s linear infinite spinner-border;
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    vertical-align: text-bottom;
+    border: .125em solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    -webkit-animation: .75s linear infinite spinner-border;
+    animation: .75s linear infinite spinner-border;
 }
 
 @-webkit-keyframes spinner-border {
-  to {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes spinner-border {
-  to {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }
 
 .spinner-border-sm {
-  width: .8rem;
-  height: .8rem;
-  border-width: .1em;
+    width: .8rem;
+    height: .8rem;
+    border-width: .1em;
 }
