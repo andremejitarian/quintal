@@ -662,14 +662,37 @@ body {
     font-weight: 600;
 }
 
-.course-price {
+.course-plans-prices {
+    font-size: 0.85rem;
     color: #666;
-    font-size: 0.9em;
+    margin-top: 5px;
     font-weight: normal;
+    line-height: 1.5;
+}
+
+.plan-price-tag {
+    display: inline-block;
+}
+
+.plan-price-tag strong {
+    color: #5b5b5b;
+    font-weight: 600;
+}
+
+.price-separator {
+    color: #ccc;
+    margin: 0 4px;
+}
+
+.checkbox-group label {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .courses-checkboxes .checkbox-group {
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    align-items: flex-start;
 }
 
 

@@ -214,8 +214,16 @@ $(document).ready(function() {
         // Função para criar checkboxes
         function createCheckboxes(courseList, categoryContainer) {
             courseList.forEach(course => {
-                const referencePrice = course.precos.avulso;
                 const uniqueId = `course-${course.id}-${apprenticeNumber}`;
+                
+                // Gerar lista de todos os planos e preços disponíveis para o curso
+                const pricesHtml = Object.entries(course.precos)
+                    .map(([planKey, price]) => {
+                        const planInfo = priceCalculator.getPaymentPlanInfo(planKey);
+                        const planName = planInfo ? planInfo.nome : planKey;
+                        return `<span class="plan-price-tag"><strong>${planName}:</strong> ${priceCalculator.formatCurrency(price)}</span>`;
+                    }).join(' <span class="price-separator">|</span> ');
+
                 const checkboxHtml = `
                     <div class="checkbox-group">
                         <input type="checkbox" 
@@ -223,8 +231,8 @@ $(document).ready(function() {
                                value="${course.id}" 
                                id="${uniqueId}">
                         <label for="${uniqueId}">
-                            ${course.nome} 
-                            <span class="course-price">(a partir de ${priceCalculator.formatCurrency(referencePrice)})</span>
+                            <strong>${course.nome}</strong>
+                            <div class="course-plans-prices">${pricesHtml}</div>
                         </label>
                     </div>
                 `;
