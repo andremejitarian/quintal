@@ -32,27 +32,27 @@ async function loadPriceData() {
  */
 function getAllCourses() {
     if (!pricesData) return [];
-    
+
     const allCourses = [];
-    
+
     // Adiciona cursos
     Object.keys(pricesData.cursos).forEach(courseId => {
         allCourses.push({
+            ...pricesData.cursos[courseId],
             id: courseId,
-            categoria: 'curso', // Adiciona categoria para facilitar a separação
-            ...pricesData.cursos[courseId]
+            categoria: 'curso' // Normaliza para singular para facilitar a separação
         });
     });
-    
+
     // Adiciona contraturnos
     Object.keys(pricesData.contraturnos).forEach(courseId => {
         allCourses.push({
+            ...pricesData.contraturnos[courseId],
             id: courseId,
-            categoria: 'contraturno', // Adiciona categoria para facilitar a separação
-            ...pricesData.contraturnos[courseId]
+            categoria: 'contraturno' // Normaliza para singular para facilitar a separação
         });
     });
-    
+
     return allCourses;
 }
 
@@ -64,17 +64,17 @@ function getAllCourses() {
  */
 function getCoursePrice(courseId, planKey) {
     if (!pricesData) return 0;
-    
+
     // Verifica se é um curso
     if (pricesData.cursos[courseId]) {
         return pricesData.cursos[courseId].precos[planKey] || 0;
     }
-    
+
     // Verifica se é um contraturno
     if (pricesData.contraturnos[courseId]) {
         return pricesData.contraturnos[courseId].precos[planKey] || 0;
     }
-    
+
     return 0;
 }
 
@@ -85,7 +85,7 @@ function getCoursePrice(courseId, planKey) {
  */
 function getCourseById(courseId) {
     if (!pricesData) return null;
-    
+
     // Verifica se é um curso
     if (pricesData.cursos[courseId]) {
         return {
@@ -94,7 +94,7 @@ function getCourseById(courseId) {
             ...pricesData.cursos[courseId]
         };
     }
-    
+
     // Verifica se é um contraturno
     if (pricesData.contraturnos[courseId]) {
         return {
@@ -103,7 +103,7 @@ function getCourseById(courseId) {
             ...pricesData.contraturnos[courseId]
         };
     }
-    
+
     return null;
 }
 
@@ -119,11 +119,11 @@ function getCourseById(courseId) {
 function calculateTotal(selectedCourseIds, paymentPlanKey, couponCode, paymentMethod = '', apprenticesCount = 1) {
     if (!pricesData || !couponsData) {
         console.error("Dados de preços ou cupons não carregados.");
-        return { 
-            subtotal: 0, 
-            discountAmount: 0, 
-            couponAmount: 0, 
-            cardFee: 0, 
+        return {
+            subtotal: 0,
+            discountAmount: 0,
+            couponAmount: 0,
+            cardFee: 0,
             total: 0,
             coursesDetails: [],
             appliedDiscounts: []
@@ -139,7 +139,7 @@ function calculateTotal(selectedCourseIds, paymentPlanKey, couponCode, paymentMe
         selectedCourseIds.forEach(courseId => {
             const price = getCoursePrice(courseId, paymentPlanKey);
             const courseName = getCourseNameById(courseId);
-            
+
             subtotal += price;
             coursesDetails.push({
                 id: courseId,
@@ -158,12 +158,12 @@ function calculateTotal(selectedCourseIds, paymentPlanKey, couponCode, paymentMe
     // 2 e 3. Aplicar desconto de quantidade de cursos OU desconto de múltiplos cursos OU desconto de irmãos
     // Prioridade: desconto_quantidade_cursos (se ativo) > multiplos_cursos > irmaos
     const quantityDiscountConfig = pricesData.descontos.desconto_quantidade_cursos;
-    
+
     if (quantityDiscountConfig && quantityDiscountConfig.ativo && selectedCourseIds.length >= 2) {
         // Aplicar desconto de quantidade de cursos (sobre o total)
         let discountPercentage = 0;
         let discountDescription = '';
-        
+
         if (selectedCourseIds.length === 2) {
             discountPercentage = quantityDiscountConfig.regras["2"].percentual;
             discountDescription = quantityDiscountConfig.regras["2"].descricao;
@@ -174,7 +174,7 @@ function calculateTotal(selectedCourseIds, paymentPlanKey, couponCode, paymentMe
             discountPercentage = quantityDiscountConfig.regras["4_ou_mais"].percentual;
             discountDescription = quantityDiscountConfig.regras["4_ou_mais"].descricao;
         }
-        
+
         if (discountPercentage > 0) {
             const quantityDiscount = currentTotal * discountPercentage;
             discountAmount += quantityDiscount;
@@ -272,15 +272,15 @@ function calculateTotal(selectedCourseIds, paymentPlanKey, couponCode, paymentMe
  */
 function getCourseNameById(courseId) {
     if (!pricesData) return courseId;
-    
+
     if (pricesData.cursos[courseId]) {
         return pricesData.cursos[courseId].nome;
     }
-    
+
     if (pricesData.contraturnos[courseId]) {
         return pricesData.contraturnos[courseId].nome;
     }
-    
+
     return courseId;
 }
 
@@ -291,7 +291,7 @@ function getCourseNameById(courseId) {
  */
 function getPaymentPlanInfo(planKey) {
     if (!pricesData || !pricesData.planos[planKey]) return null;
-    
+
     return pricesData.planos[planKey];
 }
 
@@ -302,7 +302,7 @@ function getPaymentPlanInfo(planKey) {
  */
 function isValidCoupon(couponCode) {
     if (!couponsData || !couponCode) return false;
-    
+
     const normalizedCouponCode = couponCode.toUpperCase();
     return !!couponsData[normalizedCouponCode];
 }
@@ -314,7 +314,7 @@ function isValidCoupon(couponCode) {
  */
 function getCouponInfo(couponCode) {
     if (!couponsData || !couponCode) return null;
-    
+
     const normalizedCouponCode = couponCode.toUpperCase();
     return couponsData[normalizedCouponCode] || null;
 }
@@ -327,10 +327,10 @@ function getCouponInfo(couponCode) {
 function formatCurrency(value) {
     // Converte para número se for string
     const numValue = typeof value === 'string' ? parseFloat(value) : value;
-    
+
     // Verifica se é um número válido
     if (isNaN(numValue)) return 'R$ 0,00';
-    
+
     // Formata o número usando toLocaleString para padrão brasileiro
     return numValue.toLocaleString('pt-BR', {
         style: 'currency',
@@ -346,7 +346,7 @@ function formatCurrency(value) {
  */
 function getAllPaymentPlans() {
     if (!pricesData || !pricesData.planos) return {};
-    
+
     return pricesData.planos;
 }
 
@@ -358,12 +358,12 @@ function getAllPaymentPlans() {
  */
 function calculatePlanDiscount(planKey, courseId) {
     if (!pricesData || planKey === 'mensal') return 0;
-    
+
     const monthlyPrice = getCoursePrice(courseId, 'mensal');
     const planPrice = getCoursePrice(courseId, planKey);
-    
+
     if (monthlyPrice === 0) return 0;
-    
+
     return (monthlyPrice - planPrice) / monthlyPrice;
 }
 
@@ -372,25 +372,25 @@ window.priceCalculator = {
     // Funções principais
     loadPriceData,
     calculateTotal,
-    
+
     // Funções de consulta de cursos
     getAllCourses,
     getCoursePrice,
     getCourseNameById,
     getCourseById,
-    
+
     // Funções de planos de pagamento
     getPaymentPlanInfo,
     getAllPaymentPlans,
     calculatePlanDiscount,
-    
+
     // Funções de cupons
     isValidCoupon,
     getCouponInfo,
-    
+
     // Funções utilitárias
     formatCurrency,
-    
+
     // Getters para dados brutos
     getPricesData: () => pricesData,
     getCouponsData: () => couponsData
