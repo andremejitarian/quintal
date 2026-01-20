@@ -428,8 +428,17 @@ $(document).ready(function () {
                 // Pegar o preço do curso para o plano de pagamento selecionado
                 const coursePrice = priceCalculator.getCoursePrice(courseId, paymentPlan);
 
-                // Usar a função formatCurrency para formatar o preço
-                coursesDetails.push(`${courseName} (${priceCalculator.formatCurrency(coursePrice)})`);
+                if (coursePrice === 0) {
+                    coursesDetails.push(`
+                        <span class="course-summary-error">
+                            <strong>${courseName}:</strong> 
+                            <span class="warning-text">Incompatível com o plano ${priceCalculator.getPaymentPlanInfo(paymentPlan)?.nome || paymentPlan}</span>
+                            <div class="incompatibility-msg">Este curso não pode ser adquirido com o plano de pagamento selecionado, neste caso será necessário inscrever os cursos separadamente.</div>
+                        </span>
+                    `);
+                } else {
+                    coursesDetails.push(`<strong>${courseName}:</strong> ${priceCalculator.formatCurrency(coursePrice)}`);
+                }
             });
 
             apprenticesSummary.push({

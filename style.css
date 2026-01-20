@@ -754,6 +754,32 @@ body {
     font-weight: 600;
 }
 
+.course-summary-error {
+    display: block;
+    margin-top: 5px;
+    padding: 10px;
+    background-color: #fff2f2;
+    border-radius: 8px;
+    border-left: 4px solid #e74c3c;
+}
+
+.warning-text {
+    color: #e74c3c;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.incompatibility-msg {
+    font-size: 0.85rem;
+    color: #856404;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    padding: 8px;
+    border-radius: 4px;
+    margin-top: 5px;
+    font-weight: normal;
+}
+
 /* style.css */
 
 /* Estilos base para a caixa de status */
