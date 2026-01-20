@@ -16,16 +16,30 @@
     },
     "semestral": {
       "nome": "Semestral",
-      "descricao": "6 meses de aulas", 
+      "descricao": "6 meses de aulas",
       "meses": 6,
       "parcelas": 6,
       "taxaCartaoPercentual": 0.0421
     },
     "anual": {
       "nome": "Anual",
-      "descricao": "12 meses de aulas", 
+      "descricao": "12 meses de aulas",
       "meses": 12,
       "parcelas": 12,
+      "taxaCartaoPercentual": 0.0421
+    },
+    "4_aulas": {
+      "nome": "Pacote 4 aulas",
+      "descricao": "Direito a 4 aulas",
+      "meses": 1,
+      "parcelas": 1,
+      "taxaCartaoPercentual": 0.0421
+    },
+    "8_aulas": {
+      "nome": "Pacote 8 aulas",
+      "descricao": "Direito a 8 aulas",
+      "meses": 1,
+      "parcelas": 1,
       "taxaCartaoPercentual": 0.0421
     }
   },
@@ -117,7 +131,7 @@
         "anual": 212.50
       }
     },
-     "desenho_quarta_tarde": {
+    "desenho_quarta_tarde": {
       "nome": "DESENHO // quarta 18h-19h // 10-12 anos",
       "categoria": "curso",
       "precos": {
@@ -167,7 +181,7 @@
         "anual": 238
       }
     },
-     "modelagem_argila_t1_sexta_tarde": {
+    "modelagem_argila_t1_sexta_tarde": {
       "nome": "MODELAGEM EM ARGILA // sexta 14h-15h30 // 6-10 anos",
       "categoria": "curso",
       "precos": {
@@ -177,7 +191,7 @@
         "anual": 225.25
       }
     },
-     "modelagem_argila_t2_sexta_tarde": {
+    "modelagem_argila_t2_sexta_tarde": {
       "nome": "MODELAGEM EM ARGILA // sexta 16h-17h30 // 6-10 anos",
       "categoria": "curso",
       "precos": {
@@ -191,14 +205,13 @@
       "nome": "PARKOUR // sábado 16h-17h30 // 6-12 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 70,
-        "mensal": 200,
-        "semestral": 180,
-        "anual": 170  
+        "avulso": 76,
+        "4_aulas": 304,
+        "8_aulas": 608
       }
     }
   },
-"contraturnos": {
+  "contraturnos": {
     "artes_brincar_terca_manha": {
       "nome": "ARTES + BRINCAR // terca 8h-11H30 // 3-7 anos",
       "categoria": "contraturnos",
@@ -209,7 +222,7 @@
         "anual": 242.25
       }
     },
-      "artes_brincar_terca_tarde": {
+    "artes_brincar_terca_tarde": {
       "nome": "ARTES + BRINCAR // terca 13h-17H30 // 3-7 anos",
       "categoria": "contraturnos",
       "precos": {
@@ -219,7 +232,7 @@
         "anual": 255
       }
     },
-       "artes_brincar_quinta_manha": {
+    "artes_brincar_quinta_manha": {
       "nome": "ARTES + BRINCAR // quinta 8h-11h30 // 3-7 anos",
       "categoria": "contraturnos",
       "precos": {
@@ -229,7 +242,7 @@
         "anual": 242.25
       }
     },
-     "artes_brincar_quinta_tarde": {
+    "artes_brincar_quinta_tarde": {
       "nome": "ARTES + BRINCAR // quinta 13h-17h30 // 3-7 anos",
       "categoria": "contraturnos",
       "precos": {

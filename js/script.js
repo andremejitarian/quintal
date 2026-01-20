@@ -2,7 +2,7 @@
 
 let isSubmitting = false;
 
-$(document).ready(function() {
+$(document).ready(function () {
     let currentStep = 1; // Inicia no primeiro passo (bem-vindo)
     const totalSteps = 4; // Contando os passos de dados (1 a 4)
     let apprenticeCounter = 0; // Para dar IDs únicos aos aprendizes
@@ -101,7 +101,7 @@ $(document).ready(function() {
     function validateApprenticesCourses($apprenticeGroup) {
         const $checkedCourses = $apprenticeGroup.find('.course-checkbox:checked');
         const $errorDiv = $apprenticeGroup.find('.courses-selection').siblings('.error-message');
-        
+
         if ($checkedCourses.length === 0) {
             $errorDiv.text('Selecione pelo menos um curso.').show();
             return false;
@@ -114,7 +114,7 @@ $(document).ready(function() {
     // Obtém cursos selecionados para um aprendiz
     function getSelectedCourses($apprenticeGroup) {
         const selectedCourses = [];
-        $apprenticeGroup.find('.course-checkbox:checked').each(function() {
+        $apprenticeGroup.find('.course-checkbox:checked').each(function () {
             selectedCourses.push($(this).val());
         });
         return selectedCourses;
@@ -161,7 +161,7 @@ $(document).ready(function() {
                 return false;
             }
 
-            $apprenticeGroups.each(function() {
+            $apprenticeGroups.each(function () {
                 const $group = $(this);
                 // Validar campos de cada aprendiz
                 isValid = validateField($group.find('.nomeAprendiz'), null, 'Nome do aprendiz é obrigatório.') && isValid;
@@ -190,7 +190,7 @@ $(document).ready(function() {
 
             // Forma de Pagamento
             isValid = validateField($('#formaPagamento'), null, 'Selecione a forma de pagamento.') && isValid;
-            
+
             // Dia de Vencimento só é obrigatório se for PIX/Boleto
             if ($('#formaPagamento').val() === 'PIX/Boleto') {
                 isValid = validateField($('#diaVencimento'), null, 'Selecione o dia de vencimento.') && isValid;
@@ -203,19 +203,19 @@ $(document).ready(function() {
     function populateCourseSelection($container) {
         const allCourses = priceCalculator.getAllCourses();
         const apprenticeNumber = $container.closest('.apprentice-group').find('.apprentice-number').text();
-        
+
         // Limpa containers existentes
         $container.find('.courses-checkboxes').empty();
-        
+
         // Separa cursos e contraturnos
         const cursos = allCourses.filter(c => c.categoria === 'curso');
         const contraturnos = allCourses.filter(c => c.categoria === 'contraturno');
-        
+
         // Função para criar checkboxes
         function createCheckboxes(courseList, categoryContainer) {
             courseList.forEach(course => {
                 const uniqueId = `course-${course.id}-${apprenticeNumber}`;
-                
+
                 // Gerar lista de todos os planos e preços disponíveis para o curso
                 const pricesHtml = Object.entries(course.precos)
                     .map(([planKey, price]) => {
@@ -239,7 +239,7 @@ $(document).ready(function() {
                 categoryContainer.append(checkboxHtml);
             });
         }
-        
+
         // Cria checkboxes para cada categoria
         createCheckboxes(cursos, $container.find('[data-category="curso"]'));
         createCheckboxes(contraturnos, $container.find('[data-category="contraturno"]'));
@@ -251,7 +251,7 @@ $(document).ready(function() {
         const $newApprentice = $('.apprentice-group.template').clone().removeClass('template').removeAttr('style');
 
         // Atualiza IDs e 'for' dos labels para serem únicos
-        $newApprentice.find('label, input, select, textarea').each(function() {
+        $newApprentice.find('label, input, select, textarea').each(function () {
             const $this = $(this);
             const oldId = $this.attr('id');
             if (oldId) {
@@ -261,19 +261,19 @@ $(document).ready(function() {
                 $(`label[for="${oldId}"]`).attr('for', newId);
             }
         });
-        
+
         // Atualiza o número do aprendiz no título
         $newApprentice.find('.apprentice-number').text(apprenticeCounter);
 
         // Popula a seleção de cursos com checkboxes
         const $courseContainer = $newApprentice.find('.courses-selection');
         populateCourseSelection($courseContainer);
-        
+
         // Mostra o botão de remover se houver mais de um aprendiz
         if ($('#apprenticesContainer .apprentice-group:not(.template)').length > 0) {
             $newApprentice.find('.btn-remove-apprentice').show();
         }
-        
+
         $('#apprenticesContainer').append($newApprentice);
 
         // Preenche dados se houver prefilledData para este aprendiz
@@ -302,7 +302,7 @@ $(document).ready(function() {
         if (animate) {
             $newApprentice.hide().fadeIn(300);
         }
-        
+
         // Atualiza a visibilidade dos botões de remover
         updateRemoveButtons();
         updateSummaryAndTotal(); // Recalcula após adicionar
@@ -311,10 +311,10 @@ $(document).ready(function() {
     // Remove um grupo de aprendiz
     function removeApprentice(button) {
         if ($('#apprenticesContainer .apprentice-group:not(.template)').length > 1) {
-            $(button).closest('.apprentice-group').fadeOut(300, function() {
+            $(button).closest('.apprentice-group').fadeOut(300, function () {
                 $(this).remove();
                 // Reordena os números dos aprendizes visíveis
-                $('#apprenticesContainer .apprentice-group:not(.template)').each(function(index) {
+                $('#apprenticesContainer .apprentice-group:not(.template)').each(function (index) {
                     $(this).find('.apprentice-number').text(index + 1);
                 });
                 updateRemoveButtons();
@@ -360,11 +360,11 @@ $(document).ready(function() {
         };
 
         // Coleta "Como soube"
-        $('input[name="comoSoube"]:checked').each(function() {
+        $('input[name="comoSoube"]:checked').each(function () {
             formData.comoSoube.push($(this).val());
         });
 
-        $('#apprenticesContainer .apprentice-group:not(.template)').each(function() {
+        $('#apprenticesContainer .apprentice-group:not(.template)').each(function () {
             const $group = $(this);
             const aprendiz = {
                 nome: $group.find('.nomeAprendiz').val(),
@@ -382,7 +382,7 @@ $(document).ready(function() {
         const priceDetails = updateSummaryAndTotal();
         formData.resumoFinanceiro = priceDetails;
         formData.valor_calculado_total = priceDetails.total;
-        
+
         // Serializa os detalhes da matrícula para o campo oculto
         // Converte os IDs dos cursos para os nomes dos cursos para o backend
         const detalhesAprendizesParaBackend = formData.aprendizes.map(ap => {
@@ -414,27 +414,27 @@ $(document).ready(function() {
         // OBTENHA O PLANO DE PAGAMENTO AQUI, ANTES DE ITERAR PELOS APRENDIZES
         const paymentPlan = $('#planoPagamento').val() || 'avulso'; // 'avulso' como padrão
 
-        $('#apprenticesContainer .apprentice-group:not(.template)').each(function() {
+        $('#apprenticesContainer .apprentice-group:not(.template)').each(function () {
             const $group = $(this);
             const apprenticeName = $group.find('.nomeAprendiz').val() || `Aprendiz ${$group.find('.apprentice-number').text()}`;
             const selectedCourseIds = getSelectedCourses($group);
-            
+
             apprenticesCount++;
-            
+
             const coursesDetails = [];
             selectedCourseIds.forEach(courseId => {
                 allSelectedCourseIds.push(courseId);
                 const courseName = priceCalculator.getCourseNameById(courseId);
                 // Pegar o preço do curso para o plano de pagamento selecionado
-                const coursePrice = priceCalculator.getCoursePrice(courseId, paymentPlan); 
-                
+                const coursePrice = priceCalculator.getCoursePrice(courseId, paymentPlan);
+
                 // Usar a função formatCurrency para formatar o preço
                 coursesDetails.push(`${courseName} (${priceCalculator.formatCurrency(coursePrice)})`);
             });
-            
-            apprenticesSummary.push({ 
-                name: apprenticeName, 
-                courses: coursesDetails 
+
+            apprenticesSummary.push({
+                name: apprenticeName,
+                courses: coursesDetails
             });
         });
 
@@ -442,9 +442,9 @@ $(document).ready(function() {
         const paymentMethod = $('#formaPagamento').val();
 
         const totals = priceCalculator.calculateTotal(
-            allSelectedCourseIds, 
-            paymentPlan, 
-            couponCode, 
+            allSelectedCourseIds,
+            paymentPlan,
+            couponCode,
             paymentMethod,
             apprenticesCount
         );
@@ -473,7 +473,7 @@ $(document).ready(function() {
 
         // Atualiza os campos ocultos
         $('#valor_calculado_total').val(totals.total.toFixed(2));
-        
+
         return totals;
     }
 
@@ -551,6 +551,7 @@ $(document).ready(function() {
 
         // Plano de Pagamento
         if (data.planoPagamento) {
+            updatePaymentPlanOptions();
             $('#planoPagamento').val(data.planoPagamento);
         }
 
@@ -561,7 +562,7 @@ $(document).ready(function() {
                 $('#diaVencimento').val(data.diaVencimento);
             }
         }
-        
+
         // Cupom Code
         if (data.couponCode) {
             $('#cupomCode').val(data.couponCode).trigger('input');
@@ -574,134 +575,134 @@ $(document).ready(function() {
 
         updateSummaryAndTotal(); // Atualiza o resumo com os dados pré-preenchidos
     }
-    
-// Função para processar a submissão do formulário
-async function processFormSubmission() {
-    console.log('Iniciando processamento da submissão...');
-    
-    // ✅ PROTEÇÃO CONTRA MÚLTIPLOS ENVIOS
-    if (isSubmitting) {
-        console.log('⚠️ Envio já em andamento, ignorando clique duplicado');
-        return;
-    }
-    
-    // Valida o último passo antes de submeter
-    if (!validateCurrentStep()) {
-        alert('Por favor, preencha todos os campos obrigatórios corretamente antes de prosseguir.');
-        return;
-    }
 
-    // ✅ MARCA COMO "ENVIANDO"
-    isSubmitting = true;
-    
-    // ✅ DESABILITA O BOTÃO IMEDIATAMENTE
-    const $submitBtn = $('.btn-submit');
-    const originalBtnText = $submitBtn.text();
-    $submitBtn.prop('disabled', true).text('Enviando...');
+    // Função para processar a submissão do formulário
+    async function processFormSubmission() {
+        console.log('Iniciando processamento da submissão...');
 
-    const formData = collectFormData();
-    console.log('Dados do Formulário para Submissão:', formData);
-
-    // Referências aos elementos da tela de status
-    const $statusBox = $('#registrationStatusBox');
-    const $statusHeading = $('#statusHeading');
-    const $statusMessage = $('#statusMessage');
-    const $goToPaymentBtn = $('#goToPaymentBtn');
-
-    // 1. Mostrar a tela de sucesso e definir estado de "processando"
-    showStep('success');
-    
-    $statusBox.removeClass('status-success status-error').addClass('status-processing');
-    $statusHeading.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Aguarde...');
-    $statusMessage.text('Estamos processando sua inscrição...');
-    $goToPaymentBtn.hide();
-
-    // Enviar dados para o backend via AJAX
-    try {
-        console.log('Enviando dados para:', WEBHOOK_SUBMISSAO_URL);
-        
-        // ✅ ADICIONA TIMEOUT DE 60 SEGUNDOS
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 segundos
-        
-        const response = await fetch(WEBHOOK_SUBMISSAO_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData),
-            signal: controller.signal // ✅ Adiciona controle de timeout
-        });
-
-        clearTimeout(timeoutId); // ✅ Limpa o timeout se a resposta chegar
-
-        console.log('Response status:', response.status);
-        console.log('Response headers:', response.headers);
-
-        if (!response.ok) {
-            throw new Error(`Erro ao enviar inscrição: ${response.status} - ${response.statusText}`);
+        // ✅ PROTEÇÃO CONTRA MÚLTIPLOS ENVIOS
+        if (isSubmitting) {
+            console.log('⚠️ Envio já em andamento, ignorando clique duplicado');
+            return;
         }
 
-        const result = await response.json();
-        console.log('Inscrição enviada com sucesso (resposta do webhook):', result);
-
-        // 2. Processamento bem-sucedido do webhook
-        $statusBox.removeClass('status-processing').addClass('status-success');
-        $statusHeading.html('✅ Sucesso!');
-        
-        if (formData.formaPagamento === 'Bolsista Integral') {
-            $statusMessage.text('Sua inscrição como bolsista foi registrada com sucesso. Em breve entraremos em contato para os próximos passos.');
-            $goToPaymentBtn.hide();
-        } else if (result.link) {
-            $statusMessage.text('Sua inscrição foi finalizada com sucesso! Clique abaixo para prosseguir com o pagamento.');
-            $goToPaymentBtn.data('payment-link', result.link).show();
-        } else {
-            $statusMessage.text('Inscrição finalizada com sucesso, mas não foi possível obter o link de pagamento. Por favor, entre em contato com a administração do Quintal das Artes.');
-            $goToPaymentBtn.hide();
+        // Valida o último passo antes de submeter
+        if (!validateCurrentStep()) {
+            alert('Por favor, preencha todos os campos obrigatórios corretamente antes de prosseguir.');
+            return;
         }
 
-        // ✅ ESCONDE O BOTÃO DE SUBMIT APÓS SUCESSO (já que mudamos para tela de sucesso)
-        $submitBtn.hide();
+        // ✅ MARCA COMO "ENVIANDO"
+        isSubmitting = true;
 
-    } catch (error) {
-        // 3. Captura de erro (rede, servidor, timeout, ou response.ok false)
-        console.error('Erro ao enviar inscrição:', error);
-        
-        $statusBox.removeClass('status-processing status-success').addClass('status-error');
-        $statusHeading.html('❌ Erro!');
-        
-        // ✅ MENSAGEM ESPECÍFICA PARA TIMEOUT
-        if (error.name === 'AbortError') {
-            $statusMessage.text('A requisição demorou muito para responder. Por favor, verifique sua conexão e tente novamente.');
-        } else {
-            $statusMessage.text('Ocorreu um erro ao finalizar a inscrição. Por favor, tente novamente ou entre em contato.');
-        }
-        
+        // ✅ DESABILITA O BOTÃO IMEDIATAMENTE
+        const $submitBtn = $('.btn-submit');
+        const originalBtnText = $submitBtn.text();
+        $submitBtn.prop('disabled', true).text('Enviando...');
+
+        const formData = collectFormData();
+        console.log('Dados do Formulário para Submissão:', formData);
+
+        // Referências aos elementos da tela de status
+        const $statusBox = $('#registrationStatusBox');
+        const $statusHeading = $('#statusHeading');
+        const $statusMessage = $('#statusMessage');
+        const $goToPaymentBtn = $('#goToPaymentBtn');
+
+        // 1. Mostrar a tela de sucesso e definir estado de "processando"
+        showStep('success');
+
+        $statusBox.removeClass('status-success status-error').addClass('status-processing');
+        $statusHeading.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Aguarde...');
+        $statusMessage.text('Estamos processando sua inscrição...');
         $goToPaymentBtn.hide();
-        
-        // ✅ REABILITA O BOTÃO EM CASO DE ERRO
-        $submitBtn.prop('disabled', false).text(originalBtnText);
-        isSubmitting = false;
-        
-        // ✅ VOLTA PARA O PASSO ANTERIOR (passo do resumo) PARA PERMITIR NOVA TENTATIVA
-        showStep(5); // Volta para o passo de resumo financeiro
-        
-    } finally {
-        // ✅ GARANTE QUE A FLAG SEJA RESETADA APENAS EM CASO DE SUCESSO
-        // (em caso de erro, já foi resetada no catch)
-        if ($statusBox.hasClass('status-success')) {
-            // Não reseta isSubmitting em caso de sucesso para evitar reenvios
-            console.log('✅ Submissão concluída com sucesso');
+
+        // Enviar dados para o backend via AJAX
+        try {
+            console.log('Enviando dados para:', WEBHOOK_SUBMISSAO_URL);
+
+            // ✅ ADICIONA TIMEOUT DE 60 SEGUNDOS
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 segundos
+
+            const response = await fetch(WEBHOOK_SUBMISSAO_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData),
+                signal: controller.signal // ✅ Adiciona controle de timeout
+            });
+
+            clearTimeout(timeoutId); // ✅ Limpa o timeout se a resposta chegar
+
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+
+            if (!response.ok) {
+                throw new Error(`Erro ao enviar inscrição: ${response.status} - ${response.statusText}`);
+            }
+
+            const result = await response.json();
+            console.log('Inscrição enviada com sucesso (resposta do webhook):', result);
+
+            // 2. Processamento bem-sucedido do webhook
+            $statusBox.removeClass('status-processing').addClass('status-success');
+            $statusHeading.html('✅ Sucesso!');
+
+            if (formData.formaPagamento === 'Bolsista Integral') {
+                $statusMessage.text('Sua inscrição como bolsista foi registrada com sucesso. Em breve entraremos em contato para os próximos passos.');
+                $goToPaymentBtn.hide();
+            } else if (result.link) {
+                $statusMessage.text('Sua inscrição foi finalizada com sucesso! Clique abaixo para prosseguir com o pagamento.');
+                $goToPaymentBtn.data('payment-link', result.link).show();
+            } else {
+                $statusMessage.text('Inscrição finalizada com sucesso, mas não foi possível obter o link de pagamento. Por favor, entre em contato com a administração do Quintal das Artes.');
+                $goToPaymentBtn.hide();
+            }
+
+            // ✅ ESCONDE O BOTÃO DE SUBMIT APÓS SUCESSO (já que mudamos para tela de sucesso)
+            $submitBtn.hide();
+
+        } catch (error) {
+            // 3. Captura de erro (rede, servidor, timeout, ou response.ok false)
+            console.error('Erro ao enviar inscrição:', error);
+
+            $statusBox.removeClass('status-processing status-success').addClass('status-error');
+            $statusHeading.html('❌ Erro!');
+
+            // ✅ MENSAGEM ESPECÍFICA PARA TIMEOUT
+            if (error.name === 'AbortError') {
+                $statusMessage.text('A requisição demorou muito para responder. Por favor, verifique sua conexão e tente novamente.');
+            } else {
+                $statusMessage.text('Ocorreu um erro ao finalizar a inscrição. Por favor, tente novamente ou entre em contato.');
+            }
+
+            $goToPaymentBtn.hide();
+
+            // ✅ REABILITA O BOTÃO EM CASO DE ERRO
+            $submitBtn.prop('disabled', false).text(originalBtnText);
+            isSubmitting = false;
+
+            // ✅ VOLTA PARA O PASSO ANTERIOR (passo do resumo) PARA PERMITIR NOVA TENTATIVA
+            showStep(5); // Volta para o passo de resumo financeiro
+
+        } finally {
+            // ✅ GARANTE QUE A FLAG SEJA RESETADA APENAS EM CASO DE SUCESSO
+            // (em caso de erro, já foi resetada no catch)
+            if ($statusBox.hasClass('status-success')) {
+                // Não reseta isSubmitting em caso de sucesso para evitar reenvios
+                console.log('✅ Submissão concluída com sucesso');
+            }
         }
     }
-}
-    
+
     // Configura todos os event listeners
     function setupEventListeners() {
         console.log('Configurando event listeners...');
-        
+
         // Navegação entre passos
-        $('.btn-next').on('click', function() {
+        $('.btn-next').on('click', function () {
             console.log('Botão próximo clicado, passo atual:', currentStep);
             if (validateCurrentStep()) {
                 if (currentStep < totalSteps + 1) { // totalSteps + 1 para incluir o passo de termos
@@ -712,7 +713,7 @@ async function processFormSubmission() {
             }
         });
 
-        $('.btn-prev').on('click', function() {
+        $('.btn-prev').on('click', function () {
             console.log('Botão anterior clicado, passo atual:', currentStep);
             if (currentStep > 1) {
                 showStep(currentStep - 1);
@@ -720,7 +721,7 @@ async function processFormSubmission() {
         });
 
         // Event listener específico para o botão de submit
-        $('.btn-submit').on('click', function(event) {
+        $('.btn-submit').on('click', function (event) {
             console.log('Botão Finalizar Inscrição clicado!');
             event.preventDefault();
             event.stopPropagation();
@@ -728,7 +729,7 @@ async function processFormSubmission() {
         });
 
         // Previne o envio padrão do formulário
-        $('#registrationForm').on('submit', function(event) {
+        $('#registrationForm').on('submit', function (event) {
             console.log('Form submit event interceptado');
             event.preventDefault();
             event.stopPropagation();
@@ -736,21 +737,71 @@ async function processFormSubmission() {
         });
 
         // Adicionar/Remover Aprendiz
-        $('.btn-add-apprentice').on('click', function() {
+        $('.btn-add-apprentice').on('click', function () {
             addApprentice();
         });
 
-        $('#apprenticesContainer').on('click', '.btn-remove-apprentice', function() {
+        $('#apprenticesContainer').on('click', '.btn-remove-apprentice', function () {
             removeApprentice(this);
         });
 
         // Disparar cálculo ao mudar seleção de curso, plano ou cupom
-        $('#registrationForm').on('change', '.course-checkbox, #planoPagamento', function() {
+        $('#registrationForm').on('change', '.course-checkbox, #planoPagamento', function () {
+            if ($(this).hasClass('course-checkbox')) {
+                updatePaymentPlanOptions();
+            }
             updateSummaryAndTotal();
         });
 
+        // Função para atualizar as opções do select de plano de pagamento
+        function updatePaymentPlanOptions() {
+            const $planoSelect = $('#planoPagamento');
+            const currentSelectedPlan = $planoSelect.val();
+            const allSelectedCourseIds = [];
+
+            $('#apprenticesContainer .apprentice-group:not(.template)').each(function () {
+                const selectedIds = getSelectedCourses($(this));
+                allSelectedCourseIds.push(...selectedIds);
+            });
+
+            // Se não houver cursos, mantém as opções padrão
+            if (allSelectedCourseIds.length === 0) return;
+
+            // Coleta todos os planos possíveis dos cursos selecionados
+            const availablePlans = new Set();
+            const allCourses = priceCalculator.getAllCourses();
+
+            allSelectedCourseIds.forEach(id => {
+                const course = allCourses.find(c => c.id === id);
+                if (course && course.precos) {
+                    Object.keys(course.precos).forEach(planKey => availablePlans.add(planKey));
+                }
+            });
+
+            // Limpa e repopula o select
+            $planoSelect.empty();
+            $planoSelect.append('<option value="">Selecione um plano de pagamento</option>');
+
+            const allPlans = priceCalculator.getPricesData().planos;
+
+            // Ordenar planos: avulso primeiro, depois os outros
+            const sortedPlans = Object.keys(allPlans).sort((a, b) => {
+                if (a === 'avulso') return -1;
+                if (b === 'avulso') return 1;
+                return 0;
+            });
+
+            sortedPlans.forEach(planKey => {
+                if (availablePlans.has(planKey)) {
+                    const plan = allPlans[planKey];
+                    const selected = planKey === currentSelectedPlan ? 'selected' : '';
+                    $planoSelect.append(`<option value="${planKey}" ${selected}>${plan.nome}</option>`);
+                }
+            });
+        }
+
         // Toggle para Dia de Vencimento
-        $('#formaPagamento').on('change', function() {
+        $('#formaPagamento').on('change', function () {
             if ($(this).val() === 'PIX/Boleto') {
                 $('#diaVencimentoGroup').slideDown();
                 $('#diaVencimento').prop('required', true);
@@ -764,7 +815,7 @@ async function processFormSubmission() {
             updateSummaryAndTotal();
         });
 
-        $('#cupomCode').on('input', function() {
+        $('#cupomCode').on('input', function () {
             const cupomFeedback = $('.cupom-feedback');
             const couponValue = $(this).val().toUpperCase();
             if (couponValue === '') {
@@ -776,23 +827,23 @@ async function processFormSubmission() {
             }
             updateSummaryAndTotal();
         });
-        
+
         // Live validation para CPF e Email em blur
-        $('#cpfResponsavel').on('blur', function() {
+        $('#cpfResponsavel').on('blur', function () {
             validateField(this, (val) => isValidCPF(val), 'CPF inválido.');
         });
 
-        $('#emailResponsavel').on('blur', function() {
+        $('#emailResponsavel').on('blur', function () {
             validateField(this, (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val), 'Email inválido.');
         });
-        
+
         // Validação genérica para campos required em blur
-        $('#registrationForm').on('blur', 'input[required], select[required], textarea[required]', function() {
+        $('#registrationForm').on('blur', 'input[required], select[required], textarea[required]', function () {
             validateField(this);
         });
 
         // Validação "Como ficou sabendo" em change
-        $('input[name="comoSoube"]').on('change', function() {
+        $('input[name="comoSoube"]').on('change', function () {
             const $howKnowCheckboxes = $('input[name="comoSoube"]');
             const $howKnowErrorDiv = $('.how-know-error');
             if ($howKnowCheckboxes.filter(':checked').length === 0) {
@@ -803,7 +854,7 @@ async function processFormSubmission() {
         });
 
         // Validação de radio buttons de autorização de foto
-        $('input[name="autorizaFoto"]').on('change', function() {
+        $('input[name="autorizaFoto"]').on('change', function () {
             const $photoConsentRadios = $('input[name="autorizaFoto"]');
             const $photoConsentErrorDiv = $('.photo-consent-error');
             if ($photoConsentRadios.filter(':checked').length === 0) {
@@ -814,7 +865,7 @@ async function processFormSubmission() {
         });
 
         // Botão de redirecionamento para pagamento
-        $('#goToPaymentBtn').on('click', function() {
+        $('#goToPaymentBtn').on('click', function () {
             const paymentLink = $(this).data('payment-link');
             if (paymentLink) {
                 window.open(paymentLink, '_blank');
