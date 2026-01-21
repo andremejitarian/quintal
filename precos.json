@@ -71,16 +71,6 @@
         "anual": 225.25
       }
     },
-    "excluir_trabalhos_manuais_segunda_manha": {
-      "nome": "TRABALHOS MANUAIS // segunda 10h-11h15 // 7-11 anos",
-      "categoria": "curso",
-      "precos": {
-        "avulso": 76,
-        "mensal": 250,
-        "semestral": 225,
-        "anual": 212.50
-      }
-    },
     "artes_segunda_tarde": {
       "nome": "ARTES // segunda 14h-17H // 7-11 anos",
       "categoria": "curso",
