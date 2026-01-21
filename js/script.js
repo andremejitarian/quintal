@@ -11,7 +11,7 @@ $(document).ready(function () {
 
     // URLs dos webhooks
     const WEBHOOK_CONSULTA_URL = 'https://criadordigital-n8n-webhook.kttqgl.easypanel.host/webhook/consulta-matricula';
-    const WEBHOOK_SUBMISSAO_URL = 'https://auto-n8n-webhook.rbnawr.easypanel.host/webhook/e79ba1bc-0655-4f91-bbb0-5d855c146485';
+    const WEBHOOK_SUBMISSAO_URL = 'https://auto-n8n-webhook.rbnawr.easypanel.host/webhook/envio-matricula';
 
     // Inicializa as máscaras para os campos
     function initializeMasks() {
