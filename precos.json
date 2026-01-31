@@ -1,7 +1,7 @@
 {
   "planos": {
       "experimental": {
-      "nome": "Aula experimento",
+      "nome": "Aula experimental",
       "descricao": "Pagamento por aula",
       "meses": 1,
       "parcelas": 1,
