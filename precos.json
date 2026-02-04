@@ -172,6 +172,28 @@
         "anual": 212.50
       }
     },
+    "musica_ingles_quinta_manha": {
+      "nome": "MUSICA > INGLÊS // quinta 9h30-11h // 5-8 anos",
+      "categoria": "curso",
+      "precos": {
+        "experimental": 19,        
+        "avulso": 76,
+        "mensal": 350,
+        "semestral": 330,
+        "anual": 300
+      }
+    },
+   "musica_ingles_sexta_manha": {
+      "nome": "MUSICA > INGLÊS // sexta 9h30-11h // 5-8 anos",
+      "categoria": "curso",
+      "precos": {
+        "experimental": 19,        
+        "avulso": 76,
+        "mensal": 350,
+        "semestral": 330,
+        "anual": 300
+      }
+    },
     "modelagem_argila_sexta_manha": {
       "nome": "MODELAGEM EM ARGILA // sexta 10h-11h30 // 7-11 anos",
       "categoria": "curso",
