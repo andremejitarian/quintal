@@ -413,7 +413,7 @@ $(document).ready(function () {
 
         // OBTENHA O PLANO DE PAGAMENTO AQUI, ANTES DE ITERAR PELOS APRENDIZES
         const paymentPlan = $('#planoPagamento').val() || 'avulso'; // 'avulso' como padrão
-        
+
         // Atualiza a política de cancelamento com base no plano selecionado
         updateCancellationPolicy(paymentPlan);
 
@@ -494,23 +494,30 @@ $(document).ready(function () {
         const $policyContainer = $('#cancellation-policy');
         let policyText = '';
 
+        // Tenta obter o nome do plano via helper ou usa o próprio key capitalizado
+        const planInfo = priceCalculator.getPaymentPlanInfo(planKey);
+        // Fallback simples se não achar o plano (ex: experimental/avulso que as vezes não tem 'nome' no json da mesma forma, ou se for null)
+        let planName = planInfo ? planInfo.nome : planKey.charAt(0).toUpperCase() + planKey.slice(1);
+
+        const titleHtml = `<h5 style="margin-top: 0; margin-bottom: 8px; font-size: 1rem; color: #d9534f;">Política de Cancelamento do Plano ${planName}</h5>`;
+
         if (planKey === 'mensal') {
             policyText = `
-                <strong>Mensal</strong><br>
-                Cancelamento a qualquer momento, com aviso prévio de 30 dias.
+                ${titleHtml}
+                <p style="margin: 0;">Cancelamento a qualquer momento, com aviso prévio de 30 dias.</p>
             `;
         } else if (planKey === 'semestral') {
             policyText = `
-                <strong>Semestral</strong><br>
-                <ul style="padding-left: 20px; margin: 5px 0 0 0;">
+                ${titleHtml}
+                <ul style="padding-left: 20px; margin: 0;">
                     <li>Compromisso mínimo de 6 meses.</li>
                     <li>Em caso de cancelamento antecipado, será cobrada multa equivalente a até 2 mensalidades, limitada ao valor das parcelas restantes.</li>
                 </ul>
             `;
         } else if (planKey === 'anual') {
             policyText = `
-                <strong>Anual</strong><br>
-                <ul style="padding-left: 20px; margin: 5px 0 0 0;">
+                ${titleHtml}
+                <ul style="padding-left: 20px; margin: 0;">
                     <li>Compromisso mínimo de 12 meses.</li>
                     <li>Em caso de cancelamento antecipado, será cobrada multa equivalente a até 3 mensalidades, limitada ao valor das parcelas restantes.</li>
                 </ul>
