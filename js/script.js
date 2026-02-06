@@ -413,6 +413,9 @@ $(document).ready(function () {
 
         // OBTENHA O PLANO DE PAGAMENTO AQUI, ANTES DE ITERAR PELOS APRENDIZES
         const paymentPlan = $('#planoPagamento').val() || 'avulso'; // 'avulso' como padrão
+        
+        // Atualiza a política de cancelamento com base no plano selecionado
+        updateCancellationPolicy(paymentPlan);
 
         $('#apprenticesContainer .apprentice-group:not(.template)').each(function () {
             const $group = $(this);
@@ -484,6 +487,41 @@ $(document).ready(function () {
         $('#valor_calculado_total').val(totals.total.toFixed(2));
 
         return totals;
+    }
+
+    // Atualiza o texto da política de cancelamento
+    function updateCancellationPolicy(planKey) {
+        const $policyContainer = $('#cancellation-policy');
+        let policyText = '';
+
+        if (planKey === 'mensal') {
+            policyText = `
+                <strong>Mensal</strong><br>
+                Cancelamento a qualquer momento, com aviso prévio de 30 dias.
+            `;
+        } else if (planKey === 'semestral') {
+            policyText = `
+                <strong>Semestral</strong><br>
+                <ul style="padding-left: 20px; margin: 5px 0 0 0;">
+                    <li>Compromisso mínimo de 6 meses.</li>
+                    <li>Em caso de cancelamento antecipado, será cobrada multa equivalente a até 2 mensalidades, limitada ao valor das parcelas restantes.</li>
+                </ul>
+            `;
+        } else if (planKey === 'anual') {
+            policyText = `
+                <strong>Anual</strong><br>
+                <ul style="padding-left: 20px; margin: 5px 0 0 0;">
+                    <li>Compromisso mínimo de 12 meses.</li>
+                    <li>Em caso de cancelamento antecipado, será cobrada multa equivalente a até 3 mensalidades, limitada ao valor das parcelas restantes.</li>
+                </ul>
+            `;
+        }
+
+        if (policyText) {
+            $policyContainer.html(policyText).show();
+        } else {
+            $policyContainer.hide().empty();
+        }
     }
 
     // Verifica o parâmetro 'matricula' na URL e tenta pré-preencher

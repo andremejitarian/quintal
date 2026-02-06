@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscrição Quintal das Artes</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- Banner superior -->
     <div class="banner-top"></div>
-    
+
     <div class="main-container">
         <!-- Logo circular que "salta" do card -->
         <div class="logo-circle">
             <img src="images/logo.png" alt="Logo Quintal das Artes">
         </div>
-        
+
         <div class="form-card form-container">
             <form id="registrationForm">
                 <!-- Campo oculto para matrícula -->
@@ -26,8 +28,12 @@
                 <div class="form-step" id="step-1">
                     <div class="form-header">
                         <h1 class="form-title">Ficha de Inscrição</h1>
-                        <p class="form-description">Que bom que chegou aqui! Se você recebeu este link é porque já passou por uma aula experimental e vai fazer sua inscrição. Estamos muito felizes em receber sua família! A arte e o brincar são elementos centrais na programação do QUINTAL das artes.</p>
-                        <p class="form-contact">Para + informações e dúvidas, entre em contato com a Lari no whatsapp <a href="https://wa.me/5511940355159" class="whatsapp-link">(11) 9 4035.5159</a></p>
+                        <p class="form-description">Que bom que chegou aqui! Se você recebeu este link é porque já
+                            passou por uma aula experimental e vai fazer sua inscrição. Estamos muito felizes em receber
+                            sua família! A arte e o brincar são elementos centrais na programação do QUINTAL das artes.
+                        </p>
+                        <p class="form-contact">Para + informações e dúvidas, entre em contato com a Lari no whatsapp <a
+                                href="https://wa.me/5511940355159" class="whatsapp-link">(11) 9 4035.5159</a></p>
                     </div>
 
                     <div class="form-navigation">
@@ -41,7 +47,7 @@
                 <!-- ETAPA 2: Dados do Responsável -->
                 <div class="form-step" id="step-2">
                     <h2 class="step-title">Dados do Responsável</h2>
-                    
+
                     <div class="form-fields">
                         <div class="form-group">
                             <label for="nomeResponsavel">Nome Completo do Responsável *</label>
@@ -63,13 +69,15 @@
 
                         <div class="form-group">
                             <label for="telefoneResponsavel">Telefone/WhatsApp *</label>
-                            <input type="tel" id="telefoneResponsavel" name="telefoneResponsavel" class="mask-phone" required>
+                            <input type="tel" id="telefoneResponsavel" name="telefoneResponsavel" class="mask-phone"
+                                required>
                             <div class="error-message">Telefone inválido</div>
                         </div>
 
                         <div class="form-group">
                             <label for="enderecoResponsavel">Endereço Completo</label>
-                            <textarea id="enderecoResponsavel" name="enderecoResponsavel" rows="3" placeholder="Rua, número, bairro, cidade, CEP"></textarea>
+                            <textarea id="enderecoResponsavel" name="enderecoResponsavel" rows="3"
+                                placeholder="Rua, número, bairro, cidade, CEP"></textarea>
                             <div class="error-message">Este campo é obrigatório</div>
                         </div>
 
@@ -80,12 +88,14 @@
 
                         <div class="form-group">
                             <label for="segundoResponsavelTelefone">Telefone do Segundo Responsável (opcional)</label>
-                            <input type="tel" id="segundoResponsavelTelefone" name="segundoResponsavelTelefone" class="mask-phone">
+                            <input type="tel" id="segundoResponsavelTelefone" name="segundoResponsavelTelefone"
+                                class="mask-phone">
                         </div>
 
                         <div class="form-group">
                             <label for="emergenciaQuemChamar">Em caso de emergência, quem chamar? *</label>
-                            <input type="text" id="emergenciaQuemChamar" name="emergenciaQuemChamar" placeholder="Nome e telefone" required>
+                            <input type="text" id="emergenciaQuemChamar" name="emergenciaQuemChamar"
+                                placeholder="Nome e telefone" required>
                             <div class="error-message">Este campo é obrigatório</div>
                         </div>
 
@@ -93,7 +103,8 @@
                             <label>Como ficou sabendo do Quintal das Artes? *</label>
                             <div class="checkbox-group-container">
                                 <div class="checkbox-group">
-                                    <input type="checkbox" name="comoSoube" value="indicacao-amigos" id="indicacao-amigos">
+                                    <input type="checkbox" name="comoSoube" value="indicacao-amigos"
+                                        id="indicacao-amigos">
                                     <label for="indicacao-amigos">Indicação de amigos/família</label>
                                 </div>
                                 <div class="checkbox-group">
@@ -136,12 +147,12 @@
                 <!-- ETAPA 3: Dados dos Aprendizes -->
                 <div class="form-step" id="step-3">
                     <h2 class="step-title">Dados do(s) Aprendiz(es)</h2>
-                    
+
                     <div id="apprenticesContainer">
                         <!-- Template para aprendiz (será clonado pelo JavaScript) -->
                         <div class="apprentice-group template" style="display: none;">
                             <h3>Aprendiz <span class="apprentice-number">1</span></h3>
-                            
+
                             <div class="form-group">
                                 <label>Nome Completo do Aprendiz *</label>
                                 <input type="text" class="nomeAprendiz" required>
@@ -155,7 +166,8 @@
 
                             <div class="form-group">
                                 <label>Data de Nascimento *</label>
-                                <input type="text" class="dataNascimentoAprendiz mask-date" placeholder="DD/MM/AAAA" required>
+                                <input type="text" class="dataNascimentoAprendiz mask-date" placeholder="DD/MM/AAAA"
+                                    required>
                                 <div class="error-message">Data de nascimento inválida</div>
                             </div>
 
@@ -183,7 +195,8 @@
                                     </div>
                                     <div class="course-category">
                                         <h4>Contraturnos</h4>
-                                        <div class="checkbox-group-container courses-checkboxes" data-category="contraturno">
+                                        <div class="checkbox-group-container courses-checkboxes"
+                                            data-category="contraturno">
                                             <!-- Será preenchido pelo JavaScript -->
                                         </div>
                                     </div>
@@ -193,13 +206,17 @@
 
                             <div class="form-group">
                                 <label>Restrições Alimentares *</label>
-                                <textarea class="restricaoAlimentarAprendiz" rows="2" placeholder="Descreva qualquer restrição alimentar ou digite 'Nenhuma'" required></textarea>
+                                <textarea class="restricaoAlimentarAprendiz" rows="2"
+                                    placeholder="Descreva qualquer restrição alimentar ou digite 'Nenhuma'"
+                                    required></textarea>
                                 <div class="error-message">Este campo é obrigatório</div>
                             </div>
 
                             <div class="form-group">
                                 <label>Questões de Saúde *</label>
-                                <textarea class="questaoSaudeAprendiz" rows="2" placeholder="Descreva qualquer questão de saúde relevante ou digite 'Nenhuma'" required></textarea>
+                                <textarea class="questaoSaudeAprendiz" rows="2"
+                                    placeholder="Descreva qualquer questão de saúde relevante ou digite 'Nenhuma'"
+                                    required></textarea>
                                 <div class="error-message">Este campo é obrigatório</div>
                             </div>
 
@@ -228,37 +245,55 @@
                 <!-- ETAPA 4: Termos e Condições -->
                 <div class="form-step" id="step-terms">
                     <h2 class="step-title">Termos e Condições</h2>
-                    
+
                     <div class="form-fields">
                         <div class="terms-and-conditions">
                             <h3>Termos e Condições de Uso</h3>
-            <p>Sejam bem-vindxs! É com alegria que o Quintal das Artes recebe vocês. Somos um ambiente de cuidado e acolhimento para crianças de 03 a 11 anos que realiza propostas de educação e artes oferecendo cursos livres e contraturno.</p>
-            
-            <h3>Sobre o pagamento</h3>
-            <p>O pagamento é relativo ao mês que será cursado, garantindo assim condições de sustentabilidade financeira para o pleno cumprimento das atividades e a remuneração da equipe.</p>
-            
-            <h3>Sobre o conteúdo e educadores responsáveis</h3>
-            <p>Para obter mais detalhes sobre o conteúdo do curso e sobre o orientador, consulte nosso site em <a href="https://www.quintaldasartes.com" >https://www.quintaldasartes.com</a></p>
-            
-            <h3>Materiais</h3>
-            <p>O Quintal das Artes oferece os materiais de uso comum para a realização das atividades propostas e em alguns casos, o educador responsável poderá solicitar o envio de material complementar para o desenvolvimento de uma proposta específica. Pedimos que a criança procure sempre vir com sapato fechado (tênis) para uso no quintal. Também gostaríamos de solicitar para o uso regular uma meia ou uma pantufa para uso na área interna.</p>
-            
-            <h3>Desistência</h3>
-            <p>No caso de serviços mensais ou quadrimestrais, caso a família decida não frequentar mais o Quintal, deverá nos comunicar antes do início de um novo mês com 30 dias de antecedência.</p>
-            
-            <h3>Sobre as faltas</h3>
-            <p>No momento, o Quintal das Artes não trabalha com reposição de aulas em caso de falta.</p>
-            
-            <h3>Sobre a pontualidade</h3>
-            <p>Pedimos às famílias compromisso com o horário de entrada e saída das crianças. Caso haja um atraso de mais de 10 minutos, favor informar o núcleo de coordenação ou a educadora responsável.</p>
-            
-            <h3>Das obrigações da contratada</h3>
-            <p>A CONTRATADA prestará serviços educacionais ao Aprendiz BENEFICIÁRIO (A), regularmente matriculado, por meio de aulas e demais atividades previstas na proposta pedagógica da Instituição, em sala de aula e/ou em locais apropriados, nos horários acordados.</p>
+                            <p>Sejam bem-vindxs! É com alegria que o Quintal das Artes recebe vocês. Somos um ambiente
+                                de cuidado e acolhimento para crianças de 03 a 11 anos que realiza propostas de educação
+                                e artes oferecendo cursos livres e contraturno.</p>
 
-            <h3>Das obrigações da contratante</h3>
-            <p>A CONTRATANTE se compremete a cumprir os pagamentos conforme o plano e valores escolhido, e a respeitar a política de desistência aqui descrita.</p>
-            
-            <p>A CONTRATANTE pagará à CONTRATADA, a mensalidade, correspondente à atividade que o(a) aluno(a), BENIFICIÁRIO(A) irá cursar.</p>
+                            <h3>Sobre o pagamento</h3>
+                            <p>O pagamento é relativo ao mês que será cursado, garantindo assim condições de
+                                sustentabilidade financeira para o pleno cumprimento das atividades e a remuneração da
+                                equipe.</p>
+
+                            <h3>Sobre o conteúdo e educadores responsáveis</h3>
+                            <p>Para obter mais detalhes sobre o conteúdo do curso e sobre o orientador, consulte nosso
+                                site em <a href="https://www.quintaldasartes.com">https://www.quintaldasartes.com</a>
+                            </p>
+
+                            <h3>Materiais</h3>
+                            <p>O Quintal das Artes oferece os materiais de uso comum para a realização das atividades
+                                propostas e em alguns casos, o educador responsável poderá solicitar o envio de material
+                                complementar para o desenvolvimento de uma proposta específica. Pedimos que a criança
+                                procure sempre vir com sapato fechado (tênis) para uso no quintal. Também gostaríamos de
+                                solicitar para o uso regular uma meia ou uma pantufa para uso na área interna.</p>
+
+                            <h3>Desistência</h3>
+                            <p>No caso de serviços mensais ou quadrimestrais, caso a família decida não frequentar mais
+                                o Quintal, deverá nos comunicar antes do início de um novo mês com 30 dias de
+                                antecedência.</p>
+
+                            <h3>Sobre as faltas</h3>
+                            <p>No momento, o Quintal das Artes não trabalha com reposição de aulas em caso de falta.</p>
+
+                            <h3>Sobre a pontualidade</h3>
+                            <p>Pedimos às famílias compromisso com o horário de entrada e saída das crianças. Caso haja
+                                um atraso de mais de 10 minutos, favor informar o núcleo de coordenação ou a educadora
+                                responsável.</p>
+
+                            <h3>Das obrigações da contratada</h3>
+                            <p>A CONTRATADA prestará serviços educacionais ao Aprendiz BENEFICIÁRIO (A), regularmente
+                                matriculado, por meio de aulas e demais atividades previstas na proposta pedagógica da
+                                Instituição, em sala de aula e/ou em locais apropriados, nos horários acordados.</p>
+
+                            <h3>Das obrigações da contratante</h3>
+                            <p>A CONTRATANTE se compremete a cumprir os pagamentos conforme o plano e valores escolhido,
+                                e a respeitar a política de desistência aqui descrita.</p>
+
+                            <p>A CONTRATANTE pagará à CONTRATADA, a mensalidade, correspondente à atividade que o(a)
+                                aluno(a), BENIFICIÁRIO(A) irá cursar.</p>
                         </div>
 
                         <div class="form-group">
@@ -300,9 +335,9 @@
                 <!-- ETAPA 5: Plano de Pagamento e Resumo -->
                 <div class="form-step" id="step-4">
                     <h2 class="step-title">Plano de Pagamento e Resumo</h2>
-                    
+
                     <div class="summary-section">
-                        
+
                         <div class="form-group">
                             <label>Aprendizes e Cursos:</label>
                             <ul id="summaryApprenticesList">
@@ -310,18 +345,18 @@
                             </ul>
                         </div>
 
-<div class="form-group">
-    <label for="planoPagamento">Plano de Pagamento *</label>
-    <select id="planoPagamento" name="planoPagamento" required>
-        <option value="">Selecione um plano de pagamento</option>
-        <option value="experimental">Aula Experimental</option>       
-        <option value="avulso">Aula Avulsa</option>
-        <option value="mensal">Mensal</option>
-        <option value="semestral">Semestral</option>
-        <option value="anual">Anual</option>
-    </select>
-    <div class="error-message">Selecione o plano de pagamento</div>
-</div>
+                        <div class="form-group">
+                            <label for="planoPagamento">Plano de Pagamento *</label>
+                            <select id="planoPagamento" name="planoPagamento" required>
+                                <option value="">Selecione um plano de pagamento</option>
+                                <option value="experimental">Aula Experimental</option>
+                                <option value="avulso">Aula Avulsa</option>
+                                <option value="mensal">Mensal</option>
+                                <option value="semestral">Semestral</option>
+                                <option value="anual">Anual</option>
+                            </select>
+                            <div class="error-message">Selecione o plano de pagamento</div>
+                        </div>
 
                         <div class="form-group">
                             <label for="formaPagamento">Forma de Pagamento *</label>
@@ -361,6 +396,10 @@
                                 <p>** Mínimo de 5 alunos para formação da turma de Parkour.</p>
                                 <p>*** Caso a turma não seja formada, o reembolso será realizado integralmente.</p>
                             </div>
+                            <div id="cancellation-policy" class="cancellation-policy"
+                                style="display:none; margin-top: 15px; font-size: 0.9em; color: #555; background-color: #f9f9f9; padding: 10px; border-radius: 5px; border-left: 3px solid #ff6b6b;">
+                                <!-- Texto da política de cancelamento será inserido via JavaScript -->
+                            </div>
                         </div>
                     </div>
 
@@ -379,18 +418,18 @@
                 <!-- TELA DE SUCESSO -->
                 <div class="form-step" id="step-success">
                     <h2 class="step-title">Cadastro quase completo! 🎨</h2>
-                    
-<div style="text-align: center; padding: 40px 20px;">
-    <div id="registrationStatusBox" class="status-box">
-        <h3 id="statusHeading"></h3>
-        <p id="statusMessage"></p>
-    </div>
-    
-        <button type="button" id="goToPaymentBtn" class="btn btn-primary" style="display: none;">
-    Ir para Pagamento
-    <span>💳</span>
-    </button>
-</div>
+
+                    <div style="text-align: center; padding: 40px 20px;">
+                        <div id="registrationStatusBox" class="status-box">
+                            <h3 id="statusHeading"></h3>
+                            <p id="statusMessage"></p>
+                        </div>
+
+                        <button type="button" id="goToPaymentBtn" class="btn btn-primary" style="display: none;">
+                            Ir para Pagamento
+                            <span>💳</span>
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -404,4 +443,5 @@
     <script src="js/priceCalculator.js"></script>
     <script src="js/script.js"></script>
 </body>
+
 </html>
