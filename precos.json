@@ -172,8 +172,8 @@
         "anual": 212.50
       }
     },
-    "musica_ingles_quinta_manha": {
-      "nome": "MUSICA > INGLÊS // quinta 9h30-11h // 5-8 anos",
+    "ingles_quinta_manha": {
+      "nome": "INGLÊS // quinta 9h30-11h // 5-8 anos",
       "categoria": "curso",
       "precos": {
         "experimental": 19,        
@@ -183,8 +183,8 @@
         "anual": 300
       }
     },
-   "musica_ingles_sexta_manha": {
-      "nome": "MUSICA > INGLÊS // sexta 9h30-11h // 5-8 anos",
+   "ingles_sexta_manha": {
+      "nome": "INGLÊS // sexta 9h30-11h // 5-8 anos",
       "categoria": "curso",
       "precos": {
         "experimental": 19,        
