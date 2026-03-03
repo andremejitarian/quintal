@@ -128,7 +128,7 @@
         "anual": 212.50
       }
     },
-    "desenho_quarta_tarde_t1": {
+    "desenho_t1_quarta_tarde": {
       "nome": "DESENHO // quarta 14h-15h30 // 6-10 anos",
       "categoria": "curso",
       "precos": {
@@ -150,7 +150,7 @@
         "anual": 212.50
       }
     },
-    "desenho_quarta_tarde_t2": {
+    "desenho_t2_quarta_tarde": {
       "nome": "DESENHO // quarta 18h-19h15 // 12-15 anos",
       "categoria": "curso",
       "precos": {
