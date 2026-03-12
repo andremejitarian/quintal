@@ -412,8 +412,7 @@ $(document).ready(function () {
         let apprenticesCount = 0;
 
         // OBTENHA O PLANO DE PAGAMENTO AQUI, ANTES DE ITERAR PELOS APRENDIZES
-        const paymentPlan = $('#planoPagamento').val() || 'avulso'; // 'avulso' como padrão
-
+        const paymentPlan = $('#planoPagamento').val(); // Removido padrão 'avulso'
         // Atualiza a política de cancelamento com base no plano selecionado
         updateCancellationPolicy(paymentPlan);
         updatePlanDescription(paymentPlan);
@@ -555,7 +554,7 @@ $(document).ready(function () {
                 break;
         }
 
-        if (description) {
+        if (description && planKey) {
             $descriptionContainer.text(description).fadeIn(200);
         } else {
             $descriptionContainer.hide().empty();
