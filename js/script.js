@@ -353,7 +353,7 @@ $(document).ready(function () {
             aprendizes: [],
             planoPagamento: $('#planoPagamento').val(),
             formaPagamento: $('#formaPagamento').val(),
-            diaVencimento: ($('#formaPagamento').val() === 'PIX/Boleto') ? $('#diaVencimento').val() : '',
+            diaVencimento: ($('#formaPagamento').val() === 'PIX/Boleto') ? $('#diaVencimento').val() : ($('#formaPagamento').val() === 'Cartão de Crédito' ? '10' : ''),
             aceiteTermos: $('#aceiteTermos').is(':checked'),
             autorizaFoto: $('input[name="autorizaFoto"]:checked').val(),
             cupomCode: $('#cupomCode').val().toUpperCase()
@@ -561,6 +561,22 @@ $(document).ready(function () {
         }
     }
 
+    // Atualiza o texto explicativo da forma de pagamento
+    function updatePaymentMethodDescription(method) {
+        const $descriptionContainer = $('#formaPagamentoDescricao');
+        let description = '';
+
+        if (method === 'Cartão de Crédito') {
+            description = 'A assinatura será cobrada no dia 10 de cada mês.';
+        }
+
+        if (description) {
+            $descriptionContainer.text(description).fadeIn(200);
+        } else {
+            $descriptionContainer.hide().empty();
+        }
+    }
+
     // Verifica o parâmetro 'matricula' na URL e tenta pré-preencher
     async function checkMatriculaParam() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -643,6 +659,7 @@ $(document).ready(function () {
         // Forma de Pagamento e Dia de Vencimento
         if (data.formaPagamento) {
             $('#formaPagamento').val(data.formaPagamento).trigger('change');
+            updatePaymentMethodDescription(data.formaPagamento);
             if (data.formaPagamento === 'PIX/Boleto' && data.diaVencimento) {
                 $('#diaVencimento').val(data.diaVencimento);
             }
@@ -890,7 +907,10 @@ $(document).ready(function () {
 
         // Toggle para Dia de Vencimento
         $('#formaPagamento').on('change', function () {
-            if ($(this).val() === 'PIX/Boleto') {
+            const method = $(this).val();
+            updatePaymentMethodDescription(method);
+
+            if (method === 'PIX/Boleto') {
                 $('#diaVencimentoGroup').slideDown();
                 $('#diaVencimento').prop('required', true);
             } else {
