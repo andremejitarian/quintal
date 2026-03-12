@@ -353,19 +353,19 @@ $(document).ready(function () {
             aprendizes: [],
             planoPagamento: $('#planoPagamento').val(),
             formaPagamento: $('#formaPagamento').val(),
-            diaVencimento: (function() {
+            diaVencimento: (function () {
                 const plan = $('#planoPagamento').val();
                 const method = $('#formaPagamento').val();
-                
+
                 if (plan === 'experimental' || plan === 'avulso' || plan === '4_aulas' || plan === '8_aulas') {
                     const date = new Date();
                     date.setDate(date.getDate() + 5);
                     return date.toLocaleDateString('pt-BR'); // Retorna DD/MM/AAAA
                 }
-                
+
                 if (method === 'PIX/Boleto') return $('#diaVencimento').val();
                 if (method === 'Cartão de Crédito') return '10';
-                
+
                 return '';
             })(),
             aceiteTermos: $('#aceiteTermos').is(':checked'),
@@ -558,7 +558,7 @@ $(document).ready(function () {
                 description = 'uma única aula experimental para conhecer o curso';
                 break;
             case 'avulso':
-                description = 'este plano representa a compra de uma ou duas aulas apenas para cada curso escolhido';
+                description = 'este plano representa a compra de uma aula para cada curso escolhido';
                 break;
             case 'mensal':
                 description = 'este plano representa o pagamento mensal do valor abaixo, podendo ser cancelado a qualquer momento.';
@@ -608,7 +608,7 @@ $(document).ready(function () {
         if (planKey === 'experimental' || planKey === 'avulso' || planKey === '4_aulas' || planKey === '8_aulas' || method !== 'PIX/Boleto') {
             $group.slideUp();
             $select.prop('required', false);
-            if (method !== 'PIX/Boleto') $select.val(''); 
+            if (method !== 'PIX/Boleto') $select.val('');
             validateField($select);
         } else {
             $group.slideDown();
