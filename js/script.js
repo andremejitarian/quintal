@@ -364,7 +364,7 @@ $(document).ready(function () {
                 }
 
                 if (method === 'PIX/Boleto') return $('#diaVencimento').val();
-                if (method === 'Cartão de Crédito') return '10';
+                if (method === 'Cartão de Crédito') return '5';
 
                 return '';
             })(),
@@ -587,7 +587,7 @@ $(document).ready(function () {
         if (planKey === 'experimental' || planKey === 'avulso' || planKey === '4_aulas' || planKey === '8_aulas') {
             description = 'O pagamento pode ser realizado em até 5 dias após a inscrição.';
         } else if (method === 'Cartão de Crédito') {
-            description = 'A assinatura será cobrada no dia 10 de cada mês.';
+            description = 'A assinatura será cobrada no dia 5 de cada mês.';
         }
 
         if (description) {
