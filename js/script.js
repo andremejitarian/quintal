@@ -357,7 +357,7 @@ $(document).ready(function () {
                 const plan = $('#planoPagamento').val();
                 const method = $('#formaPagamento').val();
                 
-                if (plan === 'experimental' || plan === 'avulso') {
+                if (plan === 'experimental' || plan === 'avulso' || plan === '4_aulas' || plan === '8_aulas') {
                     const date = new Date();
                     date.setDate(date.getDate() + 5);
                     return date.toLocaleDateString('pt-BR'); // Retorna DD/MM/AAAA
@@ -584,7 +584,7 @@ $(document).ready(function () {
         const planKey = $('#planoPagamento').val();
         let description = '';
 
-        if (planKey === 'experimental' || planKey === 'avulso') {
+        if (planKey === 'experimental' || planKey === 'avulso' || planKey === '4_aulas' || planKey === '8_aulas') {
             description = 'O pagamento pode ser realizado em até 5 dias após a inscrição.';
         } else if (method === 'Cartão de Crédito') {
             description = 'A assinatura será cobrada no dia 10 de cada mês.';
@@ -604,8 +604,8 @@ $(document).ready(function () {
         const $group = $('#diaVencimentoGroup');
         const $select = $('#diaVencimento');
 
-        // Oculta se for experimental/avulso OU se não for PIX/Boleto
-        if (planKey === 'experimental' || planKey === 'avulso' || method !== 'PIX/Boleto') {
+        // Oculta se for experimental/avulso/pacotes OU se não for PIX/Boleto
+        if (planKey === 'experimental' || planKey === 'avulso' || planKey === '4_aulas' || planKey === '8_aulas' || method !== 'PIX/Boleto') {
             $group.slideUp();
             $select.prop('required', false);
             if (method !== 'PIX/Boleto') $select.val(''); 
