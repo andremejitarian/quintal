@@ -353,7 +353,21 @@ $(document).ready(function () {
             aprendizes: [],
             planoPagamento: $('#planoPagamento').val(),
             formaPagamento: $('#formaPagamento').val(),
-            diaVencimento: ($('#formaPagamento').val() === 'PIX/Boleto') ? $('#diaVencimento').val() : ($('#formaPagamento').val() === 'Cartão de Crédito' ? '10' : ''),
+            diaVencimento: (function() {
+                const plan = $('#planoPagamento').val();
+                const method = $('#formaPagamento').val();
+                
+                if (plan === 'experimental' || plan === 'avulso') {
+                    const date = new Date();
+                    date.setDate(date.getDate() + 5);
+                    return date.toLocaleDateString('pt-BR'); // Retorna DD/MM/AAAA
+                }
+                
+                if (method === 'PIX/Boleto') return $('#diaVencimento').val();
+                if (method === 'Cartão de Crédito') return '10';
+                
+                return '';
+            })(),
             aceiteTermos: $('#aceiteTermos').is(':checked'),
             autorizaFoto: $('input[name="autorizaFoto"]:checked').val(),
             cupomCode: $('#cupomCode').val().toUpperCase()
@@ -412,10 +426,13 @@ $(document).ready(function () {
         let apprenticesCount = 0;
 
         // OBTENHA O PLANO DE PAGAMENTO AQUI, ANTES DE ITERAR PELOS APRENDIZES
-        const paymentPlan = $('#planoPagamento').val(); // Removido padrão 'avulso'
-        // Atualiza a política de cancelamento com base no plano selecionado
+        const paymentPlan = $('#planoPagamento').val();
+
+        // Atualiza a política de cancelamento e descrições com base no plano selecionado
         updateCancellationPolicy(paymentPlan);
         updatePlanDescription(paymentPlan);
+        updatePaymentMethodDescription($('#formaPagamento').val());
+        toggleDueDateField(); // Nova função para centralizar a lógica de exibição do vencimento
 
         $('#apprenticesContainer .apprentice-group:not(.template)').each(function () {
             const $group = $(this);
@@ -564,9 +581,12 @@ $(document).ready(function () {
     // Atualiza o texto explicativo da forma de pagamento
     function updatePaymentMethodDescription(method) {
         const $descriptionContainer = $('#formaPagamentoDescricao');
+        const planKey = $('#planoPagamento').val();
         let description = '';
 
-        if (method === 'Cartão de Crédito') {
+        if (planKey === 'experimental' || planKey === 'avulso') {
+            description = 'O pagamento pode ser realizado em até 5 dias após a inscrição.';
+        } else if (method === 'Cartão de Crédito') {
             description = 'A assinatura será cobrada no dia 10 de cada mês.';
         }
 
@@ -574,6 +594,25 @@ $(document).ready(function () {
             $descriptionContainer.text(description).fadeIn(200);
         } else {
             $descriptionContainer.hide().empty();
+        }
+    }
+
+    // Gerencia a visibilidade do campo de Dia de Vencimento
+    function toggleDueDateField() {
+        const planKey = $('#planoPagamento').val();
+        const method = $('#formaPagamento').val();
+        const $group = $('#diaVencimentoGroup');
+        const $select = $('#diaVencimento');
+
+        // Oculta se for experimental/avulso OU se não for PIX/Boleto
+        if (planKey === 'experimental' || planKey === 'avulso' || method !== 'PIX/Boleto') {
+            $group.slideUp();
+            $select.prop('required', false);
+            if (method !== 'PIX/Boleto') $select.val(''); 
+            validateField($select);
+        } else {
+            $group.slideDown();
+            $select.prop('required', true);
         }
     }
 
@@ -909,17 +948,7 @@ $(document).ready(function () {
         $('#formaPagamento').on('change', function () {
             const method = $(this).val();
             updatePaymentMethodDescription(method);
-
-            if (method === 'PIX/Boleto') {
-                $('#diaVencimentoGroup').slideDown();
-                $('#diaVencimento').prop('required', true);
-            } else {
-                $('#diaVencimentoGroup').slideUp();
-                $('#diaVencimento').prop('required', false);
-                $('#diaVencimento').val(''); // Limpa a seleção
-                validateField($('#diaVencimento')); // Limpa o erro visual
-            }
-            // Disparar cálculo se a forma de pagamento afeta taxa
+            toggleDueDateField();
             updateSummaryAndTotal();
         });
 
