@@ -882,3 +882,12 @@ body {
     height: .8rem;
     border-width: .1em;
 }
+/* Descrição dinâmica do plano de pagamento */
+.plano-descricao {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+    line-height: 1.4;
+    padding: 2px 5px;
+}

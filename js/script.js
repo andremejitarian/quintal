@@ -416,6 +416,7 @@ $(document).ready(function () {
 
         // Atualiza a política de cancelamento com base no plano selecionado
         updateCancellationPolicy(paymentPlan);
+        updatePlanDescription(paymentPlan);
 
         $('#apprenticesContainer .apprentice-group:not(.template)').each(function () {
             const $group = $(this);
@@ -531,6 +532,36 @@ $(document).ready(function () {
         }
     }
 
+    // Atualiza o texto explicativo do plano de pagamento
+    function updatePlanDescription(planKey) {
+        const $descriptionContainer = $('#planoDescricao');
+        let description = '';
+
+        switch (planKey) {
+            case 'experimental':
+                description = 'uma única aula experimental para conhecer o curso';
+                break;
+            case 'avulso':
+                description = 'este plano representa a compra de uma ou duas aulas apenas para cada curso escolhido';
+                break;
+            case 'mensal':
+                description = 'este plano representa o pagamento mensal do valor abaixo, podendo ser cancelado a qualquer momento.';
+                break;
+            case 'semestral':
+                description = 'este plano representa o pagamento mensal do valor abaixo ao longo de 6 meses, com direito a cancelamento conforme política abaixo';
+                break;
+            case 'anual':
+                description = 'este plano representa o pagamento mensal do valor abaixo ao longo de 12 meses, com direito a cancelamento conforme política abaixo';
+                break;
+        }
+
+        if (description) {
+            $descriptionContainer.text(description).fadeIn(200);
+        } else {
+            $descriptionContainer.hide().empty();
+        }
+    }
+
     // Verifica o parâmetro 'matricula' na URL e tenta pré-preencher
     async function checkMatriculaParam() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -607,6 +638,7 @@ $(document).ready(function () {
         if (data.planoPagamento) {
             updatePaymentPlanOptions();
             $('#planoPagamento').val(data.planoPagamento);
+            updatePlanDescription(data.planoPagamento);
         }
 
         // Forma de Pagamento e Dia de Vencimento
@@ -803,6 +835,9 @@ $(document).ready(function () {
         $('#registrationForm').on('change', '.course-checkbox, #planoPagamento', function () {
             if ($(this).hasClass('course-checkbox')) {
                 updatePaymentPlanOptions();
+            }
+            if ($(this).attr('id') === 'planoPagamento') {
+                updatePlanDescription($(this).val());
             }
             updateSummaryAndTotal();
         });
