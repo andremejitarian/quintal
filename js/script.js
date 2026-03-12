@@ -603,16 +603,30 @@ $(document).ready(function () {
         const method = $('#formaPagamento').val();
         const $group = $('#diaVencimentoGroup');
         const $select = $('#diaVencimento');
+        const $proporcionalAviso = $('#proporcionalAviso');
+
+        const isOneTimePlan = ['experimental', 'avulso', '4_aulas', '8_aulas'].includes(planKey);
 
         // Oculta se for experimental/avulso/pacotes OU se não for PIX/Boleto
-        if (planKey === 'experimental' || planKey === 'avulso' || planKey === '4_aulas' || planKey === '8_aulas' || method !== 'PIX/Boleto') {
+        if (isOneTimePlan || method !== 'PIX/Boleto') {
             $group.slideUp();
             $select.prop('required', false);
             if (method !== 'PIX/Boleto') $select.val('');
             validateField($select);
+            $proporcionalAviso.hide();
         } else {
             $group.slideDown();
             $select.prop('required', true);
+
+            // Lógica do aviso proporcional: mensal/semestral/anual + PIX + após dia 5
+            const currentDay = new Date().getDate();
+            const isRecurringPlan = ['mensal', 'semestral', 'anual'].includes(planKey);
+
+            if (isRecurringPlan && method === 'PIX/Boleto' && currentDay > 5) {
+                $proporcionalAviso.fadeIn(200);
+            } else {
+                $proporcionalAviso.hide();
+            }
         }
     }
 
