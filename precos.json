@@ -250,12 +250,17 @@
       }
     },
     "parkour_sabado_tarde": {
-      "nome": "PARKOUR // sábado 16h-17h30 // 6-12 anos",
+      "nome": "PARKOUR // sábado 21/03 15h-17h no Quintal das Artes // 6-12 anos",
       "categoria": "curso",
       "precos": {
-        "avulso": 76,
-        "4_aulas": 304,
-        "8_aulas": 608
+        "avulso": 70
+      }
+    },
+    "parkour_sabado_tarde_objetivo": {
+      "nome": "PARKOUR // sábado 04/04 15h-17h no parque do Colégio Objetivo // 6-12 anos",
+      "categoria": "curso",
+      "precos": {
+        "avulso": 70
       }
     }
   },
