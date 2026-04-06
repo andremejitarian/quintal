@@ -172,26 +172,15 @@
         "anual": 212.50
       }
     },
-    "ingles_quinta_manha": {
-      "nome": "INGLÊS // quinta 9h30-11h30 // 5-8 anos",
+    "ingles_terca_manha": {
+      "nome": "INGLÊS // terça 10h-11h30 // 5-8 anos",
       "categoria": "curso",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 76,
-        "mensal": 350,
-        "semestral": 330,
-        "anual": 300
-      }
-    },
-   "ingles_sexta_manha": {
-      "nome": "INGLÊS // sexta 9h30-11h30 // 5-8 anos",
-      "categoria": "curso",
-      "precos": {
-        "experimental": 19,        
-        "avulso": 76,
-        "mensal": 350,
-        "semestral": 330,
-        "anual": 300
+        "mensal": 280,
+        "semestral": 252,
+        "anual": 238
       }
     },
     "modelagem_argila_sexta_manha": {
