@@ -1,6 +1,6 @@
 {
   "planos": {
-      "experimental": {
+    "experimental": {
       "nome": "Experimental",
       "descricao": "Pagamento por aula",
       "meses": 1,
@@ -58,8 +58,7 @@
         "experimental": 19,
         "avulso": 76,
         "mensal": 250,
-        "semestral": 225,
-        "anual": 212.50
+        "semestral": 225
       }
     },
     "desenho_segunda_manha": {
@@ -69,8 +68,7 @@
         "experimental": 19,
         "avulso": 75,
         "mensal": 265,
-        "semestral": 238.50,
-        "anual": 225.25
+        "semestral": 238.5
       }
     },
     "artes_segunda_tarde": {
@@ -80,96 +78,87 @@
         "experimental": 19,
         "avulso": 85,
         "mensal": 310,
-        "semestral": 279,
-        "anual": 263.50
+        "semestral": 279
       }
     },
     "jogos_ingles_terca_tarde": {
       "nome": "JOGOS > INGLÊS // terca 14h-15H30 // 6-11 anos",
       "categoria": "curso",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 76,
         "mensal": 280,
-        "semestral": 252,
-        "anual": 238
+        "semestral": 252
       }
     },
     "musicalizacao_terca_tarde": {
       "nome": "MUSICALIZAÇÃO // terça 18h-19h // 7-11 anos",
       "categoria": "curso",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 76,
         "mensal": 250,
-        "semestral": 225,
-        "anual": 212.50
+        "semestral": 225
       }
     },
     "musicalizacao_quarta_manha": {
       "nome": "MUSICALIZAÇÃO // quarta 8h30-9H45 // 7-11 anos",
       "categoria": "curso",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 76,
         "mensal": 250,
-        "semestral": 225,
-        "anual": 212.50
+        "semestral": 225
       }
     },
     "trabalhos_manuais_quarta_manha": {
       "nome": "TRABALHOS MANUAIS // quarta 10h-11h15 // 7-11 anos",
       "categoria": "curso",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 76,
         "mensal": 250,
-        "semestral": 225,
-        "anual": 212.50
+        "semestral": 225
       }
     },
     "desenho_t1_quarta_tarde": {
       "nome": "DESENHO // quarta 14h-15h30 // 6-10 anos",
       "categoria": "curso",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 75,
         "mensal": 265,
-        "semestral": 238.50,
-        "anual": 225.25
+        "semestral": 238.5
       }
     },
     "trabalhos_manuais_quarta_tarde": {
       "nome": "TRABALHOS MANUAIS // quarta 16h-17h15 // 6-10 anos",
       "categoria": "curso",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 76,
         "mensal": 250,
-        "semestral": 225,
-        "anual": 212.50
+        "semestral": 225
       }
     },
     "desenho_t2_quarta_tarde": {
       "nome": "DESENHO // quarta 18h-19h15 // 6-10 anos",
       "categoria": "curso",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 75,
         "mensal": 265,
-        "semestral": 238.50,
-        "anual": 225.25
+        "semestral": 238.5
       }
     },
     "musicalizacao_quinta_tarde": {
       "nome": "MUSICALIZAÇÃO // quarta 18h-19h // 7-11 anos",
       "categoria": "curso",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 76,
         "mensal": 250,
-        "semestral": 225,
-        "anual": 212.50
+        "semestral": 225
       }
     },
     "ingles_terca_manha": {
@@ -179,63 +168,57 @@
         "experimental": 19,
         "avulso": 76,
         "mensal": 280,
-        "semestral": 252,
-        "anual": 238
+        "semestral": 252
       }
     },
     "modelagem_argila_sexta_manha": {
       "nome": "MODELAGEM EM ARGILA // sexta 10h-11h30 // 7-11 anos",
       "categoria": "curso",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 76,
         "mensal": 265,
-        "semestral": 238.50,
-        "anual": 225.25
+        "semestral": 238.5
       }
     },
     "jogos_ingles_t1_sexta_tarde": {
       "nome": "JOGOS > INGLÊS // sexta 14h-15h30 // 6-11 anos",
       "categoria": "curso",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 76,
         "mensal": 280,
-        "semestral": 252,
-        "anual": 238
+        "semestral": 252
       }
     },
     "jogos_ingles_t2_sexta_tarde": {
       "nome": "JOGOS > INGLÊS // sexta 16h-17h30 // 6-11 anos",
       "categoria": "curso",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 76,
         "mensal": 280,
-        "semestral": 252,
-        "anual": 238
+        "semestral": 252
       }
     },
     "modelagem_argila_t1_sexta_tarde": {
       "nome": "MODELAGEM EM ARGILA // sexta 14h-15h30 // 6-11 anos",
       "categoria": "curso",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 76,
         "mensal": 265,
-        "semestral": 238.50,
-        "anual": 225.25
+        "semestral": 238.5
       }
     },
     "modelagem_argila_t2_sexta_tarde": {
       "nome": "MODELAGEM EM ARGILA // sexta 16h-17h30 // 6-11 anos",
       "categoria": "curso",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 76,
         "mensal": 265,
-        "semestral": 238.50,
-        "anual": 225.25
+        "semestral": 238.5
       }
     },
     "parkour_sabado_tarde": {
@@ -258,44 +241,40 @@
       "nome": "ARTES + BRINCAR // terca 8h-11H30 // 3-7 anos",
       "categoria": "contraturnos",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 82,
         "mensal": 285,
-        "semestral": 256.50,
-        "anual": 242.25
+        "semestral": 256.5
       }
     },
     "artes_brincar_terca_tarde": {
       "nome": "ARTES + BRINCAR // terca 13h-17H30 // 3-7 anos",
       "categoria": "contraturnos",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 86,
         "mensal": 300,
-        "semestral": 270,
-        "anual": 255
+        "semestral": 270
       }
     },
     "artes_brincar_quinta_manha": {
       "nome": "ARTES + BRINCAR // quinta 8h-11h30 // 3-7 anos",
       "categoria": "contraturnos",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 82,
         "mensal": 285,
-        "semestral": 256.50,
-        "anual": 242.25
+        "semestral": 256.5
       }
     },
     "artes_brincar_quinta_tarde": {
       "nome": "ARTES + BRINCAR // quinta 13h-17h30 // 3-7 anos",
       "categoria": "contraturnos",
       "precos": {
-        "experimental": 19,        
+        "experimental": 19,
         "avulso": 86,
         "mensal": 300,
-        "semestral": 270,
-        "anual": 255
+        "semestral": 270
       }
     }
   },
@@ -303,13 +282,13 @@
     "irmaos": {
       "nome": "Irmãos",
       "descricao": "Desconto para irmãos",
-      "percentual": 0.10,
+      "percentual": 0.1,
       "observacao": "Não cumulativo com outros descontos"
     },
     "filhos_professores": {
       "nome": "Filhos de professores",
       "descricao": "Desconto para filhos de professores",
-      "percentual": 0.10,
+      "percentual": 0.1,
       "observacao": "Não cumulativo com outros descontos"
     },
     "desconto_quantidade_cursos": {
@@ -318,7 +297,7 @@
       "descricao": "Desconto progressivo baseado no número de cursos",
       "regras": {
         "2": {
-          "percentual": 0.10,
+          "percentual": 0.1,
           "descricao": "10% de desconto para 2 cursos"
         },
         "3": {
