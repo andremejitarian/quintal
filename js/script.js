@@ -11,7 +11,7 @@ $(document).ready(function () {
 
     // URLs dos webhooks
     const WEBHOOK_CONSULTA_URL = 'https://criadordigital-n8n-webhook.kttqgl.easypanel.host/webhook/consulta-matricula';
-    const WEBHOOK_SUBMISSAO_URL = 'https://andremejitarian--pranna-webhook-server-fastapi-app.modal.run/api/webhooks/prod/quintal-das-artes/quintal-ficha-inscricao?secret=6f0a9e372a658fede926e6b001a92b431b98bdc5c6034dbf274a076ac98949f1&sync=true';
+    const WEBHOOK_SUBMISSAO_URL = 'https://andremejitarian--pranna-webhook-server-fastapi-app.modal.run/api/webhooks/prod/quintal-das-artes/quintal-ficha-inscricao?secret=1bb4c522dc69a1b6b41f0f6d7bdaa40cc0d146f0d424d26a&sync=true';
 
     // Inicializa as máscaras para os campos
     function initializeMasks() {
